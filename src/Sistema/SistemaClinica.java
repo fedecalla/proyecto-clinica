@@ -1,6 +1,10 @@
 package Sistema;
 import clinica.Clinica;
 import facturacion.Factura;
+
+import individuos.Medico;
+import individuos.Paciente;
+
 import hospedaje.Habitacion;
 
 public class SistemaClinica implements iSistema {
@@ -22,7 +26,6 @@ public class SistemaClinica implements iSistema {
 		clinica.ingresaPaciente(p);
 	}
 
-	public void atiendePaciente(Medico m, Paciente p);
 	public void atiendePaciente(Medico m, Paciente p);
 
 	public Factura egresaPaciente(Paciente p) {

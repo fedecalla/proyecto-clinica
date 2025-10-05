@@ -1,4 +1,8 @@
 package hospedaje;
+import individuos.Paciente;
+import individuos.Persona;
+import individuos.Medico;
+
 
 
 /**
@@ -7,7 +11,7 @@ package hospedaje;
  */
 public class HCompartida extends Habitacion{
 	
-	private Paciente persona2;
+	private Paciente persona;
 	private static double CostoHabCompartida=50;
 
 	/**
@@ -16,7 +20,7 @@ public class HCompartida extends Habitacion{
 	 */
 	public HCompartida() {
 		super();
-		this.persona2=null;
+		this.persona=null;
 		this.tipo="Compartida";
 	}
 
@@ -31,7 +35,7 @@ public class HCompartida extends Habitacion{
 	public void setPersona(Persona persona) {
 		if (this.persona ==null) {
 			this.persona = persona;
-		}else if (this.persona2 ==null) {
+		}else if (this.persona ==null) {
 			this.persona = persona;
 		}else {
 			throw new HabitacionCompletaException("Habitacion completa");
