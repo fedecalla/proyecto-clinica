@@ -1,7 +1,9 @@
 package hospedaje;
-import individuos.Paciente;
+import pacientes.Paciente;
 import individuos.Persona;
-import individuos.Medico;
+import medicos.Medico;
+import java.util.ArrayList;
+import excepciones.HabitacionCompletaException;
 
 
 
@@ -13,7 +15,7 @@ import individuos.Medico;
 public abstract class Habitacion {
 	
 	protected static double costoAsignacion=200;
-	protected Paciente persona;
+	protected ArrayList<Persona> pacientesEnHabitacion; // si es habitacion compartida van a haber varios, y si es privada habra uno solo
 	protected String tipo;
 	
 	/**
@@ -22,7 +24,7 @@ public abstract class Habitacion {
 	*/
 		
 	public Habitacion() {
-		this.persona = null;
+		this.pacientesEnHabitacion = new ArrayList<>();
 	}
 		
 	/**
@@ -31,8 +33,8 @@ public abstract class Habitacion {
 	public abstract double getCosto(long cant_dias); 
 		
 		
-	public Persona getPersona() {
-		return persona;
+	public ArrayList<Persona> getPersonas() {
+		return this.pacientesEnHabitacion;
 	}
 		
 		
@@ -45,18 +47,14 @@ public abstract class Habitacion {
 	*que la habitacion este completa<br>
 	*/
 		
-	public void setPersona(Paciente persona) throws HabitacionCompletaException {
-		if(persona == null) {
-			this.persona = persona;
-		}
-		else {
-			throw new HabitacionCompletaException("Habitacion completa");
-		}
-	}
+	public abstract void setPersona(Persona persona) throws HabitacionCompletaException; // se sobreescribe porque varia de si la habitacion es compartida o no
 
 
 	public String getTipo(long cant_dias) {
 		return tipo;
 	}
+	
+	public abstract boolean EstaLlena();
+	
 
 }

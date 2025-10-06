@@ -1,7 +1,7 @@
 package hospedaje;
-import individuos.Paciente;
+import pacientes.Paciente;
 import individuos.Persona;
-import individuos.Medico;
+import medicos.Medico;
 
 
 
@@ -13,6 +13,7 @@ public class HCompartida extends Habitacion{
 	
 	private Paciente persona;
 	private static double CostoHabCompartida=50;
+	private static int capacidad = 5;
 
 	/**
 	 *Constructor de la clase
@@ -32,14 +33,9 @@ public class HCompartida extends Habitacion{
 	 *que la habitacion este completa<br>
 	 */
 	@Override 
-	public void setPersona(Persona persona) {
-		if (this.persona ==null) {
-			this.persona = persona;
-		}else if (this.persona ==null) {
-			this.persona = persona;
-		}else {
-			throw new HabitacionCompletaException("Habitacion completa");
-		}
+	public void setPersona(Persona persona) throws  {
+		super.pacientesEnHabitacion.add(persona);
+		super.cantPacientes++;
 	}
 
 	/**
@@ -49,5 +45,14 @@ public class HCompartida extends Habitacion{
 	@Override
 	public double getCosto(long cant_dias) {
 		return costoAsignacion+(cant_dias*CostoHabCompartida);
+	}
+
+	@Override
+	public boolean EstaLlena() {
+		boolean resultado = false;
+		if(super.cantPacientes == capacidad)
+			resultado = true;
+		return resultado;
+		
 	}
 }

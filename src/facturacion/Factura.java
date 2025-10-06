@@ -1,7 +1,5 @@
 package facturacion;
-import individuos.Medico;
-
-
+import medicos.Medico;
 import java.util.ArrayList;
 
 import hospedaje.Habitacion;
@@ -115,5 +113,14 @@ public class Factura {
 		    return texto;
 		}
 	
-
+	public String getNombrePaciente()
+	{
+		return this.nombrePaciente;
+	}
+	
+	public void setFechaSalida()
+	{
+		this.egreso = LocalDate.now();
+	}
 }
+

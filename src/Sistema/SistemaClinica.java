@@ -1,9 +1,9 @@
 package Sistema;
 import clinica.Clinica;
 import facturacion.Factura;
-
-import individuos.Medico;
-import individuos.Paciente;
+import medicos.Medico;
+import pacientes.Paciente;
+import individuos.Persona;
 
 import hospedaje.Habitacion;
 
@@ -18,22 +18,35 @@ public class SistemaClinica implements iSistema {
 		clinica.agregaMedico(m);
 	}
 
-	public void registraPaciente(Paciente p) {
+	public void registraPaciente(Persona p) {
+		
+		Factura factura = new Factura(p.getNombreyapellido());
+		clinica.agregaPacienteACola(p);
+		clinica.agregaFactura(factura);
+
+		//y enviarlo a patio o sala de espera
+	}
+
+	public void ingresaPaciente(Persona p , String proposito) {
+		
+		if(proposito.toLowerCase() == "internacion")
+			clinica.InternaPaciente(p);
 		clinica.agregaPaciente(p);
 	}
 
-	public void ingresaPaciente(Paciente p) {
-		clinica.ingresaPaciente(p);
+	public void atiendePaciente(Medico m, Persona p)
+	{
+		Factura factura = clinica.getFactura(p);
+		factura.setMedicos(m);
 	}
-
-	public void atiendePaciente(Medico m, Paciente p);
-
-	public Factura egresaPaciente(Paciente p) {
+	public Factura egresaPaciente(Persona p) {
+		clinica.eliminarPaciente(p);
+		clinica.desvincularPacienteHabitacion(p);
 		return clinica.getFactura(p); 
 	}
 
-	public void internaPaciente(Paciente p, Habitacion h) {
-		clinica.internar(p,h);
+	//public void internaPaciente(Paciente p, Habitacion h) {
+		//clinica.internar(p,h);
 	}
 
 }

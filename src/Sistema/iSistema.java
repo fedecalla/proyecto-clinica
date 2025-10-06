@@ -1,8 +1,8 @@
 package Sistema;
 import facturacion.Factura;
 import hospedaje.Habitacion;
-import individuos.Medico;
-import individuos.Paciente;
+import medicos.Medico;
+import pacientes.Paciente;
 
 public interface iSistema {
 
