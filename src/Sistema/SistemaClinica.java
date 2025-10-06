@@ -4,6 +4,8 @@ import facturacion.Factura;
 import medicos.Medico;
 import pacientes.Paciente;
 import individuos.Persona;
+import medicos.Medico;
+import pacientes.Paciente;
 
 import hospedaje.Habitacion;
 
@@ -18,35 +20,37 @@ public class SistemaClinica implements iSistema {
 		clinica.agregaMedico(m);
 	}
 
-	public void registraPaciente(Persona p) {
-		
-		Factura factura = new Factura(p.getNombreyapellido());
+	public void registraPaciente(Paciente p) {
 		clinica.agregaPacienteACola(p);
+		clinica.ingresaPaciente(p);
+	}
+
+	public void ingresaPaciente() {
+		Paciente proximo;
+		proximo = clinica.atiendePaciente();
+		Factura factura = new Factura(proximo.getNombreyapellido());
 		clinica.agregaFactura(factura);
-
-		//y enviarlo a patio o sala de espera
-	}
-
-	public void ingresaPaciente(Persona p , String proposito) {
 		
-		if(proposito.toLowerCase() == "internacion")
-			clinica.InternaPaciente(p);
-		clinica.agregaPaciente(p);
+		//aca de alguna manera tendriamos que saber el proposito del paciente e internarlo si es necesario
+		
+		clinica.agregaPaciente(proximo);
 	}
 
-	public void atiendePaciente(Medico m, Persona p)
+	public void atiendePacienteMedico(Medico m, Paciente p)
 	{
 		Factura factura = clinica.getFactura(p);
 		factura.setMedicos(m);
 	}
-	public Factura egresaPaciente(Persona p) {
+	
+	
+	public Factura egresaPaciente(Paciente p) {
 		clinica.eliminarPaciente(p);
 		clinica.desvincularPacienteHabitacion(p);
 		return clinica.getFactura(p); 
 	}
 
+
+
 	//public void internaPaciente(Paciente p, Habitacion h) {
 		//clinica.internar(p,h);
-	}
-
 }

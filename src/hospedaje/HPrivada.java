@@ -1,4 +1,8 @@
 package hospedaje;
+
+import excepciones.HabitacionCompletaException;
+import individuos.Persona;
+
 /**
  * Clase HPrivada, hija de Habitacion
  * contiene un estatico de su valor
@@ -33,6 +37,25 @@ public class HPrivada extends Habitacion{
 		}
 		
 		return this.costo;
+	}
+
+	@Override
+	public void setPersona(Persona persona) throws HabitacionCompletaException {
+		if(!this.EstaLlena())
+		{
+			super.pacientesEnHabitacion.add(persona);
+			super.cantPacientes++;
+		}
+		else
+			throw new HabitacionCompletaException("no se puede agregar a la habitacion porque esta la misma esta completa");	
+	}
+
+	@Override
+	public boolean EstaLlena() {
+		boolean resultado = false;
+		if(super.cantPacientes == 1)
+			resultado = true;
+		return resultado;
 	}
 
 }

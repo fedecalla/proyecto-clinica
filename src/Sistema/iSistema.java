@@ -10,12 +10,12 @@ void registraMedico(Medico m);
 
 void registraPaciente(Paciente p);
 
-void ingresaPaciente(Paciente p);
+void ingresaPaciente();
 
-void atiendePaciente(Medico m, Paciente p);
+void atiendePacienteMedico(Medico m, Paciente p);
 
 Factura egresaPaciente(Paciente p);
 
-void internaPaciente(Paciente p, Habitacion h);
+//void internaPaciente(Paciente p, Habitacion h);
 
 }

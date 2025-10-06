@@ -17,6 +17,7 @@ public abstract class Habitacion {
 	protected static double costoAsignacion=200;
 	protected ArrayList<Persona> pacientesEnHabitacion; // si es habitacion compartida van a haber varios, y si es privada habra uno solo
 	protected String tipo;
+	protected int cantPacientes;
 	
 	/**
 	*Constructor de habitacion
@@ -25,6 +26,7 @@ public abstract class Habitacion {
 		
 	public Habitacion() {
 		this.pacientesEnHabitacion = new ArrayList<>();
+		this.cantPacientes = 0;
 	}
 		
 	/**

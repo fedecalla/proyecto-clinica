@@ -1,6 +1,7 @@
 package clinica;
 
 import medicos.Medico;
+
 import pacientes.Paciente;
 import facturacion.Factura;
 import hospedaje.Habitacion;
@@ -8,25 +9,34 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import individuos.Persona;
 
+import java.util.*;
+
+
 
 public class Clinica {
 
 	private static Clinica singleton = null;
 	private ArrayList <Medico> medicos;
-	private ArrayList <Persona> pacientes;
+	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
 	private ArrayList <Habitacion> habitaciones;
+	private SalaEspera salaEspera;
+	//private Queue<Paciente> listaEspera;
+	private ArrayList<Paciente> patio;
 	private String nombre;
 	private String direccion;
 	private String ciudad;
 	private String telefono;
-	private LinkedList <Persona> colaDeEspera;
+	private LinkedList <Paciente> colaDeEspera;
 	
 	private Clinica() {
 		this.medicos = new ArrayList<>();
 		this.pacientes = new ArrayList<>();
 		this.facturas = new ArrayList<>();
 		this.habitaciones = new ArrayList<>();
+		this.salaEspera  = new SalaEspera();
+		//this.listaEspera = new ArrayDeque<>();
+		this.patio = new ArrayList<>();
 		this.nombre = null;
 		this.direccion = null;
 		this.ciudad = null;
@@ -118,31 +128,35 @@ public class Clinica {
 	
 	//METODOS QUE INTERACTUAN EN EL Sistema	--------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
-	public void agregaPacienteACola(Persona p) //podria tirar excepcion de cola llena
+	public void agregaPacienteACola(Paciente p) //podria tirar excepcion de cola llena
 	{
 		this.colaDeEspera.add(p);
 	}
-	public void agregaPaciente(Persona paciente) {
+	public void agregaPaciente(Paciente paciente) {
 		
 		this.pacientes.add(paciente);
 	}
 
-	public Factura getFactura(Persona paciente) { // precondicion:exista ya la factura
+	public Factura getFactura(Paciente paciente) { // precondicion:exista ya la factura
 		Factura factura; int i=0;
 		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombreyapellido())
 			i++;
 		factura = this.facturas.get(i);
 		return factura;
 	}
+	
+	
 	public void InternaPaciente(Persona paciente) // podria tirar excepciones de tipo no hay habitaciones disponibles
 	{
 		Habitacion SalaDeInternacion = this.getHabitacion();
 		if(SalaDeInternacion != null)
 			SalaDeInternacion.setPersona(paciente);
-		else
-			//tira excepcion porque no encontro habitacion disponible
+		
+		//aca habria un else que tire una excepcion
 	}
-	public void eliminarPaciente(Persona paciente)
+	
+	
+	public void eliminarPaciente(Paciente paciente)
 	{
 		this.setFechaSalida(paciente);
 		int i=0;
@@ -152,12 +166,13 @@ public class Clinica {
 			this.pacientes.remove(i);
 	}
 	
+	
 	public void desvincularPacienteHabitacion(Persona paciente)
 	{
-		int i =0;
+		int i =0; int j;
 		while(this.habitaciones.get(i) != null)
 		{
-			int j =0; Habitacion sala = this.habitaciones.get(i);
+			j =0; Habitacion sala = this.habitaciones.get(i);
 			while(sala.getPersonas().get(j)!=paciente && sala.getPersonas().get(j)!=null )
 				j++;
 			if(sala.getPersonas().get(j)!=null)
@@ -166,7 +181,29 @@ public class Clinica {
 				break;
 			}
 		}
+	}	
 		
+	public void ingresaPaciente(Paciente p) {
+		if (!salaEspera.estaOcupada())
+			salaEspera.ingresar(p);
+		else {
+			Paciente perdedor = salaEspera.ingresar(p);
+			if (perdedor!=null)
+				patio.add(perdedor);
+		}
+		colaDeEspera.add(p);
 	}
 	
+	
+	public Paciente atiendePaciente() {
+		Paciente proximo =  colaDeEspera.getFirst();
+		colaDeEspera.removeFirst();
+		return proximo;
+		/*Falta ver como manejar los pacientes en atencion
+		 * 
+		 */
+	}
+	/* egresaPaciente() deberia llamar a la factura para mostrar	
+	 * 
+	 */
 }

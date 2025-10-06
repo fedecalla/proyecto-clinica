@@ -33,7 +33,7 @@ public class HCompartida extends Habitacion{
 	 *que la habitacion este completa<br>
 	 */
 	@Override 
-	public void setPersona(Persona persona) throws  {
+	public void setPersona(Persona persona){
 		super.pacientesEnHabitacion.add(persona);
 		super.cantPacientes++;
 	}
