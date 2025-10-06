@@ -1,5 +1,7 @@
-/facturacion/
-/hospedaje/
-/individuos/
-/clinica/
 /Sistema/
+/clinica/
+/excepciones/
+/medicos/
+/pacientes/
+/SalaEspera.class
+/individuos/

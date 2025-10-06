@@ -4,7 +4,7 @@ import individuos.Medico;
 import individuos.Paciente;
 import facturacion.Factura;
 import hospedaje.Habitacion;
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class Clinica {
@@ -14,6 +14,9 @@ public class Clinica {
 	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
 	private ArrayList <Habitacion> habitaciones;
+	private SalaEspera salaEspera;
+	private Queue<Paciente> listaEspera;
+	private Queue<Paciente> patio;
 	private String nombre;
 	private String direccion;
 	private String ciudad;
@@ -24,11 +27,13 @@ public class Clinica {
 		this.pacientes = new ArrayList<>();
 		this.facturas = new ArrayList<>();
 		this.habitaciones = new ArrayList<>();
+		this.salaEspera  = new SalaEspera();
+		this.listaEspera = new ArrayDeque<>();
+		this.patio = new ArrayDeque<>();
 		this.nombre = null;
 		this.direccion = null;
 		this.ciudad = null;
 		this.telefono = null;
-		//FALTARIA INICIALIZAR SALA DE ESPERA Y PATIO PERO DEPENDE DE COMO SE IMPLEMENTEN.
 	}
 	
 	public Clinica getClinica() {
@@ -96,5 +101,27 @@ public class Clinica {
 	public String getCiudad() {
 		return this.ciudad;
 	}
+	public void agregaPaciente(Paciente p) {
+		this.pacientes.add(p);
+	}
 	
+	public void ingresaPaciente(Paciente p) {
+		if (!salaEspera.estaOcupada())
+			salaEspera.ingresar(p);
+		else {
+			Paciente perdedor = salaEspera.ingresar(p);
+			if (perdedor!=null)
+				patio.add(perdedor);
+		}
+	}
+	public void atiendePaciente(Paciente p) {
+		salaEspera.retirar();
+		salaEspera.ingresar(patio.remove());
+		/*Falta ver como manejar los pacientes en atencion
+		 * 
+		 */
+	}
+	/* egresaPaciente() deberia llamar a la factura para mostrar	
+	 * 
+	 */
 }

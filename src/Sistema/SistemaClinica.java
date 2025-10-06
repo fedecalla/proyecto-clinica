@@ -1,7 +1,6 @@
 package Sistema;
 import clinica.Clinica;
 import facturacion.Factura;
-
 import individuos.Medico;
 import individuos.Paciente;
 
