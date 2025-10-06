@@ -1,7 +1,7 @@
 package medicos;
 
 public abstract class Medico implements IMedico{
-	protected String nombre, dni, matricula, ciudad, domicilio, telefono;
+	protected String nombre, dni, matricula, ciudad, domicilio, telefono, especialidad;
 	
 	protected static double honorarioBasico = 20000;
 	
@@ -12,6 +12,10 @@ public abstract class Medico implements IMedico{
 		this.ciudad=ciudad;
 		this.domicilio=dom;
 		this.telefono=tel;
+	}
+
+	public String getEspecialidad() {
+		return this.especialidad;
 	}
 
 	public String getNombre() {

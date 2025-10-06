@@ -52,7 +52,7 @@ public abstract class Habitacion {
 	public abstract void setPersona(Persona persona) throws HabitacionCompletaException; // se sobreescribe porque varia de si la habitacion es compartida o no
 
 
-	public String getTipo(long cant_dias) {
+	public String getTipo() {
 		return tipo;
 	}
 	

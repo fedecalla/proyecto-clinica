@@ -102,13 +102,13 @@ public class Factura {
 		    		
 		    		for(i=0;i<medicos.size();i++) {
 		    			aux=medicos.get(i);
-		    			total+=aux.getCosto();
-		    			texto+="Nombre medico :" + aux.getNombre() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: "+ aux.getCosto()+ "\n";
+		    			total+=aux.getHonorario()*1.2;
+		    			texto+="Nombre medico :" + aux.getNombre() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: %0.2f"+ (aux.getHonorario()*1.2)+ "\n";
 		    		}
 		    		
 		    		texto+="\n";
 		    		
-		    		texto+="\t \t Total: " + this.total + "\n";
+		    		texto+="\t \t Total: %0.2f" + this.total + "\n";
 		    		
 		    return texto;
 		}

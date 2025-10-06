@@ -1,21 +1,10 @@
 package Sistema;
+import clinica.Clinica;
 import facturacion.Factura;
 import hospedaje.Habitacion;
 import medicos.Medico;
 import pacientes.Paciente;
 
 public interface iSistema {
-
-void registraMedico(Medico m);
-
-void registraPaciente(Paciente p);
-
-void ingresaPaciente();
-
-void atiendePacienteMedico(Medico m, Paciente p);
-
-Factura egresaPaciente(Paciente p);
-
-//void internaPaciente(Paciente p, Habitacion h);
 
 }

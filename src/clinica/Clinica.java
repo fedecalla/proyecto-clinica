@@ -7,6 +7,8 @@ import facturacion.Factura;
 import hospedaje.Habitacion;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import excepciones.HabitacionCompletaException;
 import individuos.Persona;
 
 import java.util.*;
@@ -115,6 +117,15 @@ public class Clinica {
 			this.ciudad = c;
 	}
 	
+	public Factura getFactura(Persona paciente){
+		Factura factura; int i=0;
+		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombreyapellido())
+			i++;
+		factura = this.facturas.get(i);
+		return factura;
+	}
+
+
 	public String getCiudad() {
 		return this.ciudad;
 	}
@@ -149,9 +160,13 @@ public class Clinica {
 	public void InternaPaciente(Persona paciente) // podria tirar excepciones de tipo no hay habitaciones disponibles
 	{
 		Habitacion SalaDeInternacion = this.getHabitacion();
-		if(SalaDeInternacion != null)
-			SalaDeInternacion.setPersona(paciente);
-		
+		try {
+			if(SalaDeInternacion != null)
+				SalaDeInternacion.setPersona(paciente);
+		}
+		catch(HabitacionCompletaException e) {
+			System.out.println(e.getMessage());
+		}
 		//aca habria un else que tire una excepcion
 	}
 	

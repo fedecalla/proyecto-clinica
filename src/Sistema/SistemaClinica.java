@@ -10,12 +10,13 @@ import pacientes.Paciente;
 import hospedaje.Habitacion;
 
 public class SistemaClinica implements iSistema {
-	private Clinica clinica;
+	public Clinica clinica=null;
 	
-	SistemaClinica(Clinica c){
-		this.clinica=c;
+	SistemaClinica(Clinica c) {
+		this.clinica = c.getClinica();
 	}
-	
+
+	/*
 	public void registraMedico(Medico m) {
 		clinica.agregaMedico(m);
 	}
@@ -50,7 +51,7 @@ public class SistemaClinica implements iSistema {
 	}
 
 
-
+	 */
 	//public void internaPaciente(Paciente p, Habitacion h) {
 		//clinica.internar(p,h);
 }
