@@ -1,6 +1,5 @@
 package clinica;
 
-
 import individuos.Medico;
 import individuos.Paciente;
 import facturacion.Factura;

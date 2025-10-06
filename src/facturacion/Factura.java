@@ -1,5 +1,5 @@
 package facturacion;
-
+import individuos.Medico;
 
 
 import java.util.ArrayList;

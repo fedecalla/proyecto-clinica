@@ -1,4 +1,7 @@
 package hospedaje;
+import individuos.Paciente;
+import individuos.Persona;
+import individuos.Medico;
 
 
 
