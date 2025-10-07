@@ -12,11 +12,11 @@ import hospedaje.Habitacion;
 public class SistemaClinica implements iSistema {
 	public Clinica clinica=null;
 	
-	SistemaClinica(Clinica c) {
+	public SistemaClinica(Clinica c) {
 		this.clinica = c.getClinica();
 	}
 
-	/*
+	
 	public void registraMedico(Medico m) {
 		clinica.agregaMedico(m);
 	}
@@ -50,8 +50,6 @@ public class SistemaClinica implements iSistema {
 		return clinica.getFactura(p); 
 	}
 
-
-	 */
-	//public void internaPaciente(Paciente p, Habitacion h) {
-		//clinica.internar(p,h);
+	public void internaPaciente(Paciente p, Habitacion h) {
+		clinica.InternaPaciente(p,h);
 }
