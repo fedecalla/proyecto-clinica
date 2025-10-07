@@ -1,7 +1,5 @@
-/Sistema/
+/.project
 /clinica/
-/excepciones/
-/medicos/
-/pacientes/
-/SalaEspera.class
-/individuos/
+/facturacion/
+/hospedaje/
+/Sistema/

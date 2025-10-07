@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import excepciones.HabitacionCompletaException;
 import individuos.Persona;
 
-import java.util.*;
 
 
 
@@ -117,19 +116,12 @@ public class Clinica {
 			this.ciudad = c;
 	}
 	
-	public Factura getFactura(Persona paciente){
-		Factura factura; int i=0;
-		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombreyapellido())
-			i++;
-		factura = this.facturas.get(i);
-		return factura;
-	}
-
-
 	public String getCiudad() {
 		return this.ciudad;
 	}
-	private void setFechaSalida(Persona paciente)
+
+
+	private void setFechaSalida(Paciente paciente)
 	{
 		Factura factura = this.getFactura(paciente);
 		factura.setFechaSalida();
@@ -154,6 +146,19 @@ public class Clinica {
 			i++;
 		factura = this.facturas.get(i);
 		return factura;
+	}
+	
+	public Factura getFactura(int numero) {
+		Factura fac;
+		int i = 0;
+		while(this.facturas.get(i).getNum() != numero)
+			i++;
+		if(numero < this.facturas.size())
+			fac = this.facturas.get(i);
+		else
+			fac = null;
+		return fac;
+			
 	}
 	
 	

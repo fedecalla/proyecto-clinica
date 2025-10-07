@@ -8,7 +8,7 @@ public abstract class DecoratorMedico implements IMedico{
 		this.encapsulado=m;
 	}
 
-	public String getNombre() {
+/*	public String getNombre() {
 		return this.encapsulado.getNombre();
 	}
 
@@ -16,11 +16,11 @@ public abstract class DecoratorMedico implements IMedico{
 		return this.encapsulado.getDni();
 	}
 
-	public String getMatricula() {
+*/	public String getMatricula() {
 		return this.encapsulado.getMatricula();
 	}
 
-	public String getCiudad() {
+/*	public String getCiudad() {
 		return this.encapsulado.getCiudad();
 	}
 
@@ -32,6 +32,6 @@ public abstract class DecoratorMedico implements IMedico{
 		return this.encapsulado.getTelefono();
 	}
 	
-	public abstract double getHonorario();
+*/	public abstract double getHonorario();
 
 }

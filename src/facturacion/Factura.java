@@ -48,6 +48,11 @@ public class Factura {
 		
 	}
 	
+	//******************************GETTERS Y SETTERS************************************
+	
+	public int getNum() {
+		return this.nro;
+	}
 	/**
 	 *getMedico
 	 */
@@ -103,7 +108,7 @@ public class Factura {
 		    		for(i=0;i<medicos.size();i++) {
 		    			aux=medicos.get(i);
 		    			total+=aux.getHonorario()*1.2;
-		    			texto+="Nombre medico :" + aux.getNombre() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: %0.2f"+ (aux.getHonorario()*1.2)+ "\n";
+		    			texto+="Nombre medico :" + aux.getNombreyapellido() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: %0.2f"+ (aux.getHonorario()*1.2)+ "\n";
 		    		}
 		    		
 		    		texto+="\n";
