@@ -9,9 +9,10 @@ import hospedaje.Habitacion;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.time.LocalDate;
-
+import excepciones.NotFoundMedicoException;
 import excepciones.HabitacionCompletaException;
 import individuos.Persona;
+import java.util.Iterator;
 
 
 
@@ -47,7 +48,6 @@ public class Clinica {
 		this.telefono = telefono;
 		this.colaDeEspera = new LinkedList<>();
 		this.consultas = new ArrayList<>();
-		//FALTARIA INICIALIZAR SALA DE ESPERA Y PATIO PERO DEPENDE DE COMO SE IMPLEMENTEN.
 	}
 	
 	private Habitacion getHabitacion()
@@ -247,21 +247,51 @@ public class Clinica {
 		 */
 	}
 	
-	
-	//PRECONDICION: FECHA_INICIO < FECHA_FIN
-	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin){
-		ArrayList <consultasMedicas> result = new ArrayList <>();
-		int i = 0;
-		while(this.consultas.get(i).getFecha().compareTo(fecha_inicio) < 0 && i< consultasMedicas.getcantidad())
+	private boolean MedicoInClinica(Medico medico)
+	{
+		boolean resultado=false; int i=0;
+		while(!this.medicos.get(i).equals(medico))
+		{
 			i++;
-		while(this.consultas.get(i).getFecha().compareTo(fecha_fin) <= 0 && i<consultasMedicas.getcantidad()) {
-			if(this.consultas.get(i).getMedicos().contains(medico)) {
-				result.add(this.consultas.get(i));
-			}
+			if(this.medicos.get(i).equals(medico))
+				resultado = true;
 		}
 		
-		return result;
-		
+		return resultado;
+	}
+	
+	
+	//PRECONDICION: FECHA_INICIO < FECHA_FIN
+	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws NotFoundMedicoException{
+		if(MedicoInClinica(medico))
+		{	
+			ArrayList <consultasMedicas> result = new ArrayList <>();
+			int i = 0;
+			while(this.consultas.get(i).getFecha().compareTo(fecha_inicio) < 0 && i< consultasMedicas.getcantidad())
+				i++;
+			while(this.consultas.get(i).getFecha().compareTo(fecha_fin) <= 0 && i<consultasMedicas.getcantidad()) {
+				if(this.consultas.get(i).getMedicos().contains(medico)) {
+					result.add(this.consultas.get(i));
+				}
+			}
+			
+			return result;
+		}
+		else
+			throw new NotFoundMedicoException("el medico no esta ingresado en el sistema de la clinica");
+	}
+	
+	
+	public String PrintConsultas(ArrayList consultas)
+	{	
+		String informe = "";
+		Iterator<consultasMedicas> printeable = consultas.iterator();
+		consultasMedica actividad;
+		while(printeable.hasNext())
+		{
+			
+		}
+		return informe;
 	}
 	/* egresaPaciente() deberia llamar a la factura para mostrar y agregar al Medico por el que fue atendido una consulta realizada	
 	 * 
