@@ -31,8 +31,8 @@ public class consultasMedicas {
 		return consultasMedicas.cantidad;
 	}
 
-	public String getNombrePaciente() {
-		return this.paciente.getNombre();
+	public Paciente getPaciente() {
+		return this.paciente;
 	}
 	@Override
 	public String toString() {

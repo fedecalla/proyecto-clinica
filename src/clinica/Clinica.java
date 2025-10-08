@@ -9,8 +9,9 @@ import hospedaje.Habitacion;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.time.LocalDate;
-import excepciones.NotFoundMedicoException;
 import excepciones.HabitacionCompletaException;
+import excepciones.MedicoNoExisteException;
+import excepciones.NoHayPacientesEnEsperaException;
 import individuos.Persona;
 import java.util.Iterator;
 
@@ -233,18 +234,50 @@ public class Clinica {
 	}
 	
 	
-	public void atiendePaciente(ArrayList <Medico> medicos) {
+	public Paciente atiendePaciente(ArrayList <Medico> medicos) throws NoHayPacientesEnEsperaException{
 		LocalDate fecha = LocalDate.now();
+		if (colaDeEspera.isEmpty())
+			throw new NoHayPacientesEnEsperaException();
 		Paciente proximo =  colaDeEspera.getFirst();
 		colaDeEspera.removeFirst();
-		
 		consultasMedicas consulta = new consultasMedicas(fecha, proximo, medicos);
-		
 		this.consultas.add(0, consulta);
 		
+		return proximo;
 		/*Falta ver como manejar los pacientes en atencion
 		 * 
 		 */
+	}
+	
+	public void CreaConsulta(Paciente paciente)
+	{
+		LocalDate fecha = LocalDate.now();
+		consultasMedicas consulta  = new consultasMedicas(fecha,paciente,null);
+		this.consultas.add(consulta);
+	}
+	
+	public Paciente atiendePaciente() throws NoHayPacientesEnEsperaException{
+		if (colaDeEspera.isEmpty())
+			throw new NoHayPacientesEnEsperaException();
+		Paciente proximo =  colaDeEspera.getFirst();
+		colaDeEspera.removeFirst();
+		return proximo;
+		/*Falta ver como manejar los pacientes en atencion
+		 * 
+		 */
+	}
+	
+	public consultasMedicas GetConsultaByPaciente(Paciente paciente)
+	{
+		int i = 0;
+		consultasMedicas consulta = null;
+		while(i<consultasMedicas.getcantidad() && !this.consultas.get(i).getPaciente().equals(paciente))
+			i++;
+		if(i<consultasMedicas.getcantidad())
+			consulta = this.consultas.get(i);
+		
+		return consulta;
+		
 	}
 	
 	private boolean MedicoInClinica(Medico medico)
@@ -256,13 +289,12 @@ public class Clinica {
 			if(this.medicos.get(i).equals(medico))
 				resultado = true;
 		}
-		
 		return resultado;
 	}
-	
+		
 	
 	//PRECONDICION: FECHA_INICIO < FECHA_FIN
-	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws NotFoundMedicoException{
+	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws MedicoNoExisteException{
 		if(MedicoInClinica(medico))
 		{	
 			ArrayList <consultasMedicas> result = new ArrayList <>();
@@ -278,7 +310,7 @@ public class Clinica {
 			return result;
 		}
 		else
-			throw new NotFoundMedicoException("el medico no esta ingresado en el sistema de la clinica");
+			throw new MedicoNoExisteException();
 	}
 	
 	
@@ -286,10 +318,11 @@ public class Clinica {
 	{	
 		String informe = "";
 		Iterator<consultasMedicas> printeable = consultas.iterator();
-		consultasMedica actividad;
+		
 		while(printeable.hasNext())
 		{
-			
+			consultasMedicas actividad = printeable.next();
+			informe += actividad;
 		}
 		return informe;
 	}

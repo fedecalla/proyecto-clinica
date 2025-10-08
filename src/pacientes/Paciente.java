@@ -5,7 +5,7 @@ import clinica.PrioridadMayor;
 import clinica.PrioridadNiño;
 import clinica.PrioridadSala;
 import individuos.Persona;
-
+import excepciones.RangoNoEncontradoException;
 
 public class Paciente extends Persona{
 	private int historiaclinica;
@@ -14,15 +14,19 @@ public class Paciente extends Persona{
 	private PrioridadSala prioridad;
 	
 	
-	public Paciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int norden, String rango) {
+	public Paciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int norden, String rango) throws RangoNoEncontradoException{
 		super(dni, nombreyapellido, telefono, domicilio, ciudad);
 		this.historiaclinica = historiaclinica;
 		this.norden = norden;
 		this.rango = rango;
-		switch (rango) {
+		switch (rango.toLowerCase()) {
 		case "niño": this.prioridad = new PrioridadNiño();
+					 break;	
 		case "joven" : this.prioridad = new PrioridadJoven();
+						break;
 		case "mayor" : this.prioridad = new PrioridadMayor();
+					 break;	
+		default: throw new RangoNoEncontradoException(rango);
 		}		
 	}
 	
