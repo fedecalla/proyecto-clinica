@@ -25,6 +25,10 @@ public class Paciente extends Persona{
 		case "mayor" : this.prioridad = new PrioridadMayor();
 		}		
 	}
+	
+	public String getNombre() {
+		return this.nombreyapellido;
+	}
 
 	public int getHistoriaclinica() {
 		return historiaclinica;

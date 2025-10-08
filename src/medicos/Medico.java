@@ -1,5 +1,6 @@
 package medicos;
 import individuos.Persona;
+import pacientes.Paciente;
 import java.util.ArrayList;
 import java.lang.String;
 import java.time.LocalDate;
@@ -36,7 +37,7 @@ public abstract class Medico extends Persona implements IMedico{
 	 * @param paciente
 	 * Funcionalidad que agrega consultas medicas realizadas por el medico. Se agrega una cada vez que se genera una factura de egreso de Paciente.
 	 */
-	public void agregaConsulta(LocalDate fecha, String paciente) {
+	public void agregaConsulta(LocalDate fecha, Paciente paciente) {
 		consultasMedicas c = new consultasMedicas(fecha,paciente);
 		this.consultas.add(c);
 	}

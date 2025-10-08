@@ -1,14 +1,22 @@
 package medicos;
 
+import pacientes.Paciente;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class consultasMedicas {
+	private static int cantidad = 0;
+	private int numConsulta;
+	private ArrayList <Medico> medicos;
 	private LocalDate fecha;
-	private String nombrePaciente;
+	private Paciente paciente;
 	
-	public consultasMedicas(LocalDate fecha, String nombrepaciente) {
+	public consultasMedicas(LocalDate fecha, Paciente paciente, ArrayList <Medico> medicos) {
+		this.medicos = medicos;
 		this.fecha=fecha;
-		this.nombrePaciente=nombrepaciente;		
+		this.paciente=paciente;
+		this.numConsulta = consultasMedicas.cantidad;
+		consultasMedicas.cantidad+= 1;
 	}
 
 	public LocalDate getFecha() {
@@ -16,11 +24,11 @@ public class consultasMedicas {
 	}
 
 	public String getNombrePaciente() {
-		return nombrePaciente;
+		return this.paciente.getNombre();
 	}
 	@Override
 	public String toString() {
-		return " Fecha:" + fecha + " - Paciente: " + nombrePaciente + "\n";
+		return " Fecha:" + fecha + " - Paciente: " + this.paciente.getNombre() + "\n";
 	}
 	
 }

@@ -1,11 +1,11 @@
 package individuos;
 
 public abstract class Persona {
-	private String dni;
-	private String nombreyapellido;
-	private String telefono;
-	private String domicilio;
-	private String ciudad;
+	protected String dni;
+	protected String nombreyapellido;
+	protected String telefono;
+	protected String domicilio;
+	protected String ciudad;
 	
 	public Persona(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad) {
 		super();

@@ -4,9 +4,11 @@ import medicos.Medico;
 
 import pacientes.Paciente;
 import facturacion.Factura;
+import medicos.consultasMedicas;
 import hospedaje.Habitacion;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.time.LocalDate;
 
 import excepciones.HabitacionCompletaException;
 import individuos.Persona;
@@ -21,6 +23,7 @@ public class Clinica {
 	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
 	private ArrayList <Habitacion> habitaciones;
+	private ArrayList <consultasMedicas> consultas;
 	private SalaEspera salaEspera;
 	//private Queue<Paciente> listaEspera;
 	private ArrayList<Paciente> patio;
@@ -43,6 +46,7 @@ public class Clinica {
 		this.ciudad = ciudad;
 		this.telefono = telefono;
 		this.colaDeEspera = new LinkedList<>();
+		this.consultas = new ArrayList<>();
 		//FALTARIA INICIALIZAR SALA DE ESPERA Y PATIO PERO DEPENDE DE COMO SE IMPLEMENTEN.
 	}
 	
@@ -229,10 +233,15 @@ public class Clinica {
 	}
 	
 	
-	public Paciente atiendePaciente() {
+	public void atiendePaciente(ArrayList <Medico> medicos) {
+		LocalDate fecha = LocalDate.now();
 		Paciente proximo =  colaDeEspera.getFirst();
 		colaDeEspera.removeFirst();
-		return proximo;
+		
+		consultasMedicas consulta = new consultasMedicas(fecha, proximo, medicos);
+		
+		this.consultas.add(0, consulta);
+		
 		/*Falta ver como manejar los pacientes en atencion
 		 * 
 		 */
