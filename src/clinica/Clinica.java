@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.time.LocalDate;
 
 import excepciones.HabitacionCompletaException;
+import excepciones.MedicoNoExisteException;
+import excepciones.NoHayPacientesEnEsperaException;
 import individuos.Persona;
 
 
@@ -47,7 +49,6 @@ public class Clinica {
 		this.telefono = telefono;
 		this.colaDeEspera = new LinkedList<>();
 		this.consultas = new ArrayList<>();
-		//FALTARIA INICIALIZAR SALA DE ESPERA Y PATIO PERO DEPENDE DE COMO SE IMPLEMENTEN.
 	}
 	
 	private Habitacion getHabitacion()
@@ -233,8 +234,10 @@ public class Clinica {
 	}
 	
 	
-	public void atiendePaciente(ArrayList <Medico> medicos) {
+	public void atiendePaciente(ArrayList <Medico> medicos) throws NoHayPacientesEnEsperaException{
 		LocalDate fecha = LocalDate.now();
+		if (colaDeEspera.isEmpty())
+			throw new NoHayPacientesEnEsperaException();
 		Paciente proximo =  colaDeEspera.getFirst();
 		colaDeEspera.removeFirst();
 		
@@ -249,9 +252,11 @@ public class Clinica {
 	
 	
 	//PRECONDICION: FECHA_INICIO < FECHA_FIN
-	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin){
+	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws MedicoNoExisteException{
 		ArrayList <consultasMedicas> result = new ArrayList <>();
 		int i = 0;
+		if (!this.medicos.contains(medico))
+			throw new MedicoNoExisteException();
 		while(this.consultas.get(i).getFecha().compareTo(fecha_inicio) < 0 && i< consultasMedicas.getcantidad())
 			i++;
 		while(this.consultas.get(i).getFecha().compareTo(fecha_fin) <= 0 && i<consultasMedicas.getcantidad()) {

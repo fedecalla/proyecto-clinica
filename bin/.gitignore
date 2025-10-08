@@ -1,7 +1,12 @@
 /.project
+/Sistema/
+/bin/
 /clinica/
+/excepciones/
 /facturacion/
 /hospedaje/
-/Sistema/
 /individuos/
 /main/
+/medicos/
+/pacientes/
+/NoHayPacientesEnEsperaException.class

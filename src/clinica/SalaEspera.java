@@ -16,7 +16,7 @@ public class SalaEspera {
 	}
 	
 	/* Vacia la sala y devuelve al paciente que estaba en ella
-	 * 
+	 * Precondicion: Sala llena
 	 */
 	public Paciente retirar() {
 		Paciente retirado = actual;
