@@ -246,6 +246,23 @@ public class Clinica {
 		 * 
 		 */
 	}
+	
+	
+	//PRECONDICION: FECHA_INICIO < FECHA_FIN
+	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin){
+		ArrayList <consultasMedicas> result = new ArrayList <>();
+		int i = 0;
+		while(this.consultas.get(i).getFecha().compareTo(fecha_inicio) < 0 && i< consultasMedicas.getcantidad())
+			i++;
+		while(this.consultas.get(i).getFecha().compareTo(fecha_fin) <= 0 && i<consultasMedicas.getcantidad()) {
+			if(this.consultas.get(i).getMedicos().contains(medico)) {
+				result.add(this.consultas.get(i));
+			}
+		}
+		
+		return result;
+		
+	}
 	/* egresaPaciente() deberia llamar a la factura para mostrar y agregar al Medico por el que fue atendido una consulta realizada	
 	 * 
 	 */

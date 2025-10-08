@@ -22,6 +22,14 @@ public class consultasMedicas {
 	public LocalDate getFecha() {
 		return fecha;
 	}
+	
+	public ArrayList<Medico> getMedicos(){
+		return this.medicos;
+	}
+	
+	public static int getcantidad(){
+		return consultasMedicas.cantidad;
+	}
 
 	public String getNombrePaciente() {
 		return this.paciente.getNombre();
