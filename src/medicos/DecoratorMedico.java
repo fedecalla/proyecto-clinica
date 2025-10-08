@@ -1,10 +1,18 @@
 package medicos;
 import java.time.LocalDate;
 
+
+
+/**
+ * Primera clase decoradora de Medico, extiende y encapsula IMedico
+ */
 public abstract class DecoratorMedico implements IMedico{
 	
 	protected IMedico encapsulado;
 	
+	/**
+	 * Constructor de la clase
+	 */
 	public DecoratorMedico(IMedico m) {
 		this.encapsulado=m;
 	}
@@ -17,7 +25,12 @@ public abstract class DecoratorMedico implements IMedico{
 		return this.encapsulado.getDni();
 	}
 
-*/	public String getMatricula() {
+	
+*/	
+	/**
+	 * Get Matricula
+	 */
+	public String getMatricula() {
 		return this.encapsulado.getMatricula();
 	}
 
@@ -33,7 +46,19 @@ public abstract class DecoratorMedico implements IMedico{
 		return this.encapsulado.getTelefono();
 	}
 	
-*/	public abstract double getHonorario();
+*/	
+	/**
+	 * Clase abstracta encargada de calcular honorarios
+	 */
+	
+	public abstract double getHonorario();
+	
+	/**
+	 * Reporat actividad del medico en un determinado periodo
+	 *<b>Pre:</b><br>
+	 *desde>0<br>
+	 *hasta>desde<br>
+	 */
 
 	public String getReporte(LocalDate desde, LocalDate hasta) {
 		return this.encapsulado.getReporte(desde, hasta);
