@@ -10,10 +10,10 @@ import pacientes.Paciente;
 import hospedaje.Habitacion;
 
 public class SistemaClinica implements iSistema {
-	public Clinica clinica=null;
+	private Clinica clinica=null;
 	
 	public SistemaClinica(Clinica c) {
-		this.clinica = c.getClinica();
+		this.clinica = c.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
 	}
 
 	
@@ -50,6 +50,7 @@ public class SistemaClinica implements iSistema {
 		return clinica.getFactura(p); 
 	}
 
-	public void internaPaciente(Paciente p, Habitacion h) {
-		clinica.InternaPaciente(p,h);
+	//public void internaPaciente(Paciente p, Habitacion h) {
+		//clinica.InternaPaciente(p,h);
+	//}
 }

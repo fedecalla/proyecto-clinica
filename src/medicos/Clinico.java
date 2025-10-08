@@ -2,7 +2,7 @@ package medicos;
 
 public class Clinico extends Medico{
 
-	public Clinico(String nom, String dni, String mat, String ciudad, String dom, String tel) {
+	public Clinico(String nom, String dni, String ciudad, String dom, String tel, String mat) {
 		super(nom, dni, mat, ciudad, dom, tel);
 		this.especialidad = "Clinico";
 	}

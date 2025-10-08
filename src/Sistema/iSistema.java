@@ -17,6 +17,6 @@ public interface iSistema {
 	
 	public Factura egresaPaciente(Paciente p);
 
-	public void internaPaciente(Paciente p, Habitacion h);
+	//public void internaPaciente(Paciente p, Habitacion h);
 	
 }

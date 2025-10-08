@@ -30,7 +30,7 @@ public class Clinica {
 	private String telefono;
 	private LinkedList <Paciente> colaDeEspera;
 	
-	private Clinica() {
+	private Clinica(String nombre, String direccion, String ciudad, String telefono) {
 		this.medicos = new ArrayList<>();
 		this.pacientes = new ArrayList<>();
 		this.facturas = new ArrayList<>();
@@ -38,10 +38,10 @@ public class Clinica {
 		this.salaEspera  = new SalaEspera();
 		//this.listaEspera = new ArrayDeque<>();
 		this.patio = new ArrayList<>();
-		this.nombre = null;
-		this.direccion = null;
-		this.ciudad = null;
-		this.telefono = null;
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.ciudad = ciudad;
+		this.telefono = telefono;
 		this.colaDeEspera = new LinkedList<>();
 		//FALTARIA INICIALIZAR SALA DE ESPERA Y PATIO PERO DEPENDE DE COMO SE IMPLEMENTEN.
 	}
@@ -54,14 +54,14 @@ public class Clinica {
 		habitacion = this.habitaciones.get(i);
 		return habitacion;
 	}
-	public Clinica getClinica() {
+	public static Clinica getClinica(String nombre, String direccion, String ciudad, String telefono ) {
 		if(Clinica.singleton == null)
-			Clinica.singleton = new Clinica();
+			Clinica.singleton = new Clinica(nombre,direccion, ciudad, telefono);
 		return Clinica.singleton;
 	}
 	
-	public void agregaMedico(Medico medico) {
-		this.medicos.add(medico);
+	public void agregaMedico(Medico m) {
+		this.medicos.add(m);
 	}
 	
 	public void eliminaMedico(Medico medico) {
@@ -129,8 +129,22 @@ public class Clinica {
 	
 	
 	
+	
+	
 	//METODOS QUE INTERACTUAN EN EL Sistema	--------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
+	@Override
+	public String toString() {
+		String s;
+		s = ("Clinica: "+ nombre +" - Direccion: "+this.direccion + " - Telefono: "+ this.telefono+" - Ciudad: "+ this.ciudad +"\n"+"MEDICOS: \n" );
+				for (int i=0;i<this.medicos.size(); i++) {
+					s+=(this.medicos.get(i).toString());
+					s+="\n";
+				}
+			
+		return s ;
+	}
+
 	public void agregaPacienteACola(Paciente p) //podria tirar excepcion de cola llena
 	{
 		this.colaDeEspera.add(p);

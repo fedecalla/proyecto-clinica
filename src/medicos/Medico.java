@@ -6,7 +6,7 @@ public abstract class Medico extends Persona implements IMedico{
 	
 	protected static double honorarioBasico = 20000;
 	
-	public Medico(String nom, String dni, String mat, String ciudad, String dom, String tel ) {
+	public Medico(String nom, String dni, String ciudad, String dom, String tel, String mat) {
 		super(dni, nom, tel, dom, ciudad);
 		this.matricula=mat;
 	}
@@ -22,5 +22,12 @@ public abstract class Medico extends Persona implements IMedico{
 	}
 	
 	public abstract double getHonorario();
+
+	@Override
+	public String toString() {
+		return super.toString()+" - (Medico) matricula: " + matricula + " - especialidad: " + especialidad + "";
+	}
+	
+	
 
 }

@@ -42,6 +42,8 @@ public class Paciente extends Persona{
 	public PrioridadSala getPrioridad() {
 		return prioridad;
 	}
+	
+	
 
 
 }

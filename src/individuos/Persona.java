@@ -39,6 +39,14 @@ public abstract class Persona {
 	public String getCiudad() {
 		return ciudad;
 	}
+
+	@Override
+	public String toString() {
+		return "(Persona) Dni: " + dni + ", nombreyapellido: " + nombreyapellido + ", telefono: " + telefono
+				+ ", domicilio: " + domicilio + ", ciudad: " + ciudad + "";
+	}
+	
+	
 	
 	
 }
