@@ -1,6 +1,6 @@
 package medicos;
 
-public class Pediatra extends Medico{
+public class Pediatra extends Medico {
 
 	public Pediatra(String nom, String dni, String mat, String ciudad, String dom, String tel) {
 		super(nom, dni, mat, ciudad, dom, tel);
@@ -11,7 +11,8 @@ public class Pediatra extends Medico{
 	public double getHonorario() {
 		return honorarioBasico*1.07;
 	}
-
+	
+	
 	
 
 }

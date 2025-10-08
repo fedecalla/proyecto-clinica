@@ -237,7 +237,7 @@ public class Clinica {
 		 * 
 		 */
 	}
-	/* egresaPaciente() deberia llamar a la factura para mostrar	
+	/* egresaPaciente() deberia llamar a la factura para mostrar y agregar al Medico por el que fue atendido una consulta realizada	
 	 * 
 	 */
 }

@@ -1,4 +1,5 @@
 package medicos;
+import java.time.LocalDate;
 
 public abstract class DecoratorMedico implements IMedico{
 	
@@ -33,5 +34,9 @@ public abstract class DecoratorMedico implements IMedico{
 	}
 	
 */	public abstract double getHonorario();
+
+	public String getReporte(LocalDate desde, LocalDate hasta) {
+		return this.encapsulado.getReporte(desde, hasta);
+	}
 
 }
