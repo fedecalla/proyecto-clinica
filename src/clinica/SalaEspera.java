@@ -40,9 +40,12 @@ public class SalaEspera {
 			return null;
 		}
 		Paciente ocupante = this.actual;
-		ResultadoSala r = ingresante.getPrioridad().disputar(ingresante, ocupante);
-		actual = r.ganador;
-		return r.perdedor;
+		actual = ocupante.getGanador(ingresante);
+		if (actual.equals(ocupante)) {
+			return ingresante;
+		}
+		else
+			return ocupante;
 		
 	}
 	
