@@ -1,19 +1,18 @@
 
 package pacientes;
 import individuos.Persona;
-import excepciones.RangoNoEncontradoException;
 
 public abstract class Paciente extends Persona{
 	private int historiaclinica;
 	private int norden;
-	private String rango;
+	protected String rango;
 	
 	
-	public Paciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int norden) throws RangoNoEncontradoException{
+	public Paciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int norden)
+	{
 		super(dni, nombreyapellido, telefono, domicilio, ciudad);
 		this.historiaclinica = historiaclinica;
 		this.norden = norden;
-		this.rango = rango;	
 	}
 	
 	public String getNombre() {
@@ -28,9 +27,7 @@ public abstract class Paciente extends Persona{
 		return norden;
 	}
 
-	public String getRango() {
-		return rango;
-	}
+	public abstract String getRango();
 	
 	public abstract Paciente getGanador(Paciente otro);
 	public abstract Paciente enfrentaNinio(Paciente otro);

@@ -1,11 +1,10 @@
 package pacientes;
 
-import excepciones.RangoNoEncontradoException;
-
-public class Mayor extends Paciente{
+class Mayor extends Paciente{
 	public Mayor(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad,
-			int historiaclinica, int norden) throws RangoNoEncontradoException {
+			int historiaclinica, int norden) {
 		super(dni, nombreyapellido, telefono, domicilio, ciudad, historiaclinica, norden);
+		this.rango="Mayor";
 		// TODO Auto-generated constructor stub
 	}
 	public Paciente getGanador(Paciente otro) {
@@ -19,5 +18,10 @@ public class Mayor extends Paciente{
 	}
 	public Paciente enfrentaMayor(Paciente otro) {
 		return this;
+	}
+	
+	@Override
+	public String getRango() {
+		return this.rango;
 	}
 }

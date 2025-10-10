@@ -35,6 +35,7 @@ public class Clinica {
 	private String telefono;
 	private LinkedList <Paciente> colaDeEspera;
 	
+	//constructor
 	private Clinica(String nombre, String direccion, String ciudad, String telefono) {
 		this.medicos = new ArrayList<>();
 		this.pacientes = new ArrayList<>();
@@ -59,6 +60,7 @@ public class Clinica {
 		habitacion = this.habitaciones.get(i);
 		return habitacion;
 	}
+	
 	public static Clinica getClinica(String nombre, String direccion, String ciudad, String telefono ) {
 		if(Clinica.singleton == null)
 			Clinica.singleton = new Clinica(nombre,direccion, ciudad, telefono);
@@ -136,7 +138,7 @@ public class Clinica {
 	
 	
 	
-	//METODOS QUE INTERACTUAN EN EL Sistema	--------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// METODOS QUE INTERACTUAN EN EL SISTEMA	--------------------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	@Override
 	public String toString() {
@@ -154,10 +156,25 @@ public class Clinica {
 	{
 		this.colaDeEspera.add(p);
 	}
+	
+	//-------
+	
 	public void agregaPaciente(Paciente paciente) {
 		
 		this.pacientes.add(paciente);
 	}
+	
+	public void eliminarPaciente(Paciente paciente)
+	{
+		this.setFechaSalida(paciente);
+		int i=0;
+		while(this.pacientes.get(i) != paciente)
+			i++;
+		if(this.pacientes.get(i) != null)
+			this.pacientes.remove(i);
+	}
+	
+	//-------
 
 	public Factura getFactura(Paciente paciente) { // precondicion:exista ya la factura
 		Factura factura; int i=0;
@@ -195,15 +212,7 @@ public class Clinica {
 	}
 	
 	
-	public void eliminarPaciente(Paciente paciente)
-	{
-		this.setFechaSalida(paciente);
-		int i=0;
-		while(this.pacientes.get(i) != paciente)
-			i++;
-		if(this.pacientes.get(i) != null)
-			this.pacientes.remove(i);
-	}
+	
 	
 	
 	public void desvincularPacienteHabitacion(Persona paciente)
@@ -234,7 +243,7 @@ public class Clinica {
 	}
 	
 	
-	public Paciente atiendePaciente(ArrayList <Medico> medicos) throws NoHayPacientesEnEsperaException{
+	/*public Paciente atiendePaciente(ArrayList <Medico> medicos) throws NoHayPacientesEnEsperaException{
 		LocalDate fecha = LocalDate.now();
 		if (colaDeEspera.isEmpty())
 			throw new NoHayPacientesEnEsperaException();
@@ -246,25 +255,23 @@ public class Clinica {
 		return proximo;
 		/*Falta ver como manejar los pacientes en atencion
 		 * 
-		 */
+		 }*/
+	
+	public void atenderPaciente(Medico m, Paciente p)
+	{
+		consultasMedicas consulta = this.GetConsultaByPaciente(p);
+		consulta.getMedicos().add(m);
+		
+		Factura factura = this.getFactura(p);
+		factura.setMedicos(m);
 	}
+
 	
 	public void CreaConsulta(Paciente paciente)
 	{
 		LocalDate fecha = LocalDate.now();
 		consultasMedicas consulta  = new consultasMedicas(fecha,paciente,null);
 		this.consultas.add(consulta);
-	}
-	
-	public Paciente atiendePaciente() throws NoHayPacientesEnEsperaException{
-		if (colaDeEspera.isEmpty())
-			throw new NoHayPacientesEnEsperaException();
-		Paciente proximo =  colaDeEspera.getFirst();
-		colaDeEspera.removeFirst();
-		return proximo;
-		/*Falta ver como manejar los pacientes en atencion
-		 * 
-		 */
 	}
 	
 	public consultasMedicas GetConsultaByPaciente(Paciente paciente)

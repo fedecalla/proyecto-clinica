@@ -40,8 +40,8 @@ public class Factura {
 		contador++;
 		this.nro=contador;
 		medicos=new ArrayList<>();
-		ingreso.format(fmt);
 		this.ingreso=LocalDate.now();
+		this.ingreso.format(fmt);
 		this.habitacion=null;
 		this.total=0;
 		this.nombrePaciente=nom;
