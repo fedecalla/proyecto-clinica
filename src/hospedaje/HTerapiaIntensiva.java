@@ -18,6 +18,7 @@ public class HTerapiaIntensiva extends Habitacion{
 	public HTerapiaIntensiva() {
 		super();
 		this.tipo="Terapia Intensiva";
+		super.capacidad = 1;
 	}
 
 	/**

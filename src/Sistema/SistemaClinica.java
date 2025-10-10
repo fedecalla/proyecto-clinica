@@ -57,8 +57,8 @@ public class SistemaClinica implements iSistema {
 	
 	
 	public Factura egresaPaciente(Paciente p) {
-		clinica.eliminarPaciente(p);
 		clinica.desvincularPacienteHabitacion(p);
+		clinica.eliminarPaciente(p);
 		return clinica.getFactura(p); 
 	}
 	

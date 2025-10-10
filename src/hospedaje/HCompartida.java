@@ -23,6 +23,7 @@ public class HCompartida extends Habitacion{
 		super();
 		this.persona=null;
 		this.tipo="Compartida";
+		super.capacidad = 2;
 	}
 
 	/**

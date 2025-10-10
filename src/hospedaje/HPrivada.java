@@ -19,6 +19,7 @@ public class HPrivada extends Habitacion{
 	public HPrivada() {
 		super();
 		this.tipo="Privada";
+		super.capacidad = 1;
 	}
 
 	/**

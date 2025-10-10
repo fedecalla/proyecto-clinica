@@ -17,7 +17,8 @@ public abstract class Habitacion {
 	protected static double costoAsignacion=200;
 	protected ArrayList<Persona> pacientesEnHabitacion; // si es habitacion compartida van a haber varios, y si es privada habra uno solo
 	protected String tipo;
-	protected int cantPacientes;
+	protected int capacidad;
+	
 	
 	/**
 	*Constructor de habitacion
@@ -26,8 +27,8 @@ public abstract class Habitacion {
 		
 	public Habitacion() {
 		this.pacientesEnHabitacion = new ArrayList<>();
-		this.cantPacientes = 0;
 	}
+
 		
 	/**
 	*Metodo abstracto, calcula el costo de la estadia acorde al tipo de habitacion
@@ -40,7 +41,14 @@ public abstract class Habitacion {
 	}
 		
 		
-		
+	public int getCapacidad()
+	{
+		return this.capacidad;
+	}
+	public void setCapacidad(int c)
+	{
+		this.capacidad = c;
+	}
 	/**
 	*asignacion de personas a la habitacion
 	*<b>Pre:</b><br>

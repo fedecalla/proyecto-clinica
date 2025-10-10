@@ -9,12 +9,12 @@ import hospedaje.Habitacion;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.time.LocalDate;
-import excepciones.HabitacionCompletaException;
+import excepciones.NoHayHabitacionDisponibleException;
 import excepciones.MedicoNoExisteException;
 import excepciones.NoHayPacientesEnEsperaException;
 import individuos.Persona;
 import java.util.Iterator;
-
+import java.util.Stack;
 
 
 
@@ -24,7 +24,7 @@ public class Clinica {
 	private ArrayList <Medico> medicos;
 	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
-	private ArrayList <Habitacion> habitaciones;
+	private Stack <Habitacion> habitaciones;
 	private ArrayList <consultasMedicas> consultas;
 	private SalaEspera salaEspera;
 	//private Queue<Paciente> listaEspera;
@@ -40,7 +40,7 @@ public class Clinica {
 		this.medicos = new ArrayList<>();
 		this.pacientes = new ArrayList<>();
 		this.facturas = new ArrayList<>();
-		this.habitaciones = new ArrayList<>();
+		this.habitaciones = new Stack<>();
 		this.salaEspera  = new SalaEspera();
 		//this.listaEspera = new ArrayDeque<>();
 		this.patio = new ArrayList<>();
@@ -52,14 +52,14 @@ public class Clinica {
 		this.consultas = new ArrayList<>();
 	}
 	
-	private Habitacion getHabitacion()
+	/*private Habitacion getHabitacion()
 	{
 		Habitacion habitacion; int i = 0;
 		while(this.habitaciones.get(i)!=null && this.habitaciones.get(i).EstaLlena())
 			i++;
 		habitacion = this.habitaciones.get(i);
 		return habitacion;
-	}
+	}*/
 	
 	public static Clinica getClinica(String nombre, String direccion, String ciudad, String telefono ) {
 		if(Clinica.singleton == null)
@@ -197,7 +197,7 @@ public class Clinica {
 			
 	}
 	
-	
+	/*
 	public void InternaPaciente(Persona paciente) // podria tirar excepciones de tipo no hay habitaciones disponibles
 	{
 		Habitacion SalaDeInternacion = this.getHabitacion();
@@ -209,26 +209,19 @@ public class Clinica {
 			System.out.println(e.getMessage());
 		}
 		//aca habria un else que tire una excepcion
-	}
+	}*/
 	
 	
 	
 	
 	
-	public void desvincularPacienteHabitacion(Persona paciente)
+	public void desvincularPacienteHabitacion(Paciente paciente)
 	{
-		int i =0; int j;
-		while(this.habitaciones.get(i) != null)
-		{
-			j =0; Habitacion sala = this.habitaciones.get(i);
-			while(sala.getPersonas().get(j)!=paciente && sala.getPersonas().get(j)!=null )
-				j++;
-			if(sala.getPersonas().get(j)!=null)
-			{
-				sala.getPersonas().remove(j);
-				break;
-			}
-		}
+		Habitacion habitacion = paciente.getHabitacion();
+		if(habitacion.getCapacidad() == 0)
+			this.habitaciones.push(habitacion);
+		habitacion.setCapacidad(habitacion.getCapacidad()++);
+		paciente.setHabitacion(null);
 	}	
 		
 	public void ingresaPaciente(Paciente p) {
@@ -318,6 +311,32 @@ public class Clinica {
 		}
 		else
 			throw new MedicoNoExisteException();
+	}
+	private Habitacion getHabitacionNollena()
+	{
+		Habitacion resultado;
+		if(this.habitaciones.isEmpty())
+			resultado = null;
+		else
+			resultado = this.habitaciones.pop();
+		return resultado;
+	}
+	
+	private void InternaPaciente(Paciente p) throws NoHayHabitacionDisponibleException
+	{
+		
+		Habitacion habitacion = getHabitacionNollena();
+		if(habitacion != null)
+		{
+			int capacidad = habitacion.getCapacidad();
+			capacidad --;
+			habitacion.setCapacidad(capacidad);
+			if(capacidad != 0)
+				this.habitaciones.push(habitacion);
+			p.setHabitacion(habitacion);
+		}
+		else
+			throw new NoHayHabitacionDisponibleException("Todas las habitaciones estan llenas");
 	}
 	
 	
