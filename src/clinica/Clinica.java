@@ -134,6 +134,10 @@ public class Clinica {
 		factura.setFechaSalida();
 	}
 	
+	public SalaEspera getSaladeEspera() {
+		return this.salaEspera;
+	}
+	
 	public ArrayList <Paciente> getPacientes(){
 		return this.pacientes;
 	}
@@ -176,6 +180,8 @@ public class Clinica {
 		if(this.pacientes.get(i) != null)
 			this.pacientes.remove(i);
 	}
+	
+	
 	
 	
 	
@@ -230,6 +236,7 @@ public class Clinica {
 	}	
 		
 	public void ingresaPaciente(Paciente p) {
+		agregaPaciente(p);
 		if (!salaEspera.estaOcupada())
 			salaEspera.ingresar(p);
 		else {
@@ -360,4 +367,9 @@ public class Clinica {
 	/* egresaPaciente() deberia llamar a la factura para mostrar y agregar al Medico por el que fue atendido una consulta realizada	
 	 * 
 	 */
+	
+	
 }
+
+
+
