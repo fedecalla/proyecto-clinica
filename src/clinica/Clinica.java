@@ -24,7 +24,9 @@ public class Clinica {
 	private ArrayList <Medico> medicos;
 	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
-	private Stack <Habitacion> habitaciones;
+	private Stack <Habitacion> privadas;
+	private Stack <Habitacion> Compartidas;
+	private Stack <Habitacion> TerapiaIntensiva;
 	private ArrayList <consultasMedicas> consultas;
 	private SalaEspera salaEspera;
 	//private Queue<Paciente> listaEspera;
@@ -52,14 +54,6 @@ public class Clinica {
 		this.consultas = new ArrayList<>();
 	}
 	
-	/*private Habitacion getHabitacion()
-	{
-		Habitacion habitacion; int i = 0;
-		while(this.habitaciones.get(i)!=null && this.habitaciones.get(i).EstaLlena())
-			i++;
-		habitacion = this.habitaciones.get(i);
-		return habitacion;
-	}*/
 	
 	public static Clinica getClinica(String nombre, String direccion, String ciudad, String telefono ) {
 		if(Clinica.singleton == null)
@@ -208,20 +202,6 @@ public class Clinica {
 			
 	}
 	
-	/*
-	public void InternaPaciente(Persona paciente) // podria tirar excepciones de tipo no hay habitaciones disponibles
-	{
-		Habitacion SalaDeInternacion = this.getHabitacion();
-		try {
-			if(SalaDeInternacion != null)
-				SalaDeInternacion.setPersona(paciente);
-		}
-		catch(HabitacionCompletaException e) {
-			System.out.println(e.getMessage());
-		}
-		//aca habria un else que tire una excepcion
-	}*/
-	
 	
 	
 	
@@ -247,19 +227,18 @@ public class Clinica {
 	}
 	
 	
-	/*public Paciente atiendePaciente(ArrayList <Medico> medicos) throws NoHayPacientesEnEsperaException{
-		LocalDate fecha = LocalDate.now();
+	public Paciente atiendePaciente() throws NoHayPacientesEnEsperaException{
 		if (colaDeEspera.isEmpty())
 			throw new NoHayPacientesEnEsperaException();
 		Paciente proximo =  colaDeEspera.getFirst();
 		colaDeEspera.removeFirst();
-		consultasMedicas consulta = new consultasMedicas(fecha, proximo, medicos);
-		this.consultas.add(0, consulta);
 		
-		return proximo;
-		/*Falta ver como manejar los pacientes en atencion
-		 * 
-		 }*/
+		if (proximo.equals(this.salaEspera.getActual()))
+			this.salaEspera.vaciar();
+		else
+			this.patio.remove(proximo);
+		return proximo; 
+	}
 	
 	public void atenderPaciente(Medico m, Paciente p)
 	{
@@ -323,20 +302,55 @@ public class Clinica {
 		else
 			throw new MedicoNoExisteException();
 	}
-	private Habitacion getHabitacionNollena()
+	private Habitacion getHabitacionNollena(String tipo)
 	{
 		Habitacion resultado;
-		if(this.habitaciones.isEmpty())
-			resultado = null;
-		else
-			resultado = this.habitaciones.pop();
+		switch(tipo)
+		{
+			case "compartida" :
+			{
+					if(this.compartidas.isEmpty())
+						resultado = null;
+					else
+					{
+						resultado = this.Compartidas.pop();
+					
+						resultado.setCapacidad(resultado.getCapacidad()-1);
+						if(resultado.getCapacidad() != 0)
+							this.Compartidas.push(resultado);
+					}
+					break;
+			}
+			case "privada" :
+			{
+				if(this.privadas.isEmpty())
+					resultado = null;
+				else
+					resultado = this.Privadas.pop();
+				
+				resultado.setCapacidad(resultado.getCapacidad()-1);
+				break;
+			}	
+			case "terapiaIntensiva" :
+			{
+				if(this.TerapiaIntensiva.isEmpty())
+					resultado = null;
+				else
+				{
+					resultado = this.TerapiaIntensiva.pop();
+					resultado.setCapacidad(resultado.getCapacidad()-1);
+				}
+				break;
+			}
+		}
+	
 		return resultado;
 	}
 	
 	private void InternaPaciente(Paciente p) throws NoHayHabitacionDisponibleException
 	{
 		
-		Habitacion habitacion = getHabitacionNollena();
+		Habitacion habitacion = getHabitacionNollena(p.getTipoHabitacion());
 		if(habitacion != null)
 		{
 			int capacidad = habitacion.getCapacidad();
