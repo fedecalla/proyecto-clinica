@@ -134,6 +134,9 @@ public class Clinica {
 		factura.setFechaSalida();
 	}
 	
+	public ArrayList <Paciente> getPacientes(){
+		return this.pacientes;
+	}
 	
 	
 	
@@ -173,6 +176,8 @@ public class Clinica {
 		if(this.pacientes.get(i) != null)
 			this.pacientes.remove(i);
 	}
+	
+	
 	
 	//-------
 
@@ -220,7 +225,7 @@ public class Clinica {
 		Habitacion habitacion = paciente.getHabitacion();
 		if(habitacion.getCapacidad() == 0)
 			this.habitaciones.push(habitacion);
-		habitacion.setCapacidad(habitacion.getCapacidad()++);
+		habitacion.setCapacidad(habitacion.getCapacidad() + 1);
 		paciente.setHabitacion(null);
 	}	
 		

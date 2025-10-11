@@ -5,17 +5,19 @@ import hospedaje.Habitacion;
 
 public abstract class Paciente extends Persona{
 	private int historiaclinica;
-	private int norden;
+	protected static int siguiente = 0;
+	private static int norden;
 	protected String rango;
 	private Habitacion habitacion;
 	
 	
-	public Paciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int norden)
+	public Paciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica)
 	{
 		super(dni, nombreyapellido, telefono, domicilio, ciudad);
 		this.historiaclinica = historiaclinica;
 		this.habitacion = null;
-		this.norden = norden;
+		this.norden = Paciente.siguiente;
+		Paciente.siguiente = Paciente.siguiente + 1;
 	}
 	
 	public String getNombre() {

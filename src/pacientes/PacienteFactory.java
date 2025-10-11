@@ -19,18 +19,18 @@ public class PacienteFactory{
 	 * 
 	 * Retorna una instancia de alguna clase clasificada por la edad del paciente.
 	 */
-	public static Paciente crearPaciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int norden, int edad) {
+	public static Paciente crearPaciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int edad) {
 	        if (edad < 13)
 	        {
-	            return new Ninio( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica,norden);
+	            return new Ninio( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica);
 	        } 
 	        else if (edad < 60)
 	        {
-	            return new Joven( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica, norden);
+	            return new Joven( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica);
 	        } 
 	        else
 	        {
-	            return new Mayor( dni,nombreyapellido,telefono,domicilio,ciudad, historiaclinica, norden);
+	            return new Mayor( dni,nombreyapellido,telefono,domicilio,ciudad, historiaclinica);
 	    }
 	        
 	}

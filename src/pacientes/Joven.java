@@ -2,8 +2,8 @@ package pacientes;
 
 public class Joven extends Paciente{
 	public Joven(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad,
-			int historiaclinica, int norden){
-		super(dni, nombreyapellido, telefono, domicilio, ciudad, historiaclinica, norden);
+			int historiaclinica){
+		super(dni, nombreyapellido, telefono, domicilio, ciudad, historiaclinica);
 		this.rango = "Joven";
 	}
 	public Paciente getGanador(Paciente otro) {

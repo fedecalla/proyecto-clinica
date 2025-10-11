@@ -20,6 +20,9 @@ public class SistemaClinica implements iSistema {
 		this.clinica = c.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
 	}
 
+	public Clinica getClinica() {
+		return this.clinica;
+	}
 	
 	public void registraMedico(Medico m) {
 		clinica.agregaMedico(m);
