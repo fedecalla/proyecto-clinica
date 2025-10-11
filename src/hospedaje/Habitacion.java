@@ -15,7 +15,7 @@ import excepciones.HabitacionCompletaException;
 public abstract class Habitacion {
 	
 	protected static double costoAsignacion=200;
-	protected ArrayList<Persona> pacientesEnHabitacion; // si es habitacion compartida van a haber varios, y si es privada habra uno solo
+	//protected ArrayList<Persona> pacientesEnHabitacion; // si es habitacion compartida van a haber varios, y si es privada habra uno solo
 	protected String tipo;
 	protected int capacidad;
 	
@@ -35,7 +35,7 @@ public abstract class Habitacion {
 	*/
 	public abstract double getCosto(long cant_dias); 
 		
-		
+
 	public ArrayList<Persona> getPersonas() {
 		return this.pacientesEnHabitacion;
 	}
@@ -64,7 +64,6 @@ public abstract class Habitacion {
 		return tipo;
 	}
 	
-	public abstract boolean EstaLlena();
 	
 
 }

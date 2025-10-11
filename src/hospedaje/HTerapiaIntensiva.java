@@ -29,16 +29,4 @@ public class HTerapiaIntensiva extends Habitacion{
 		return costoAsignacion+ Math.pow(CostoHabTerapiaIntensiva, cant_dias);
 	}
 
-	@Override
-	public void setPersona(Persona persona) throws HabitacionCompletaException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean EstaLlena() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

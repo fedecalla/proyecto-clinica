@@ -20,21 +20,18 @@ public class SistemaClinica implements iSistema {
 		this.clinica = c.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
 	}
 
-	public Clinica getClinica() {
-		return this.clinica;
-	}
 	
 	public void registraMedico(Medico m) {
 		clinica.agregaMedico(m);
 	}
 
 	public void registraPaciente(Paciente p) {
-		clinica.agregaPacienteACola(p);
 		clinica.ingresaPaciente(p);
 	}
 
 	public void ingresaPaciente() {
 		Paciente proximo;
+		Factura factura;
 		try 
 		{
 			proximo = clinica.atiendePaciente();
@@ -52,7 +49,8 @@ public class SistemaClinica implements iSistema {
 	public void atiendePacienteMedico(Medico m, Paciente p)
 	{
 		consultasMedicas consulta = clinica.GetConsultaByPaciente(p);
-		consulta.getMedicos().add(m);
+		
+		consulta.getMedicos().add(m); //podria hacerse en un setter
 		
 		Factura factura = clinica.getFactura(p);
 		factura.setMedicos(m);
@@ -60,8 +58,8 @@ public class SistemaClinica implements iSistema {
 	
 	
 	public Factura egresaPaciente(Paciente p) {
-		clinica.desvincularPacienteHabitacion(p);
 		clinica.eliminarPaciente(p);
+		clinica.desvincularPacienteHabitacion(p);
 		return clinica.getFactura(p); 
 	}
 	

@@ -46,7 +46,7 @@ public abstract class Paciente extends Persona{
 	public abstract Paciente getGanador(Paciente otro);
 	public abstract Paciente enfrentaNinio(Paciente otro);
 	public abstract Paciente enfrentaJoven(Paciente otro);
-	public abstract Paciente enfrentaMayor(Paciente otro);
+	public abstract Paciente enfrentaAnciano(Paciente otro);
 
 
 }

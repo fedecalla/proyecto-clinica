@@ -33,12 +33,13 @@ public class Prueba {
 		
 		
 		
+		Imedico m1 = new Clinico("3123" , "asnfdas", "123124", "a la vuelta", "mardel pa", "12312");
+		m1 = new Magister(m1);
 		
 		
 		
 		
-		
-		Clinico m = new Clinico("222222","medic","161616","direccion0", "mdp", "Matriculanazi");
+		Medico m = new Clinico("222222","medic","161616","direccion0", "mdp", "Matriculanazi");
 		sistema.getClinica().agregaMedico(m);
 		
 		Paciente p2 = PacienteFactory.crearPaciente("38900654", "Lucía Fernández", "1134567890", "Av. Corrientes 4520", "Buenos Aires", 102, 27);

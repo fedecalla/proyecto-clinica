@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class consultasMedicas {
 	private static int cantidad = 0;
-	private int numConsulta;
+	//private int numConsulta;
 	private ArrayList <Medico> medicos;
 	private LocalDate fecha;
 	private Paciente paciente;
@@ -15,7 +15,7 @@ public class consultasMedicas {
 		this.medicos = medicos;
 		this.fecha=fecha;
 		this.paciente=paciente;
-		this.numConsulta = consultasMedicas.cantidad;
+		//this.numConsulta = consultasMedicas.cantidad;
 		consultasMedicas.cantidad+= 1;
 	}
 
