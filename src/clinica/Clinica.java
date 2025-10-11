@@ -236,7 +236,6 @@ public class Clinica {
 	}	
 		
 	public void ingresaPaciente(Paciente p) {
-		agregaPaciente(p);
 		if (!salaEspera.estaOcupada())
 			salaEspera.ingresar(p);
 		else {
