@@ -9,15 +9,12 @@ public abstract class Paciente extends Persona{
 	private static int norden;
 	protected String rango;
 	private Habitacion habitacion;
-	private String tipoHabitacion; // null si es consulta
-	
 	
 	public Paciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica)
 	{
 		super(dni, nombreyapellido, telefono, domicilio, ciudad);
 		this.historiaclinica = historiaclinica;
 		this.habitacion = null;
-		this.tipoHabitacion = null;
 		this.norden = Paciente.siguiente;
 		Paciente.siguiente = Paciente.siguiente + 1;
 	}
@@ -45,21 +42,16 @@ public abstract class Paciente extends Persona{
 	}
 	public abstract String getRango();
 	
-	public void setTipoHabitacion(String tipo)
-	{
-		this.tipoHabitacion = tipo;
-	}
-	
 	public String getTipoHabitacion()
 	{
-		return this.tipoHabitacion;
+		return this.habitacion.getTipo();
 	}
 
 	
 	public abstract Paciente getGanador(Paciente otro);
 	public abstract Paciente enfrentaNinio(Paciente otro);
 	public abstract Paciente enfrentaJoven(Paciente otro);
-	public abstract Paciente enfrentaAnciano(Paciente otro);
+	public abstract Paciente enfrentaMayor(Paciente otro);
 
 
 }

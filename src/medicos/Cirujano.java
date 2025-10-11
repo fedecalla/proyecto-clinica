@@ -24,6 +24,4 @@ public class Cirujano extends Medico{
 		return honorarioBasico*1.1;
 	}
 
-
-
 }

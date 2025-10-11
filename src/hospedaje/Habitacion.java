@@ -15,31 +15,15 @@ import excepciones.HabitacionCompletaException;
 public abstract class Habitacion {
 	
 	protected static double costoAsignacion=200;
-	//protected ArrayList<Persona> pacientesEnHabitacion; // si es habitacion compartida van a haber varios, y si es privada habra uno solo
 	protected String tipo;
 	protected int capacidad;
-	
-	
-	/**
-	*Constructor de habitacion
-	*Se crea sin personas dentro
-	*/
-		
-	public Habitacion() {
-		this.pacientesEnHabitacion = new ArrayList<>();
-	}
+
 
 		
 	/**
 	*Metodo abstracto, calcula el costo de la estadia acorde al tipo de habitacion
 	*/
 	public abstract double getCosto(long cant_dias); 
-		
-
-	public ArrayList<Persona> getPersonas() {
-		return this.pacientesEnHabitacion;
-	}
-		
 		
 	public int getCapacidad()
 	{
@@ -49,6 +33,9 @@ public abstract class Habitacion {
 	{
 		this.capacidad = c;
 	}
+	public void setPersona(){
+		this.capacidad -=1;
+	}
 	/**
 	*asignacion de personas a la habitacion
 	*<b>Pre:</b><br>
@@ -56,8 +43,6 @@ public abstract class Habitacion {
 	*b>Excepciones:</b><br>
 	*que la habitacion este completa<br>
 	*/
-		
-	public abstract void setPersona(Persona persona) throws HabitacionCompletaException; // se sobreescribe porque varia de si la habitacion es compartida o no
 
 
 	public String getTipo() {

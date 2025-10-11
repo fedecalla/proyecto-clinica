@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import hospedaje.Habitacion;
 
 public class SistemaClinica implements iSistema {
-	private Clinica clinica=null;
+	public Clinica clinica=null;
 	
 	public SistemaClinica(Clinica c) {
 		this.clinica = c.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
@@ -35,7 +35,7 @@ public class SistemaClinica implements iSistema {
 		try 
 		{
 			proximo = clinica.atiendePaciente();
-			Factura factura = new Factura(proximo.getNombreyapellido());
+			factura = new Factura(proximo.getNombreyapellido());
 			clinica.agregaFactura(factura);
 			clinica.agregaPaciente(proximo);
 			clinica.CreaConsulta(proximo);
@@ -76,8 +76,15 @@ public class SistemaClinica implements iSistema {
 			System.out.println(e);
 		}
 	}
-
-	//public void internaPaciente(Paciente p, Habitacion h) {
-		//clinica.InternaPaciente(p,h);
-	//}
+	
+	public void internaPaciente(Paciente p, String Thabitacion) {
+		try
+		{
+			clinica.InternaPaciente(p,Thabitacion);
+		}
+		catch(NoHayHabitacionDisponibleException e)
+		{
+			System.out.println(e);
+		}
+	}
 }

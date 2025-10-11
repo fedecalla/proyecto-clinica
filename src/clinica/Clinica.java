@@ -25,7 +25,7 @@ public class Clinica {
 	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
 	private Stack <Habitacion> privadas;
-	private Stack <Habitacion> Compartidas;
+	private Stack <Habitacion> compartidas;
 	private Stack <Habitacion> TerapiaIntensiva;
 	private ArrayList <consultasMedicas> consultas;
 	private SalaEspera salaEspera;
@@ -42,7 +42,6 @@ public class Clinica {
 		this.medicos = new ArrayList<>();
 		this.pacientes = new ArrayList<>();
 		this.facturas = new ArrayList<>();
-		this.habitaciones = new Stack<>();
 		this.salaEspera  = new SalaEspera();
 		//this.listaEspera = new ArrayDeque<>();
 		this.patio = new ArrayList<>();
@@ -52,6 +51,9 @@ public class Clinica {
 		this.telefono = telefono;
 		this.colaDeEspera = new LinkedList<>();
 		this.consultas = new ArrayList<>();
+		this.privadas = new Stack<Habitacion>();
+		this.compartidas = new Stack<Habitacion>();
+		this.TerapiaIntensiva = new Stack<Habitacion>();
 	}
 	
 	
@@ -64,6 +66,9 @@ public class Clinica {
 	public void agregaMedico(Medico m) {
 		this.medicos.add(m);
 	}
+	public void agregaPrivada(Habitacion privada) {
+		this.privadas.push(privada);
+	}
 	
 	public void eliminaMedico(Medico medico) {
 		this.medicos.remove(medico);
@@ -75,14 +80,6 @@ public class Clinica {
 	
 	public void eliminaFactura(Factura fac) {
 		this.facturas.remove(fac);
-	}
-	
-	public void agregaHabitacion(Habitacion h) {
-		this.habitaciones.add(h);
-	}
-	
-	public void eliminaHabitacion(Habitacion h) {
-		this.habitaciones.remove(h);
 	}
 	
 	public void setNombre(String nombre) {
@@ -209,9 +206,20 @@ public class Clinica {
 	public void desvincularPacienteHabitacion(Paciente paciente)
 	{
 		Habitacion habitacion = paciente.getHabitacion();
-		if(habitacion.getCapacidad() == 0)
-			this.habitaciones.push(habitacion);
-		habitacion.setCapacidad(habitacion.getCapacidad() + 1);
+		String tipo = habitacion.getTipo();
+		if(habitacion.getCapacidad() == 0) {
+			habitacion.setCapacidad(1);
+			switch (tipo.toLowerCase())
+			{
+			case "compartida": this.compartidas.push(habitacion);
+								break;
+			case "privada": this.privadas.push(habitacion);
+								break;
+			case "intensiva": this.TerapiaIntensiva.push(habitacion);
+								break;
+								
+			}
+		}
 		paciente.setHabitacion(null);
 	}	
 		
@@ -304,7 +312,7 @@ public class Clinica {
 	}
 	private Habitacion getHabitacionNollena(String tipo)
 	{
-		Habitacion resultado;
+		Habitacion resultado=null;
 		switch(tipo)
 		{
 			case "compartida" :
@@ -313,11 +321,11 @@ public class Clinica {
 						resultado = null;
 					else
 					{
-						resultado = this.Compartidas.pop();
+						resultado = this.compartidas.pop();
 					
-						resultado.setCapacidad(resultado.getCapacidad()-1);
+						resultado.setPersona();
 						if(resultado.getCapacidad() != 0)
-							this.Compartidas.push(resultado);
+							this.compartidas.push(resultado);
 					}
 					break;
 			}
@@ -326,7 +334,7 @@ public class Clinica {
 				if(this.privadas.isEmpty())
 					resultado = null;
 				else
-					resultado = this.Privadas.pop();
+					resultado = this.privadas.pop();
 				
 				resultado.setCapacidad(resultado.getCapacidad()-1);
 				break;
@@ -347,25 +355,18 @@ public class Clinica {
 		return resultado;
 	}
 	
-	private void InternaPaciente(Paciente p) throws NoHayHabitacionDisponibleException
+	public void InternaPaciente(Paciente p, String tipoHabitacion) throws NoHayHabitacionDisponibleException
 	{
 		
-		Habitacion habitacion = getHabitacionNollena(p.getTipoHabitacion());
+		Habitacion habitacion = getHabitacionNollena(tipoHabitacion);
 		if(habitacion != null)
-		{
-			int capacidad = habitacion.getCapacidad();
-			capacidad --;
-			habitacion.setCapacidad(capacidad);
-			if(capacidad != 0)
-				this.habitaciones.push(habitacion);
 			p.setHabitacion(habitacion);
-		}
 		else
 			throw new NoHayHabitacionDisponibleException("Todas las habitaciones estan llenas");
 	}
 	
 	
-	public String PrintConsultas(ArrayList consultas)
+	public String PrintConsultas(ArrayList<consultasMedicas> consultas)
 	{	
 		String informe = "";
 		Iterator<consultasMedicas> printeable = consultas.iterator();
@@ -377,9 +378,6 @@ public class Clinica {
 		}
 		return informe;
 	}
-	/* egresaPaciente() deberia llamar a la factura para mostrar y agregar al Medico por el que fue atendido una consulta realizada	
-	 * 
-	 */
 	
 	
 }
