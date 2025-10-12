@@ -1,22 +1,20 @@
 package Sistema;
-import clinica.Clinica;
 import facturacion.Factura;
-import hospedaje.Habitacion;
-import medicos.Medico;
+import medicos.IMedico;
 import pacientes.Paciente;
 
 public interface iSistema {
 
-	public void registraMedico(Medico m);
+	public void registraMedico(IMedico m);
 
 	public void registraPaciente(Paciente p);
 
 	public void ingresaPaciente();
 
-	public void atiendePacienteMedico(Medico m, Paciente p);
+	public void medicoAtiendePaciente(IMedico m, Paciente p);
 	
 	public Factura egresaPaciente(Paciente p);
 
-	//public void internaPaciente(Paciente p, Habitacion h);
+	public void internaPaciente(Paciente p, String tHabitacion);
 	
 }

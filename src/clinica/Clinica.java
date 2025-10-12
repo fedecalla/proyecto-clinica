@@ -1,5 +1,6 @@
 package clinica;
 
+import medicos.IMedico;
 import medicos.Medico;
 
 import pacientes.Paciente;
@@ -21,15 +22,14 @@ import java.util.Stack;
 public class Clinica {
 
 	private static Clinica singleton = null;
-	private ArrayList <Medico> medicos;
+	private ArrayList <IMedico> medicos;
 	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
 	private Stack <Habitacion> privadas;
 	private Stack <Habitacion> compartidas;
-	private Stack <Habitacion> TerapiaIntensiva;
+	private Stack <Habitacion> intensivas;
 	private ArrayList <consultasMedicas> consultas;
 	private SalaEspera salaEspera;
-	//private Queue<Paciente> listaEspera;
 	private ArrayList<Paciente> patio;
 	private String nombre;
 	private String direccion;
@@ -39,11 +39,10 @@ public class Clinica {
 	
 	//constructor
 	private Clinica(String nombre, String direccion, String ciudad, String telefono) {
-		this.medicos = new ArrayList<>();
+		this.medicos = new ArrayList<IMedico>();
 		this.pacientes = new ArrayList<>();
 		this.facturas = new ArrayList<>();
 		this.salaEspera  = new SalaEspera();
-		//this.listaEspera = new ArrayDeque<>();
 		this.patio = new ArrayList<>();
 		this.nombre = nombre;
 		this.direccion = direccion;
@@ -53,7 +52,7 @@ public class Clinica {
 		this.consultas = new ArrayList<>();
 		this.privadas = new Stack<Habitacion>();
 		this.compartidas = new Stack<Habitacion>();
-		this.TerapiaIntensiva = new Stack<Habitacion>();
+		this.intensivas = new Stack<Habitacion>();
 	}
 	
 	
@@ -63,14 +62,24 @@ public class Clinica {
 		return Clinica.singleton;
 	}
 	
-	public void agregaMedico(Medico m) {
+	
+	public void agregaMedico(IMedico m) {
 		this.medicos.add(m);
 	}
-	public void agregaPrivada(Habitacion privada) {
-		this.privadas.push(privada);
+	
+	public void agregaPrivada(Habitacion h) {
+		this.privadas.push(h);
 	}
 	
-	public void eliminaMedico(Medico medico) {
+	public void agregaCompartida(Habitacion h) {
+		this.compartidas.push(h);
+	}
+	
+	public void agregaIntensiva(Habitacion h) {
+		this.intensivas.push(h);
+	}
+	
+	public void eliminaMedico(IMedico medico) {
 		this.medicos.remove(medico);
 	}
 	
@@ -155,10 +164,13 @@ public class Clinica {
 		this.colaDeEspera.add(p);
 	}
 	
-	//-------
 	
+	/**
+	 * 
+	 * @param paciente
+	 * Metodo que agrega al paciente al vector de pacientes de la Clinica.
+	 */
 	public void agregaPaciente(Paciente paciente) {
-		
 		this.pacientes.add(paciente);
 	}
 	
@@ -215,7 +227,7 @@ public class Clinica {
 								break;
 			case "privada": this.privadas.push(habitacion);
 								break;
-			case "intensiva": this.TerapiaIntensiva.push(habitacion);
+			case "intensiva": this.intensivas.push(habitacion);
 								break;
 								
 			}
@@ -223,7 +235,7 @@ public class Clinica {
 		paciente.setHabitacion(null);
 	}	
 		
-	public void ingresaPaciente(Paciente p) {
+	public void registraPaciente(Paciente p) {
 		if (!salaEspera.estaOcupada())
 			salaEspera.ingresar(p);
 		else {
@@ -234,7 +246,11 @@ public class Clinica {
 		colaDeEspera.add(p);
 	}
 	
-	
+	/**
+	 * 
+	 * @throws NoHayPacientesEnEsperaException
+	 * @return Proximo paciente a atender segun la cola de Espera.
+	 */
 	public Paciente atiendePaciente() throws NoHayPacientesEnEsperaException{
 		if (colaDeEspera.isEmpty())
 			throw new NoHayPacientesEnEsperaException();
@@ -248,7 +264,7 @@ public class Clinica {
 		return proximo; 
 	}
 	
-	public void atenderPaciente(Medico m, Paciente p)
+	public void atenderPaciente(IMedico m, Paciente p)
 	{
 		consultasMedicas consulta = this.GetConsultaByPaciente(p);
 		consulta.getMedicos().add(m);
@@ -261,8 +277,8 @@ public class Clinica {
 	public void CreaConsulta(Paciente paciente)
 	{
 		LocalDate fecha = LocalDate.now();
-		consultasMedicas consulta  = new consultasMedicas(fecha,paciente,null);
-		this.consultas.add(consulta);
+		consultasMedicas consulta  = new consultasMedicas(fecha,paciente);
+			this.consultas.add(consulta);
 	}
 	
 	public consultasMedicas GetConsultaByPaciente(Paciente paciente)
@@ -278,7 +294,7 @@ public class Clinica {
 		
 	}
 	
-	private boolean MedicoInClinica(Medico medico)
+	private boolean MedicoInClinica(IMedico medico)
 	{
 		boolean resultado=false; int i=0;
 		while(!this.medicos.get(i).equals(medico))
@@ -292,7 +308,7 @@ public class Clinica {
 		
 	
 	//PRECONDICION: FECHA_INICIO < FECHA_FIN
-	public ArrayList <consultasMedicas> getConsultas(Medico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws MedicoNoExisteException{
+	public ArrayList <consultasMedicas> getConsultas(IMedico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws MedicoNoExisteException{
 		if(MedicoInClinica(medico))
 		{	
 			ArrayList <consultasMedicas> result = new ArrayList <>();
@@ -341,11 +357,11 @@ public class Clinica {
 			}	
 			case "terapiaIntensiva" :
 			{
-				if(this.TerapiaIntensiva.isEmpty())
+				if(this.intensivas.isEmpty())
 					resultado = null;
 				else
 				{
-					resultado = this.TerapiaIntensiva.pop();
+					resultado = this.intensivas.pop();
 					resultado.setCapacidad(resultado.getCapacidad()-1);
 				}
 				break;

@@ -1,11 +1,4 @@
 package hospedaje;
-import pacientes.Paciente;
-import individuos.Persona;
-import medicos.Medico;
-import java.util.ArrayList;
-import excepciones.HabitacionCompletaException;
-
-
 
 /**
  * Clase Habitacion

@@ -6,7 +6,7 @@ import hospedaje.Habitacion;
 public abstract class Paciente extends Persona{
 	private int historiaclinica;
 	protected static int siguiente = 0;
-	private static int norden;
+	private int norden;
 	protected String rango;
 	private Habitacion habitacion;
 	

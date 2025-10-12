@@ -24,7 +24,7 @@ public class MedicoFactory {
 	 *NoExisteContratoException
 	 */
 	
-	public IMedico crearMedico(String tipo, String posgrado, String contrato, String nom, String dni,  String mat, String ciudad, String dom, String tel) throws NoExisteEspecialidadException, NoExistePosgradoException, NoExisteContratoException {
+	public static IMedico crearMedico(String tipo, String posgrado, String contrato, String nom, String dni,  String mat, String ciudad, String dom, String tel) throws NoExisteEspecialidadException, NoExistePosgradoException, NoExisteContratoException {
         IMedico base;
         switch (tipo.toLowerCase()) {
             case "cirujano": base = new Cirujano(nom, dni, mat, ciudad, dom, tel); break;

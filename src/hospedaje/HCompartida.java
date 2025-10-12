@@ -1,10 +1,4 @@
 package hospedaje;
-import pacientes.Paciente;
-import excepciones.HabitacionCompletaException;
-import individuos.Persona;
-import medicos.Medico;
-
-
 
 /**
  * Clase HCompartida, hija de Habitacion

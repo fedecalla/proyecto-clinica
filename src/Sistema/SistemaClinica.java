@@ -1,17 +1,12 @@
 package Sistema;
 import clinica.Clinica;
 import facturacion.Factura;
-import medicos.Medico;
 import medicos.consultasMedicas;
-import pacientes.Paciente;
-import individuos.Persona;
-import medicos.Medico;
+import medicos.*;
 import pacientes.Paciente;
 import excepciones.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
-
-import hospedaje.Habitacion;
 
 public class SistemaClinica implements iSistema {
 	public Clinica clinica=null;
@@ -21,14 +16,21 @@ public class SistemaClinica implements iSistema {
 	}
 
 	
-	public void registraMedico(Medico m) {
+	public void registraMedico(IMedico m) {
 		clinica.agregaMedico(m);
 	}
 
+	/**
+	 * @param Paciente
+	 * Metodo de la clinica que agrega al paciente en la cola de Espera, y disputa la sala de espera privada
+	 */
 	public void registraPaciente(Paciente p) {
-		clinica.ingresaPaciente(p);
+		clinica.registraPaciente(p);
 	}
 
+	/**
+	 * Metodo que toma al primer paciente de la cola de espera, y lo atiende, generando su factura y su consulta.
+	 */
 	public void ingresaPaciente() {
 		Paciente proximo;
 		Factura factura;
@@ -46,12 +48,10 @@ public class SistemaClinica implements iSistema {
 		}
 	}
 
-	public void atiendePacienteMedico(Medico m, Paciente p)
+	public void medicoAtiendePaciente(IMedico m, Paciente p)
 	{
 		consultasMedicas consulta = clinica.GetConsultaByPaciente(p);
-		
-		consulta.getMedicos().add(m); //podria hacerse en un setter
-		
+		consulta.getMedicos().add(m);
 		Factura factura = clinica.getFactura(p);
 		factura.setMedicos(m);
 	}
@@ -63,7 +63,7 @@ public class SistemaClinica implements iSistema {
 		return clinica.getFactura(p); 
 	}
 	
-	public void ActividadMedico(Medico m, LocalDate desde, LocalDate hasta)
+	public void ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)
 	{
 		ArrayList<consultasMedicas> actividad = new ArrayList <>();
 		try

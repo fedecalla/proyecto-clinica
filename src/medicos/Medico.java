@@ -1,6 +1,5 @@
 package medicos;
 import individuos.Persona;
-import pacientes.Paciente;
 import java.util.ArrayList;
 import java.lang.String;
 import java.time.LocalDate;
@@ -43,6 +42,7 @@ public abstract class Medico extends Persona implements IMedico{
 		this.consultas.add(c);
 	}*/
 	
+
 	
 	/**
 	 * Funcion que permite generar un reporte de consultas medicas realizadas por un medico, entre 2 fechas especificadas.

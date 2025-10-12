@@ -1,11 +1,11 @@
 package facturacion;
+import medicos.IMedico;
 import medicos.Medico;
 import java.util.ArrayList;
 
 import hospedaje.Habitacion;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -18,7 +18,7 @@ import java.time.temporal.ChronoUnit;
 public class Factura {
 	
 	private static int contador=0;
-	private ArrayList<Medico> medicos;
+	private ArrayList<IMedico> medicos;
 	private Medico aux;
 	private LocalDate ingreso, egreso;
 	private int nro, i;
@@ -58,14 +58,14 @@ public class Factura {
 	 */
 	
 	
-	public ArrayList<Medico> getMedicos() {
+	public ArrayList<IMedico> getMedicos() {
 		return medicos;
 	}
 	/**
 	 *setMedico
 	 */
 
-	public void setMedicos(Medico m) {
+	public void setMedicos(IMedico m) {
 		medicos.add(m);
 	}
 
@@ -93,9 +93,9 @@ public class Factura {
 	 *Impresion de la factura
 	 */
 	public String toString() {
-		    texto= "Factura Nº:" + nro + "\n" +
+		     texto= "Factura Nº:" + nro + "\n" +
 		    	   "Nombre del paciente:" + this.nombrePaciente + "\n" +
-		           "Fecha de ingreso:" + ingreso + "\n" +
+		    	   "Fecha de ingreso:" + ingreso + "\n" +
 		           "Fecha de egreso:" + egreso + "\n" +
 		           "Cantidad de dias:" + cant_dias + "\n";
 		    
@@ -106,11 +106,10 @@ public class Factura {
 		    		texto+="Consultas medicas:"+ "\n" +"\n";
 		    		
 		    		for(i=0;i<medicos.size();i++) {
-		    			aux=medicos.get(i);
-		    			total+=aux.getHonorario()*1.2;
-		    			texto+="Nombre medico :" + aux.getNombreyapellido() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: %0.2f"+ (aux.getHonorario()*1.2)+ "\n";
+		    			IMedico aux = medicos.get(i);
+		    			total+=medicos.get(i).getHonorario()*1.2;
+		    			texto+="Nombre medico :" + aux.getNombreyapellido() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: "+(aux.getHonorario()*1.2)+ "\n";
 		    		}
-		    		
 		    		texto+="\n";
 		    		
 		    		texto += String.format("\t \t \t \t \t \t \t \t Total: %.2f\n", this.total);

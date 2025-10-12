@@ -17,16 +17,15 @@ public abstract class DecoratorMedico implements IMedico{
 		this.encapsulado=m;
 	}
 
-/*	public String getNombre() {
-		return this.encapsulado.getNombre();
+	public String getNombreyapellido() {
+		return this.encapsulado.getNombreyapellido();
 	}
 
-	public String getDni() {
-		return this.encapsulado.getDni();
+	public String getEspecialidad() {
+		return this.encapsulado.getEspecialidad();
 	}
-
 	
-*/	
+
 	/**
 	 * Get Matricula
 	 */
