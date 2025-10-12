@@ -212,7 +212,7 @@ public class Clinica {
 	 */
 	public Factura getFactura(Paciente paciente) { 
 		Factura factura; int i=0;
-		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombreyapellido())
+		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombre())
 			i++;
 		factura = this.facturas.get(i);
 		return factura;
