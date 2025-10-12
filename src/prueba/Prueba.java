@@ -1,5 +1,8 @@
 package prueba;
 import clinica.Clinica;
+import excepciones.NoExisteContratoException;
+import excepciones.NoExisteEspecialidadException;
+import excepciones.NoExistePosgradoException;
 import facturacion.Factura;
 import hospedaje.*;
 import Sistema.SistemaClinica;
@@ -39,6 +42,26 @@ public class Prueba {
 		System.out.println(m.toString());
 		
 		System.out.println(f1.toString());
+		
+		
+		//prueba de factory medico y caluclo de honorario
+		MedicoFactory factory = new MedicoFactory();
+
+		try {
+		    IMedico m4 = factory.crearMedico("cirujano", "doctor", "fijo", "Juan", "123", "MDP", "Calle Falsa", "223...", "MAT001");
+		    IMedico m5 = factory.crearMedico("clinico", "magister", "temporal", "Ana", "456", "MDP", "Calle Real", "223...", "MAT002");
+
+		    System.out.printf("Honorario de %s: %.2f%n", m4.getMatricula(), m4.getHonorario());
+		    System.out.printf("Honorario de %s: %.2f%n", m5.getMatricula(), m5.getHonorario());
+
+		} catch (NoExisteEspecialidadException e) {
+		    System.out.println("Error: Especialidad no reconocida → " + e.getMessage());
+		} catch (NoExistePosgradoException e) {
+		    System.out.println("Error: Posgrado no reconocido → " + e.getMessage());
+		} catch (NoExisteContratoException e) {
+		    System.out.println("Error: Tipo de contrato no reconocido → " + e.getMessage());
+		}
+
 	}
 
 }

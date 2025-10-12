@@ -10,11 +10,12 @@ public class Clinico extends Medico{
 	/**
 	 * Constructor de la clase
 	 */
-
+	
 	public Clinico(String nom, String dni, String ciudad, String dom, String tel, String mat) {
-		super(nom, dni, mat, ciudad, dom, tel);
-		this.especialidad = "Clinico";
+	    super(nom, dni, ciudad, dom, tel, mat);
+	    this.especialidad = "Clinico";
 	}
+
 
 	/**
 	 * Calculo su honorario

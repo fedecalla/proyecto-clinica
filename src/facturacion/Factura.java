@@ -113,7 +113,7 @@ public class Factura {
 		    		
 		    		texto+="\n";
 		    		
-		    		texto+="\t \t Total: %0.2f" + this.total + "\n";
+		    		texto += String.format("\t \t \t \t \t \t \t \t Total: %.2f\n", this.total);
 		    		
 		    return texto;
 		}
