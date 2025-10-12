@@ -16,7 +16,7 @@ public class HCompartida extends Habitacion{
 
 	/**
 	 *Constructor de la clase
-	 *puede contener dos personas
+	 *puede contener cinco personas
 	 */
 	public HCompartida() {
 		super();
