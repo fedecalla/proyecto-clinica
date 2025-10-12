@@ -38,11 +38,7 @@ public class Prueba {
 		System.out.println(m.toString());
 		
 		System.out.println(f1.toString());
-		
-		
-		//prueba de factory medico y caluclo de honorario
 		MedicoFactory factory = new MedicoFactory();
-
 		try {
 		    IMedico m4 = factory.crearMedico("cirujano", "doctor", "fijo", "Juan", "123", "MDP", "Calle Falsa", "223...", "MAT001");
 		    IMedico m5 = factory.crearMedico("clinico", "magister", "temporal", "Ana", "456", "MDP", "Calle Real", "223...", "MAT002");

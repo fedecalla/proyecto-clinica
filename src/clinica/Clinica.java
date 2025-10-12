@@ -356,7 +356,6 @@ public class Clinica {
 					else
 					{
 						resultado = this.compartidas.pop();
-					
 						resultado.setPersona();
 						if(resultado.getCapacidad() != 0)
 							this.compartidas.push(resultado);
@@ -367,11 +366,12 @@ public class Clinica {
 			{
 				if(this.privadas.isEmpty())
 					resultado = null;
-				else
+				else {
 					resultado = this.privadas.pop();
-				
-				resultado.setCapacidad(resultado.getCapacidad()-1);
-				break;
+					resultado.setCapacidad(resultado.getCapacidad()-1);
+					break;
+				}
+					
 			}	
 			case "terapiaIntensiva" :
 			{
