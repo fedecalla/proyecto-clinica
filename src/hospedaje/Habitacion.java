@@ -9,8 +9,8 @@ import excepciones.HabitacionCompletaException;
 
 /**
  * Clase Habitacion
- * clase padre, contiene a los pacientes internados
- * contiene un estatico del valor de asignacion de un paciente
+ * clase padre asbtracta de los tipos de habitacion concretas
+ * Contiene su capacidad, costo y tipo
  */
 public abstract class Habitacion {
 	

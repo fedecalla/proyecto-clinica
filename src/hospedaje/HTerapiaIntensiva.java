@@ -5,7 +5,7 @@ import individuos.Persona;
 
 /**
  * Clase HPrivada, hija de Habitacion
- * contiene un estatico de su valor
+ * contiene un estatico de su costo
  */
 
 public class HTerapiaIntensiva extends Habitacion{
@@ -14,6 +14,7 @@ public class HTerapiaIntensiva extends Habitacion{
 
 	/**
 	 *Constructor de la clase
+	 *Designa su capacidad y tipo
 	 */
 	public HTerapiaIntensiva() {
 		super();

@@ -4,20 +4,15 @@ import facturacion.Factura;
 import medicos.Medico;
 import medicos.consultasMedicas;
 import pacientes.Paciente;
-import individuos.Persona;
-import medicos.Medico;
-import pacientes.Paciente;
 import excepciones.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
-
-import hospedaje.Habitacion;
 
 public class SistemaClinica implements iSistema {
 	public Clinica clinica=null;
 	
 	public SistemaClinica(Clinica c) {
-		this.clinica = c.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
+		this.clinica = Clinica.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
 	}
 
 	
