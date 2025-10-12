@@ -35,7 +35,6 @@ public class consultasMedicas {
 	}
 	@Override
 	public String toString() {
-		return " Fecha:" + fecha + " - Paciente: " + this.paciente.getNombre() + "\n";
+		return " Fecha: " + fecha + " - Paciente: " + this.paciente.getNombre() + "\n";
 	}
-	
 }
