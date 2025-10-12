@@ -52,7 +52,8 @@ public abstract class Paciente extends Persona{
 		return this.habitacion.getTipo();
 	}
 
-	/*Define los metodos del double dispatch para que sean extendidos en las clases hijas
+	/*
+	 * Define los metodos del double dispatch para que sean extendidos en las clases hijas
 	 * 
 	 */
 	public abstract Paciente getGanador(Paciente otro);

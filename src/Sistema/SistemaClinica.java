@@ -47,7 +47,12 @@ public class SistemaClinica implements iSistema {
 			System.out.println(e);
 		}
 	}
-
+	/**
+	 * <b>pre: </b><br>
+	 * medico m != null <br>
+	 * paciente != null <br>
+	 * 
+	 */
 	public void medicoAtiendePaciente(IMedico m, Paciente p)
 	{
 		consultasMedicas consulta = clinica.GetConsultaByPaciente(p);
@@ -56,13 +61,25 @@ public class SistemaClinica implements iSistema {
 		factura.setMedicos(m);
 	}
 	
-	
+	/**
+	 * <b>pre: </b><br>
+	 * paciente p != null<br>
+	 * @return factura a pagar del paciente
+	 */
 	public Factura egresaPaciente(Paciente p) {
 		clinica.eliminarPaciente(p);
 		clinica.desvincularPacienteHabitacion(p);
 		return clinica.getFactura(p); 
 	}
-	
+	/**
+	 * 
+	 * @param m medico a saber la actividad
+	 * @param desde fecha de inicio de la actividad
+	 * @param hasta fecha de fin de la actividad
+	 * <b>pre: </b><br>
+	 * m != null<br>
+	 * hasta mayor que desde<br>
+	 */
 	public void ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)
 	{
 		ArrayList<consultasMedicas> actividad = new ArrayList <>();
@@ -76,7 +93,13 @@ public class SistemaClinica implements iSistema {
 			System.out.println(e);
 		}
 	}
-	
+	/**
+	 * <b>pre: </b><br>
+	 * p != null<br>
+	 * Thabitacion != null<br>
+	 * Thabitacion no vacio <br>
+	 * 
+	 */
 	public void internaPaciente(Paciente p, String Thabitacion) {
 		try
 		{

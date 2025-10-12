@@ -46,6 +46,9 @@ public abstract class Medico extends Persona implements IMedico{
 	
 	/**
 	 * Funcion que permite generar un reporte de consultas medicas realizadas por un medico, entre 2 fechas especificadas.
+	 * <b>Pre:</br><br>
+	 * fecha desde menor que fecha hasta<br>
+	 *
 	 */
 	public String getReporte(LocalDate desde, LocalDate hasta) {
 		//formato de las fechas: AAAA-MM-DD
