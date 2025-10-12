@@ -6,4 +6,8 @@ public class MedicoNoExisteException extends Exception{
 		super("Medico no registrado en la clinica");
 	}
 	
+	public MedicoNoExisteException(String matricula) {
+		super(matricula + " Medico no registrado en la clinica");
+	}
+	
 }

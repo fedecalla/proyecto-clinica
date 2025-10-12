@@ -1,8 +1,8 @@
 package medicos;
 import individuos.Persona;
-import java.util.ArrayList;
 import java.lang.String;
 import java.time.LocalDate;
+import java.util.*;
 	
 public abstract class Medico extends Persona implements IMedico{
 	protected String matricula, especialidad;
@@ -22,6 +22,11 @@ public abstract class Medico extends Persona implements IMedico{
 
 	public String getMatricula() {
 		return matricula;
+	}
+	
+	public ArrayList<consultasMedicas> getConsultas()
+	{
+		return this.consultas;
 	}
 	
 	public abstract double getHonorario();
@@ -48,24 +53,32 @@ public abstract class Medico extends Persona implements IMedico{
 	 * Funcion que permite generar un reporte de consultas medicas realizadas por un medico, entre 2 fechas especificadas.
 	 */
 	public String getReporte(LocalDate desde, LocalDate hasta) {
-		//formato de las fechas: AAAA-MM-DD
-		String rep = "";
-		int cont;
+		String rep = ("REPORTE DE MEDICO, MATRICULA: "+this.getMatricula()+"\n");
+		int cont=0;
 		int i=0;
-		while (i<this.consultas.size() && this.consultas.get(i).getFecha().isBefore(desde))
-			i++;
-		if (!(this.consultas.get(i).getFecha().isBefore(desde)) && !(this.consultas.get(i).getFecha().isAfter(hasta))) {
-			cont=0;
-			while (this.consultas.get(i).getFecha().isBefore(hasta)) {
-				cont++;
-				rep += (cont + this.consultas.get(i).toString());
+		LocalDate actual;
+		
+		this.consultas.sort(Comparator.comparing(consultasMedicas::getFecha));
+		
+		if (this.consultas.size()>0) {
+			actual = this.consultas.get(i).getFecha();
+			
+		while (i<this.consultas.size() && this.consultas.get(i).getFecha().compareTo(desde)<0)
+			i= i+1;
+		
+		actual=this.consultas.get(i).getFecha();
+		
+			while (i<this.consultas.size() && actual.compareTo(hasta)<=0) {
+				cont+=1;
+				rep += (cont + "." + this.consultas.get(i).toString());
+				if (cont>10)
+					return rep;
+				i= i+1;
 			}
 		}
-		else {
-			rep = ("Matricula: " + this.matricula + " - No ha realizado ninguna consulta en ese periodo");
-		}
+		else 
+			rep = "NO HAY CONSULTAS REALIZADAS";
 		return rep;
 	}
-	
 
 }

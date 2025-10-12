@@ -48,12 +48,19 @@ public class SistemaClinica implements iSistema {
 		}
 	}
 
-	public void medicoAtiendePaciente(IMedico m, Paciente p)
+	public void medicoAtiendePaciente(IMedico m, Paciente p) throws MedicoNoExisteException 
 	{
+		if (!this.clinica.MedicoInClinica(m))
+		{
+			throw new MedicoNoExisteException(m.getMatricula());
+		}
+		
 		consultasMedicas consulta = clinica.GetConsultaByPaciente(p);
 		consulta.getMedicos().add(m);
+		m.getConsultas().add(consulta);
 		Factura factura = clinica.getFactura(p);
 		factura.setMedicos(m);
+		
 	}
 	
 	
@@ -63,18 +70,15 @@ public class SistemaClinica implements iSistema {
 		return clinica.getFactura(p); 
 	}
 	
-	public void ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)
+	public String ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)throws MedicoNoExisteException
 	{
-		ArrayList<consultasMedicas> actividad = new ArrayList <>();
-		try
-		{
-			actividad = clinica.getConsultas(m, desde, hasta);
-			clinica.PrintConsultas(actividad);
+		String reporte="";
+		//ArrayList<consultasMedicas> actividad = new ArrayList <>();
+		if (!this.clinica.MedicoInClinica(m)){
+			throw new MedicoNoExisteException(m.getMatricula());
 		}
-		catch(MedicoNoExisteException e)
-		{
-			System.out.println(e);
-		}
+			reporte=m.getReporte(desde,hasta);
+		return reporte;
 	}
 	
 	public void internaPaciente(Paciente p, String Thabitacion) {

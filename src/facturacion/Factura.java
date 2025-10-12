@@ -19,7 +19,6 @@ public class Factura {
 	
 	private static int contador=0;
 	private ArrayList<IMedico> medicos;
-	private Medico aux;
 	private LocalDate ingreso, egreso;
 	private int nro, i;
 	private double total;
@@ -100,7 +99,7 @@ public class Factura {
 		           "Cantidad de dias:" + cant_dias + "\n";
 		    
 		    		if(habitacion != null) {
-		    			texto += "Habitacion tipo:" + this.habitacion.getTipo() + "\t Costo: "+ this.habitacion.getCosto(cant_dias)+ "\n" +"\n" ;
+		    			texto += "Habitacion tipo:" + this.habitacion.getTipo() + "\t Costo: $"+ this.habitacion.getCosto(cant_dias)+ "\n" +"\n" ;
 		    		}
 		    		
 		    		texto+="Consultas medicas:"+ "\n" +"\n";
