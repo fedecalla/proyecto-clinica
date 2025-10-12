@@ -49,6 +49,12 @@ public class SistemaClinica implements iSistema {
 	}
 
 	public void medicoAtiendePaciente(IMedico m, Paciente p) throws MedicoNoExisteException 
+	/*
+	 * <b>pre: </b><b>
+	 * medico m != null <br
+	 * paciente != null <br>
+	 * 
+	 */
 	{
 		if (!this.clinica.MedicoInClinica(m))
 		{
@@ -63,14 +69,29 @@ public class SistemaClinica implements iSistema {
 		
 	}
 	
-	
+	/**
+	 * <b>pre: </b><br>
+	 * paciente p != null<br>
+	 * @return factura a pagar del paciente
+	 */
 	public Factura egresaPaciente(Paciente p) {
 		clinica.eliminarPaciente(p);
 		clinica.desvincularPacienteHabitacion(p);
 		return clinica.getFactura(p); 
 	}
-	
+
 	public String ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)throws MedicoNoExisteException
+
+	/**
+	 * 
+	 * @param m medico a saber la actividad
+	 * @param desde fecha de inicio de la actividad
+	 * @param hasta fecha de fin de la actividad
+	 * <b>pre: </b><br>
+	 * m != null<br>
+	 * hasta mayor que desde<br>
+	 */
+
 	{
 		String reporte="";
 		//ArrayList<consultasMedicas> actividad = new ArrayList <>();
@@ -80,7 +101,13 @@ public class SistemaClinica implements iSistema {
 			reporte=m.getReporte(desde,hasta);
 		return reporte;
 	}
-	
+	/**
+	 * <b>pre: </b><br>
+	 * p != null<br>
+	 * Thabitacion != null<br>
+	 * Thabitacion no vacio <br>
+	 * 
+	 */
 	public void internaPaciente(Paciente p, String Thabitacion) {
 		try
 		{

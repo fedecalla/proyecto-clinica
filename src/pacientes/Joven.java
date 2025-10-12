@@ -6,7 +6,7 @@ package pacientes;
  */
 
 public class Joven extends Paciente{
-	/*Utiliza el constructor de la clase padre y le agrega su rango etario
+	/**Utiliza el constructor de la clase padre y le agrega su rango etario
 	 * 
 	 */
 	public Joven(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad,
@@ -15,7 +15,7 @@ public class Joven extends Paciente{
 		this.rango = "Joven";
 	}
 	
-	/*
+	/**
 	 * Metodo que resuelve en tiempo de ejecucion quien gana la sala de espera
 	 * @param Paciente
 	 * Precondicion Paciente!=null
@@ -25,7 +25,7 @@ public class Joven extends Paciente{
 		return otro.enfrentaJoven(this);
 	}
 	
-	/*
+	/**
 	 * Metodos que determinan el ganador concreto de la sala de espera
 	 */
 	public Paciente enfrentaNinio(Paciente otro) {

@@ -29,15 +29,7 @@ public abstract class Habitacion {
 	public void setPersona(){
 		this.capacidad -=1;
 	}
-	/**
-	*asignacion de personas a la habitacion
-	*<b>Pre:</b><br>
-	*persona!=null<br>
-	*b>Excepciones:</b><br>
-	*que la habitacion este completa<br>
-	*/
-
-
+	
 	public String getTipo() {
 		return tipo;
 	}

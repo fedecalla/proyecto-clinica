@@ -203,14 +203,27 @@ public class Clinica {
 	
 	//-------
 
-	public Factura getFactura(Paciente paciente) { // precondicion:exista ya la factura
+	/**
+	 * 
+	 * @param paciente
+	 * <b>pre: </b><br>
+	 * paciente != null <br>
+	 * @return retorna una factura
+	 */
+	public Factura getFactura(Paciente paciente) { 
 		Factura factura; int i=0;
 		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombreyapellido())
 			i++;
 		factura = this.facturas.get(i);
 		return factura;
 	}
-	
+	/**
+	 * 
+	 * @param numero de factura
+	 * <b>pre: </b><br>
+	 * numero positivo <br>
+	 * @return retorna una factura
+	 */
 	public Factura getFactura(int numero) {
 		Factura fac;
 		int i = 0;
@@ -230,6 +243,13 @@ public class Clinica {
 	 * Metodo que retira a un paciente de su habitacion(dado de alta) y en caso de que previamente estuviera llena se devuelve la habitacion a la pila de habitaciones disponibles(de su tipo)
 	 */
 	
+	/**
+	 * 
+	 * @param paciente
+	 * si un paciente tiene una habitacion vinculada, se la desvincula y se agrega la habitacion a la pila de habitaciones correspondiente<br>
+	 * <b>pre: </b><br>
+	 * paciente != null<br>
+	 */
 	public void desvincularPacienteHabitacion(Paciente paciente)
 	{
 		Habitacion habitacion = paciente.getHabitacion();
@@ -255,6 +275,15 @@ public class Clinica {
 	
 	/*
 	 * Ingresa al paciente y lo ubica en el lugar de espera correspondiente
+	 */
+	
+	/**
+	 * disputa la sala de espera y agrega el paciente a la cola
+	 * 
+	 * @param paciente p a registrar
+	 * <b>pre: </b> <br>
+	 * paciente p != null<br>
+	 * 
 	 */
 		
 	public void registraPaciente(Paciente p) {
@@ -285,7 +314,15 @@ public class Clinica {
 			this.patio.remove(proximo);
 		return proximo; 
 	}
-	
+	/**
+	 * 
+	 * @param medico "m" medico que va a atender al paciente
+	 * @param paciente "p" paciente que va a ser atendido
+	 * 
+	 * <b>pre: </b><br>
+	 * medico m!= null <br>
+	 * paciente p!= null <br>
+	 */
 	public void atenderPaciente(IMedico m, Paciente p)
 	{
 		consultasMedicas consulta = this.GetConsultaByPaciente(p);
@@ -295,7 +332,13 @@ public class Clinica {
 		factura.setMedicos(m);
 	}
 
-	
+	/**
+	 * crea una consulta en el sistema
+	 * @param paciente al que se le crea una consulta en el sistema
+	 * <b>pre: </b><br>
+	 * paciente != null <br>
+	 * 
+	 */
 	public void CreaConsulta(Paciente paciente)
 	{
 		LocalDate fecha = LocalDate.now();
@@ -303,6 +346,14 @@ public class Clinica {
 			this.consultas.add(consulta);
 	}
 	
+	/**
+	 * 
+	 * @param paciente paciente del que se busca la consulta
+	 *  <b>pre: </b><br>
+	 *  paciente != null <br>
+	 *  
+	 * @return la consulta que hizo el paciente
+	 */
 	public consultasMedicas GetConsultaByPaciente(Paciente paciente)
 	{
 		int i = 0;
@@ -316,8 +367,12 @@ public class Clinica {
 	}
 	
 	
-	/*
-	 * Retorna si un medico esta registrado en la clinica
+	/**
+	 * 
+	 * @param medico a verificar si esta en la clinica
+	 *  <b>pre: </b><br>
+	 *  medico!=null<br>
+	 * @return un booleano que indica si el medico esta en la clinica
 	 */
 	public boolean MedicoInClinica(IMedico medico) 
 	{
@@ -326,10 +381,18 @@ public class Clinica {
 		
 	
 
-	//PRECONDICION: FECHA_INICIO < FECHA_FIN
-
-	/*
-	 * PRECONDICION: FECHA_INICIO < FECHA_FIN
+	/**
+	 * 
+	 * @param medico al que se busca su actividad
+	 * @param fecha_inicio tope inferior de la actividad del medico
+	 * @param fecha_fin tope superior de la actividad del medico
+	 * @return todas las consultas en las que estuvo el medico
+	 *  <b>pre: </b><br>
+	 *  medico != null <br>
+	 *  fecha_inicio menor que fecha_fin <br>
+	 *  fecha_inicio != null <br>
+	 *  fecha_fin != null <br>
+	 * @throws MedicoNoExisteException si el medico no existe
 	 */
 	
 	
@@ -353,11 +416,13 @@ public class Clinica {
 			throw new MedicoNoExisteException();
 	}
 	
-	
-	/*
-	 * Retorna una habitacion con lugar disponible para un paciente
+	/**
+	 * 
+	 * @param tipo de habitacion que busca
+	 *  <b>pre: </b><br>
+	 *  tipo != null;
+	 * @return devuelve una habitacion no llena del tipo solicitado, null si no existe el tipo
 	 */
-	
 	private Habitacion getHabitacionNollena(String tipo)
 	{
 		Habitacion resultado=null;
@@ -403,7 +468,7 @@ public class Clinica {
 		return resultado;
 	}
 	
-	/* 
+	/** 
 	 * Asigna una habitacion del tipo pedido a un paciente
 	 * @param paciente (!=null)
 	 * @param tipo de habitacion ("privada" o "compartida" o " Terapia intensiva")
@@ -422,7 +487,14 @@ public class Clinica {
 			throw new NoHayHabitacionDisponibleException("Todas las habitaciones estan llenas");
 	}
 	
-	
+	 /**
+	  * 
+	  * @param consultas que se quieren pasar a string
+	  *  <b>pre: </b><br>
+	  *  consultas no vacia <br>
+	  *  consultas != null <br>
+	  * @return String con los datos de todas las consultas del arrayList
+	  */
 	public String PrintConsultas(ArrayList<consultasMedicas> consultas)
 	{	
 		String informe = "";

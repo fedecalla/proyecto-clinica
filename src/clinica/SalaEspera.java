@@ -8,15 +8,13 @@ public class SalaEspera {
 	public Paciente getActual() {
 		return actual;
 	}
-	/* Vacia la sala sin tener en cuenta quien estaba en ella
-	 * 
-	 */
+
 	public void vaciar() {
 		this.actual=null;
 	}
 	
-	/* Vacia la sala y devuelve al paciente que estaba en ella
-	 * Precondicion: Sala llena
+	/**
+	 * @return devuelve el paciente de la sala de espera
 	 */
 	public Paciente retirar() {
 		Paciente retirado = actual;
@@ -31,8 +29,12 @@ public class SalaEspera {
 	}
 	
 	
-	/* Resuelve el ingreso de pacientes a la sala de espera
-	 * Precondicion ingresante!= null
+	/**
+	 * @param ingresante
+	 *  Resuelve el ingreso de pacientes a la sala de espera
+	 *  <b>pre: </b><br>
+	 * ingresante!= null<br>
+	 * @return paciente que gana la sala de espera
 	 */
 	public Paciente ingresar (Paciente ingresante) {
 		if (!estaOcupada()){

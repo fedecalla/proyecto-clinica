@@ -52,32 +52,24 @@ public class Factura {
 	public int getNum() {
 		return this.nro;
 	}
-	/**
-	 *getMedico
-	 */
-	
 	
 	public ArrayList<IMedico> getMedicos() {
 		return medicos;
 	}
-	/**
-	 *setMedico
-	 */
 
 	public void setMedicos(IMedico m) {
 		medicos.add(m);
 	}
 
 
-	/**
-	 *setHabitacion
-	 */
+
 	public void setHabitacion(Habitacion habitacion) {
 		this.habitacion = habitacion;
 	}
 
 	/**
 	 *Comienza el proceso de egreso del paciente de la clinica 
+	 *
 	 */
 
 	public void Facturacion () {
@@ -88,9 +80,6 @@ public class Factura {
 	}
 
 	@Override
-	/**
-	 *Impresion de la factura
-	 */
 	public String toString() {
 		     texto= "Factura Nº:" + nro + "\n" +
 		    	   "Nombre del paciente:" + this.nombrePaciente + "\n" +
