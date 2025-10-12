@@ -6,16 +6,11 @@ import medicos.Medico;
 import pacientes.Paciente;
 import facturacion.Factura;
 import medicos.consultasMedicas;
-import hospedaje.Habitacion;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import hospedaje.*;
+import java.util.*;
 import java.time.LocalDate;
-import excepciones.NoHayHabitacionDisponibleException;
-import excepciones.MedicoNoExisteException;
-import excepciones.NoHayPacientesEnEsperaException;
-import individuos.Persona;
-import java.util.Iterator;
-import java.util.Stack;
+import excepciones.*;
+
 
 
 
@@ -36,6 +31,7 @@ public class Clinica {
 	private String ciudad;
 	private String telefono;
 	private LinkedList <Paciente> colaDeEspera;
+	private static int cantHabitaciones=10;
 	
 	//constructor
 	private Clinica(String nombre, String direccion, String ciudad, String telefono) {
@@ -53,8 +49,8 @@ public class Clinica {
 		this.privadas = new Stack<Habitacion>();
 		this.compartidas = new Stack<Habitacion>();
 		this.intensivas = new Stack<Habitacion>();
+		inicializarHabitaciones();
 	}
-	
 	
 	public static Clinica getClinica(String nombre, String direccion, String ciudad, String telefono ) {
 		if(Clinica.singleton == null)
@@ -62,13 +58,31 @@ public class Clinica {
 		return Clinica.singleton;
 	}
 	
+	/*
+	 * Metodo que crea una cantidad de habitaciones de cada tipo de la clinica, se instancia con el constructor de Clinica
+	 * 
+	 */
+	private void inicializarHabitaciones() {
+		for (int i=0; i<cantHabitaciones; i++) {
+			this.compartidas.push(new HCompartida());
+			this.privadas.push(new HPrivada());
+			this.intensivas.push(new HTerapiaIntensiva());
+		}
+	}
 	
 	public void agregaMedico(IMedico m) {
 		this.medicos.add(m);
 	}
+/*	
+	public void agregaPrivada(Habitacion privada) {
+		this.privadas.push(privada);
+	}
+	public void agregaCompartida(Habitacion compartida) {
+		this.privadas.push(compartida);
+	}
 	
-	public void agregaPrivada(Habitacion h) {
-		this.privadas.push(h);
+	public void agregaTIntensiva(Habitacion intensiva) {
+		this.privadas.push(intensiva);
 	}
 	
 	public void agregaCompartida(Habitacion h) {
@@ -78,7 +92,7 @@ public class Clinica {
 	public void agregaIntensiva(Habitacion h) {
 		this.intensivas.push(h);
 	}
-	
+*/
 	public void eliminaMedico(IMedico medico) {
 		this.medicos.remove(medico);
 	}
@@ -213,7 +227,9 @@ public class Clinica {
 	
 	
 	
-	
+	/*
+	 * Metodo que retira a un paciente de su habitacion(dado de alta) y en caso de que previamente estuviera llena se devuelve la habitacion a la pila de habitaciones disponibles(de su tipo)
+	 */
 	
 	public void desvincularPacienteHabitacion(Paciente paciente)
 	{
@@ -234,6 +250,10 @@ public class Clinica {
 		}
 		paciente.setHabitacion(null);
 	}	
+	
+	/*
+	 * Ingresa al paciente y lo ubica en el lugar de espera correspondiente
+	 */
 		
 	public void registraPaciente(Paciente p) {
 		if (!salaEspera.estaOcupada())
@@ -294,6 +314,10 @@ public class Clinica {
 		
 	}
 	
+	
+	/*
+	 * Retorna si un medico esta registrado en la clinica
+	 */
 	private boolean MedicoInClinica(IMedico medico)
 	{
 		boolean resultado=false; int i=0;
@@ -307,8 +331,14 @@ public class Clinica {
 	}
 		
 	
+
 	//PRECONDICION: FECHA_INICIO < FECHA_FIN
-	public ArrayList <consultasMedicas> getConsultas(IMedico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws MedicoNoExisteException{
+
+	/*
+	 * PRECONDICION: FECHA_INICIO < FECHA_FIN
+	 */
+	public ArrayList <consultasMedicas> getConsultas(IMedico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws MedicoNoExisteException
+	{
 		if(MedicoInClinica(medico))
 		{	
 			ArrayList <consultasMedicas> result = new ArrayList <>();
@@ -326,6 +356,11 @@ public class Clinica {
 		else
 			throw new MedicoNoExisteException();
 	}
+	
+	/*
+	 * Retorna una habitacion con lugar disponible para un paciente
+	 */
+	
 	private Habitacion getHabitacionNollena(String tipo)
 	{
 		Habitacion resultado=null;
@@ -338,7 +373,6 @@ public class Clinica {
 					else
 					{
 						resultado = this.compartidas.pop();
-					
 						resultado.setPersona();
 						if(resultado.getCapacidad() != 0)
 							this.compartidas.push(resultado);
@@ -349,11 +383,12 @@ public class Clinica {
 			{
 				if(this.privadas.isEmpty())
 					resultado = null;
-				else
+				else {
 					resultado = this.privadas.pop();
-				
-				resultado.setCapacidad(resultado.getCapacidad()-1);
-				break;
+					resultado.setCapacidad(resultado.getCapacidad()-1);
+					break;
+				}
+					
 			}	
 			case "terapiaIntensiva" :
 			{
@@ -370,6 +405,14 @@ public class Clinica {
 	
 		return resultado;
 	}
+	
+	/* 
+	 * Asigna una habitacion del tipo pedido a un paciente
+	 * @param paciente (!=null)
+	 * @param tipo de habitacion ("privada" o "compartida" o " Terapia intensiva")
+	 * @throws NoHayHabitacionDisponibleException si no hay ninguna habitacion con capacidad
+	 */
+	
 	
 	public void InternaPaciente(Paciente p, String tipoHabitacion) throws NoHayHabitacionDisponibleException
 	{

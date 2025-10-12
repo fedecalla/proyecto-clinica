@@ -12,7 +12,7 @@ public class SistemaClinica implements iSistema {
 	public Clinica clinica=null;
 	
 	public SistemaClinica(Clinica c) {
-		this.clinica = c.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
+		this.clinica = Clinica.getClinica(c.getNombre(),c.getDireccion(),c.getTelefono(),c.getTelefono());
 	}
 
 	
