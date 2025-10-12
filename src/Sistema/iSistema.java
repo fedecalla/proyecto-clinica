@@ -1,22 +1,25 @@
 package Sistema;
-import clinica.Clinica;
+import java.time.LocalDate;
+
+import excepciones.MedicoNoExisteException;
 import facturacion.Factura;
-import hospedaje.Habitacion;
-import medicos.Medico;
+import medicos.IMedico;
 import pacientes.Paciente;
 
 public interface iSistema {
 
-	public void registraMedico(Medico m);
+	public void registraMedico(IMedico m);
 
 	public void registraPaciente(Paciente p);
 
 	public void ingresaPaciente();
 
-	public void atiendePacienteMedico(Medico m, Paciente p);
+	public void medicoAtiendePaciente(IMedico m, Paciente p) throws MedicoNoExisteException;
 	
 	public Factura egresaPaciente(Paciente p);
 
-	//public void internaPaciente(Paciente p, Habitacion h);
+	public String ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta) throws MedicoNoExisteException;
+	
+	public void internaPaciente(Paciente p, String tHabitacion);
 	
 }

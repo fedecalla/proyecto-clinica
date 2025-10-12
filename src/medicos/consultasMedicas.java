@@ -6,24 +6,23 @@ import java.util.ArrayList;
 
 public class consultasMedicas {
 	private static int cantidad = 0;
-	//private int numConsulta;
-	private ArrayList <Medico> medicos;
+	private ArrayList <IMedico> medicos;
 	private LocalDate fecha;
 	private Paciente paciente;
 	
-	public consultasMedicas(LocalDate fecha, Paciente paciente, ArrayList <Medico> medicos) {
-		this.medicos = medicos;
+	public consultasMedicas(LocalDate fecha, Paciente paciente) {
+		this.medicos = new ArrayList<IMedico>();
 		this.fecha=fecha;
 		this.paciente=paciente;
-		//this.numConsulta = consultasMedicas.cantidad;
 		consultasMedicas.cantidad+= 1;
 	}
+
 
 	public LocalDate getFecha() {
 		return fecha;
 	}
 	
-	public ArrayList<Medico> getMedicos(){
+	public ArrayList<IMedico> getMedicos(){
 		return this.medicos;
 	}
 	
@@ -36,7 +35,6 @@ public class consultasMedicas {
 	}
 	@Override
 	public String toString() {
-		return " Fecha:" + fecha + " - Paciente: " + this.paciente.getNombre() + "\n";
+		return " Fecha: " + fecha + " - Paciente: " + this.paciente.getNombre() + "\n";
 	}
-	
 }

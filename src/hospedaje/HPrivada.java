@@ -1,11 +1,9 @@
 package hospedaje;
 
-import excepciones.HabitacionCompletaException;
-import individuos.Persona;
 
 /**
  * Clase HPrivada, hija de Habitacion
- * contiene un estatico de su valor
+ * contiene un estatico de su costo
  */
 public class HPrivada extends Habitacion{
 	
@@ -14,6 +12,7 @@ public class HPrivada extends Habitacion{
 	
 	/**
 	 *Constructor de la clase
+	 *Designa su tipo y capacidad
 	 */
 
 	public HPrivada() {

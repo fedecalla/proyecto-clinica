@@ -1,4 +1,7 @@
 package pacientes;
+
+import excepciones.RangoNoExisteException;
+
 /**
  * Clase correspondiente al patron factory para la creacion de pacientes determinados por edad.
  */
@@ -13,26 +16,28 @@ public class PacienteFactory{
 	 * @param ciudad
 	 * @param historiaclinica
 	 * @param norden
-	 * @param edad <br><br>
+	 * @param rango <br><br>
 	 * 
 	 * <h3>Pre-condiciones:</h3> la edad debe ser un numero positivo >0
 	 * 
 	 * Retorna una instancia de alguna clase clasificada por la edad del paciente.
 	 */
-	public static Paciente crearPaciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, int edad) {
-	        if (edad < 13)
-	        {
-	            return new Ninio( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica);
-	        } 
-	        else if (edad < 60)
-	        {
-	            return new Joven( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica);
-	        } 
-	        else
-	        {
-	            return new Mayor( dni,nombreyapellido,telefono,domicilio,ciudad, historiaclinica);
-	    }
-	        
-	}
+	public static Paciente crearPaciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, String rango) throws RangoNoExisteException 
+	{
+        if (rango.equalsIgnoreCase("ninio"))
+        {
+            return new Ninio( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica);
+        } 
+        else if (rango.equalsIgnoreCase("joven"))
+        {
+            return new Joven( dni,nombreyapellido,telefono,domicilio,ciudad,historiaclinica);
+        } 
+        else if (rango.equalsIgnoreCase("mayor"))
+        {
+            return new Mayor( dni,nombreyapellido,telefono,domicilio,ciudad, historiaclinica);
+        }
+        else
+        	throw new RangoNoExisteException("RANGO INGRESADO NO EXISTE");
+}
 
 }

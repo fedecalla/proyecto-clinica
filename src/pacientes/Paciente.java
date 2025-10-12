@@ -3,10 +3,15 @@ package pacientes;
 import individuos.Persona;
 import hospedaje.Habitacion;
 
+/*
+ * Clase abstracta padre de las clases concretas de paciente.
+ * 
+ */
+
 public abstract class Paciente extends Persona{
 	private int historiaclinica;
 	protected static int siguiente = 0;
-	private static int norden;
+	private int norden;
 	protected String rango;
 	private Habitacion habitacion;
 	
@@ -47,7 +52,10 @@ public abstract class Paciente extends Persona{
 		return this.habitacion.getTipo();
 	}
 
-	
+	/*
+	 * Define los metodos del double dispatch para que sean extendidos en las clases hijas
+	 * 
+	 */
 	public abstract Paciente getGanador(Paciente otro);
 	public abstract Paciente enfrentaNinio(Paciente otro);
 	public abstract Paciente enfrentaJoven(Paciente otro);

@@ -1,5 +1,7 @@
 package medicos;
 
+import java.util.ArrayList;
+
 /**
  * Clase Temporal, extiende de la clase Decorator Contrato
  */
@@ -22,4 +24,20 @@ public class Temporal extends DecoratorContrato{
 		return super.encapsulado.getHonorario()*1.05;
 	}
 
+
+	@Override
+	public String getNombreyapellido() {
+		// TODO Auto-generated method stub
+		return super.getNombreyapellido();
+	}
+	@Override
+	public String getEspecialidad() {
+		// TODO Auto-generated method stub
+		return super.getEspecialidad();
+	}
+	
+	public ArrayList<consultasMedicas> getConsultas()
+	{
+		return super.encapsulado.getConsultas();
+	}
 }

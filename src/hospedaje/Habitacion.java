@@ -1,16 +1,9 @@
 package hospedaje;
-import pacientes.Paciente;
-import individuos.Persona;
-import medicos.Medico;
-import java.util.ArrayList;
-import excepciones.HabitacionCompletaException;
-
-
 
 /**
  * Clase Habitacion
- * clase padre, contiene a los pacientes internados
- * contiene un estatico del valor de asignacion de un paciente
+ * clase padre asbtracta de los tipos de habitacion concretas
+ * Contiene su capacidad, costo y tipo
  */
 public abstract class Habitacion {
 	
@@ -36,15 +29,7 @@ public abstract class Habitacion {
 	public void setPersona(){
 		this.capacidad -=1;
 	}
-	/**
-	*asignacion de personas a la habitacion
-	*<b>Pre:</b><br>
-	*persona!=null<br>
-	*b>Excepciones:</b><br>
-	*que la habitacion este completa<br>
-	*/
-
-
+	
 	public String getTipo() {
 		return tipo;
 	}

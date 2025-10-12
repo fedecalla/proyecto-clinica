@@ -23,5 +23,7 @@ public class Cirujano extends Medico{
 	public double getHonorario() {
 		return honorarioBasico*1.1;
 	}
+	
+	
 
 }

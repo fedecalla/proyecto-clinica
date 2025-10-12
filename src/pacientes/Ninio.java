@@ -9,9 +9,20 @@ public class Ninio extends Paciente{
 		this.rango = "Ninio";
 		// TODO Auto-generated constructor stub
 	}
+	/**
+	 * Metodo que resuelve en tiempo de ejecucion quien gana la sala de espera
+	 * @param Paciente
+	 * Retorna el ganador de la sala de espera
+	 */
 	public Paciente getGanador(Paciente otro) {
 		return otro.enfrentaNinio(this);
 	}
+	
+	/**
+	 * Metodos que determinan el ganador concreto de la sala de espera
+	 * Recibe un paciente y lo enfrenta con el actual
+	 */
+	
 	public Paciente enfrentaNinio(Paciente otro) {
 		return this;
 	}

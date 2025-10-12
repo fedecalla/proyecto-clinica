@@ -6,5 +6,6 @@ package excepciones;
 public class HabitacionCompletaException extends Exception {
     public HabitacionCompletaException(String mensaje) {
         super(mensaje);
+       
     }
 }

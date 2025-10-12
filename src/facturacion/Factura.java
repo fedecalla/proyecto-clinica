@@ -1,11 +1,11 @@
 package facturacion;
+import medicos.IMedico;
 import medicos.Medico;
 import java.util.ArrayList;
 
 import hospedaje.Habitacion;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -18,8 +18,7 @@ import java.time.temporal.ChronoUnit;
 public class Factura {
 	
 	private static int contador=0;
-	private ArrayList<Medico> medicos;
-	private Medico aux;
+	private ArrayList<IMedico> medicos;
 	private LocalDate ingreso, egreso;
 	private int nro, i;
 	private double total;
@@ -53,32 +52,24 @@ public class Factura {
 	public int getNum() {
 		return this.nro;
 	}
-	/**
-	 *getMedico
-	 */
 	
-	
-	public ArrayList<Medico> getMedicos() {
+	public ArrayList<IMedico> getMedicos() {
 		return medicos;
 	}
-	/**
-	 *setMedico
-	 */
 
-	public void setMedicos(Medico m) {
+	public void setMedicos(IMedico m) {
 		medicos.add(m);
 	}
 
 
-	/**
-	 *setHabitacion
-	 */
+
 	public void setHabitacion(Habitacion habitacion) {
 		this.habitacion = habitacion;
 	}
 
 	/**
 	 *Comienza el proceso de egreso del paciente de la clinica 
+	 *
 	 */
 
 	public void Facturacion () {
@@ -89,28 +80,24 @@ public class Factura {
 	}
 
 	@Override
-	/**
-	 *Impresion de la factura
-	 */
 	public String toString() {
-		    texto= "Factura Nº:" + nro + "\n" +
+		     texto= "Factura Nº:" + nro + "\n" +
 		    	   "Nombre del paciente:" + this.nombrePaciente + "\n" +
-		           "Fecha de ingreso:" + ingreso + "\n" +
+		    	   "Fecha de ingreso:" + ingreso + "\n" +
 		           "Fecha de egreso:" + egreso + "\n" +
 		           "Cantidad de dias:" + cant_dias + "\n";
 		    
 		    		if(habitacion != null) {
-		    			texto += "Habitacion tipo:" + this.habitacion.getTipo() + "\t Costo: "+ this.habitacion.getCosto(cant_dias)+ "\n" +"\n" ;
+		    			texto += "Habitacion tipo:" + this.habitacion.getTipo() + "\t Costo: $"+ this.habitacion.getCosto(cant_dias)+ "\n" +"\n" ;
 		    		}
 		    		
 		    		texto+="Consultas medicas:"+ "\n" +"\n";
 		    		
 		    		for(i=0;i<medicos.size();i++) {
-		    			aux=medicos.get(i);
-		    			total+=aux.getHonorario()*1.2;
-		    			texto+="Nombre medico :" + aux.getNombreyapellido() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: %0.2f"+ (aux.getHonorario()*1.2)+ "\n";
+		    			IMedico aux = medicos.get(i);
+		    			total+=medicos.get(i).getHonorario()*1.2;
+		    			texto+="Nombre medico :" + aux.getNombreyapellido() + "\t	Especialidad: "+ aux.getEspecialidad()+ "\t	Subtotal: "+(aux.getHonorario()*1.2)+ "\n";
 		    		}
-		    		
 		    		texto+="\n";
 		    		
 		    		texto += String.format("\t \t \t \t \t \t \t \t Total: %.2f\n", this.total);
