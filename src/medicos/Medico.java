@@ -16,6 +16,11 @@ public abstract class Medico extends Persona implements IMedico{
 		this.consultas = new ArrayList<consultasMedicas>();	
 		}
 
+	
+	public String getNombreyapellido() {
+		return super.getNombreyapellido();
+	}
+	
 	public String getEspecialidad() {
 		return this.especialidad;
 	}

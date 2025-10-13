@@ -37,7 +37,7 @@ public class SistemaClinica implements iSistema {
 		try 
 		{
 			proximo = clinica.atiendePaciente();
-			factura = new Factura(proximo.getNombreyapellido());
+			factura = new Factura(proximo.getNombre());
 			clinica.agregaFactura(factura);
 			clinica.agregaPaciente(proximo);
 			clinica.CreaConsulta(proximo);
@@ -80,8 +80,7 @@ public class SistemaClinica implements iSistema {
 		return clinica.getFactura(p); 
 	}
 
-	public String ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)throws MedicoNoExisteException
-
+	
 	/**
 	 * 
 	 * @param m medico a saber la actividad
@@ -91,7 +90,7 @@ public class SistemaClinica implements iSistema {
 	 * m != null<br>
 	 * hasta mayor que desde<br>
 	 */
-
+	public String ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)throws MedicoNoExisteException
 	{
 		String reporte="";
 		//ArrayList<consultasMedicas> actividad = new ArrayList <>();
