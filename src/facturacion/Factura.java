@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 /**
- * Clase factura
- * numero auto-incremental
- * informa toda actividad del paciente dentro de la clinica y sus costos
+ * Clase factura<br>
+ * numero auto incremental<br>
+ * informa toda actividad del paciente dentro de la clinica y sus costos<br>
  */
 
 public class Factura {
@@ -30,7 +30,7 @@ public class Factura {
 
 	
 	/**
-	 *Constructor de la clase factura
+	 *Constructor de la clase factura<br>
 	 *<b>Pre:</b><br>
 	 *nombre != null <br>
 	 */

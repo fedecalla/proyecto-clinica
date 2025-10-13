@@ -44,7 +44,7 @@ public abstract class Medico extends Persona implements IMedico{
 	 * 
 	 * @param fecha
 	 * @param paciente
-	 * Funcionalidad que agrega consultas medicas realizadas por el medico. Se agrega una cada vez que se genera una factura de egreso de Paciente.
+	 * Funcionalidad que agrega consultas medicas realizadas por el medico. Se agrega una cada vez que se genera una factura de egreso de Paciente.<br>
 	 */
 	
 	/*public void agregaConsulta(LocalDate fecha, Paciente paciente) {
@@ -55,7 +55,7 @@ public abstract class Medico extends Persona implements IMedico{
 
 	
 	/**
-	 * Funcion que permite generar un reporte de consultas medicas realizadas por un medico, entre 2 fechas especificadas.
+	 * Funcion que permite generar un reporte de consultas medicas realizadas por un medico, entre 2 fechas especificadas.<br>
 	 * <b>Pre:</br><br>
 	 * fecha desde menor que fecha hasta<br>
 	 *

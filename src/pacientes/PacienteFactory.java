@@ -16,11 +16,10 @@ public class PacienteFactory{
 	 * @param ciudad
 	 * @param historiaclinica
 	 * @param norden
-	 * @param rango <br><br>
+	 * @param rango
 	 * 
-	 * <h3>Pre-condiciones:</h3> la edad debe ser un numero positivo >0
-	 * 
-	 * Retorna una instancia de alguna clase clasificada por la edad del paciente.
+	 * <h3>Pre-condiciones:</h3> la edad debe ser un numero positivo >0<br>
+	 * Retorna una instancia de alguna clase clasificada por la edad del paciente.<br>
 	 */
 	public static Paciente crearPaciente(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad, int historiaclinica, String rango) throws RangoNoExisteException 
 	{

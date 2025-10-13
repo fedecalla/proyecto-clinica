@@ -10,6 +10,13 @@ public class consultasMedicas {
 	private LocalDate fecha;
 	private Paciente paciente;
 	
+	/**
+	 * <b>pre: </b><br>
+	 * fecha != null <br>
+	 * paciente != null <br>
+	 * @param fecha de consulta
+	 * @param paciente paciente que hizo la consulta
+	 */
 	public consultasMedicas(LocalDate fecha, Paciente paciente) {
 		this.medicos = new ArrayList<IMedico>();
 		this.fecha=fecha;

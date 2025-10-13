@@ -16,10 +16,11 @@ public class Joven extends Paciente{
 	}
 	
 	/**
-	 * Metodo que resuelve en tiempo de ejecucion quien gana la sala de espera
+	 * Metodo que resuelve en tiempo de ejecucion quien gana la sala de espera<br>
+	 * <b>pre: </b><br>
+	 * Paciente!=null<br>
 	 * @param Paciente
-	 * Precondicion Paciente!=null
-	 * Retorna el ganador de la sala de espera
+	 * @return Retorna el ganador de la sala de espera;
 	 */
 	public Paciente getGanador(Paciente otro) {
 		return otro.enfrentaJoven(this);

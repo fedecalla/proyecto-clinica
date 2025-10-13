@@ -25,12 +25,10 @@ public class Doctorado extends DecoratorPosgrado{
 
 	@Override
 	public String getNombreyapellido() {
-		// TODO Auto-generated method stub
 		return super.getNombreyapellido();
 	}
 	@Override
 	public String getEspecialidad() {
-		// TODO Auto-generated method stub
 		return super.getEspecialidad();
 	}
 	
