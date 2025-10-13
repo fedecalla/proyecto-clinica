@@ -1,8 +1,8 @@
 package medicos;
 
 /**
- * Clase clinico, extiende de la clase abstracta Medico
- * es una especialidad
+ * Clase clinico, extiende de la clase abstracta Medico<br>
+ * es una especialidad<br>
  */
 
 public class Clinico extends Medico{

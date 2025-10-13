@@ -22,7 +22,7 @@ public class SistemaClinica implements iSistema {
 
 	/**
 	 * @param Paciente
-	 * Metodo de la clinica que agrega al paciente en la cola de Espera, y disputa la sala de espera privada
+	 * Metodo de la clinica que agrega al paciente en la cola de Espera, y disputa la sala de espera privada<br>
 	 */
 	public void registraPaciente(Paciente p) {
 		clinica.registraPaciente(p);
@@ -47,14 +47,18 @@ public class SistemaClinica implements iSistema {
 			System.out.println(e);
 		}
 	}
-
-	public void medicoAtiendePaciente(IMedico m, Paciente p) throws MedicoNoExisteException 
-	/*
+	
+	/**
 	 * <b>pre: </b><b>
-	 * medico m != null <br
+	 * medico m != null <br>
 	 * paciente != null <br>
+	 * @param medico m que atiende al paciente
+	 * @param paciente p que va a ser atendido
+	 * @exception MedicoNoExisteException si el medico no existe en el sistema
 	 * 
 	 */
+	
+	public void medicoAtiendePaciente(IMedico m, Paciente p) throws MedicoNoExisteException 
 	{
 		if (!this.clinica.MedicoInClinica(m))
 		{

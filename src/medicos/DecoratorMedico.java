@@ -53,7 +53,7 @@ public abstract class DecoratorMedico implements IMedico{
 	public abstract double getHonorario();
 	
 	/**
-	 * Reporat actividad del medico en un determinado periodo
+	 * Reporat actividad del medico en un determinado periodo<br>
 	 *<b>Pre:</b><br>
 	 *desde>0<br>
 	 *hasta>desde<br>
