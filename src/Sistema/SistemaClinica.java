@@ -22,7 +22,7 @@ public class SistemaClinica implements iSistema {
 
 	/**
 	 * @param Paciente
-	 * Metodo de la clinica que agrega al paciente en la cola de Espera, y disputa la sala de espera privada
+	 * Metodo de la clinica que agrega al paciente en la cola de Espera, y disputa la sala de espera privada<br>
 	 */
 	public void registraPaciente(Paciente p) {
 		clinica.registraPaciente(p);
@@ -37,7 +37,7 @@ public class SistemaClinica implements iSistema {
 		try 
 		{
 			proximo = clinica.atiendePaciente();
-			factura = new Factura(proximo.getNombreyapellido());
+			factura = new Factura(proximo.getNombre());
 			clinica.agregaFactura(factura);
 			clinica.agregaPaciente(proximo);
 			clinica.CreaConsulta(proximo);
@@ -47,18 +47,30 @@ public class SistemaClinica implements iSistema {
 			System.out.println(e);
 		}
 	}
+	
 	/**
-	 * <b>pre: </b><br>
+	 * <b>pre: </b><b>
 	 * medico m != null <br>
 	 * paciente != null <br>
+	 * @param medico m que atiende al paciente
+	 * @param paciente p que va a ser atendido
+	 * @exception MedicoNoExisteException si el medico no existe en el sistema
 	 * 
 	 */
-	public void medicoAtiendePaciente(IMedico m, Paciente p)
+	
+	public void medicoAtiendePaciente(IMedico m, Paciente p) throws MedicoNoExisteException 
 	{
+		if (!this.clinica.MedicoInClinica(m))
+		{
+			throw new MedicoNoExisteException(m.getMatricula());
+		}
+		
 		consultasMedicas consulta = clinica.GetConsultaByPaciente(p);
 		consulta.getMedicos().add(m);
+		m.getConsultas().add(consulta);
 		Factura factura = clinica.getFactura(p);
 		factura.setMedicos(m);
+		
 	}
 	
 	/**
@@ -71,6 +83,8 @@ public class SistemaClinica implements iSistema {
 		clinica.desvincularPacienteHabitacion(p);
 		return clinica.getFactura(p); 
 	}
+
+	
 	/**
 	 * 
 	 * @param m medico a saber la actividad
@@ -80,18 +94,15 @@ public class SistemaClinica implements iSistema {
 	 * m != null<br>
 	 * hasta mayor que desde<br>
 	 */
-	public void ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)
+	public String ActividadMedico(IMedico m, LocalDate desde, LocalDate hasta)throws MedicoNoExisteException
 	{
-		ArrayList<consultasMedicas> actividad = new ArrayList <>();
-		try
-		{
-			actividad = clinica.getConsultas(m, desde, hasta);
-			clinica.PrintConsultas(actividad);
+		String reporte="";
+		//ArrayList<consultasMedicas> actividad = new ArrayList <>();
+		if (!this.clinica.MedicoInClinica(m)){
+			throw new MedicoNoExisteException(m.getMatricula());
 		}
-		catch(MedicoNoExisteException e)
-		{
-			System.out.println(e);
-		}
+			reporte=m.getReporte(desde,hasta);
+		return reporte;
 	}
 	/**
 	 * <b>pre: </b><br>

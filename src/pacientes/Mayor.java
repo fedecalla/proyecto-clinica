@@ -12,9 +12,11 @@ public class Mayor extends Paciente{
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * Metodo que resuelve en tiempo de ejecucion quien gana la sala de espera
+	 * Metodo que resuelve en tiempo de ejecucion quien gana la sala de espera<br>
+	 * <b>pre:</b><br>
+	 * paciente != null <br>
 	 * @param Paciente
-	 * Retorna el ganador de la sala de espera
+	 * @return Retorna el ganador de la sala de espera
 	 */
 	public Paciente getGanador(Paciente otro) {
 		return otro.enfrentaMayor(this);

@@ -1,5 +1,15 @@
 package clinica;
 
+<<<<<<< HEAD
+=======
+import medicos.IMedico;
+
+import pacientes.Paciente;
+import facturacion.Factura;
+import medicos.consultasMedicas;
+import hospedaje.*;
+import java.util.*;
+>>>>>>> a9fdba061a9a84556e8cd58eb7fd66ec4c8f225a
 import java.time.LocalDate;
 import java.util.*;
 
@@ -62,9 +72,8 @@ public class Clinica {
 		return Clinica.singleton;
 	}
 	
-	/*
-	 * Metodo que crea una cantidad de habitaciones de cada tipo de la clinica, se instancia con el constructor de Clinica
-	 * 
+	/**
+	 * metodo que agrega habitaciones a las pilas de habitaciones 
 	 */
 	private void inicializarHabitaciones() {
 		for (int i=0; i<cantHabitaciones; i++) {
@@ -186,7 +195,7 @@ public class Clinica {
 	/**
 	 * 
 	 * @param paciente
-	 * Metodo que agrega al paciente al vector de pacientes de la Clinica.
+	 * Metodo que agrega al paciente al vector de pacientes de la Clinica.<br>
 	 */
 	public void agregaPaciente(Paciente paciente) {
 		this.pacientes.add(paciente);
@@ -217,7 +226,7 @@ public class Clinica {
 	 */
 	public Factura getFactura(Paciente paciente) { 
 		Factura factura; int i=0;
-		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombreyapellido())
+		while(this.facturas.get(i).getNombrePaciente()!=paciente.getNombre())
 			i++;
 		factura = this.facturas.get(i);
 		return factura;
@@ -258,21 +267,24 @@ public class Clinica {
 	public void desvincularPacienteHabitacion(Paciente paciente)
 	{
 		Habitacion habitacion = paciente.getHabitacion();
-		String tipo = habitacion.getTipo();
-		if(habitacion.getCapacidad() == 0) {
-			habitacion.setCapacidad(1);
-			switch (tipo.toLowerCase())
-			{
-			case "compartida": this.compartidas.push(habitacion);
+		if (habitacion!=null) 
+		{
+			String tipo = habitacion.getTipo();
+			if(habitacion.getCapacidad() == 0) {
+				habitacion.setCapacidad(1);
+				switch (tipo.toLowerCase())
+				{
+				case "compartida": this.compartidas.push(habitacion);
 								break;
-			case "privada": this.privadas.push(habitacion);
+				case "privada": this.privadas.push(habitacion);
 								break;
-			case "intensiva": this.intensivas.push(habitacion);
+				case "intensiva": this.intensivas.push(habitacion);
 								break;
-								
+				}
+			
 			}
-		}
 		paciente.setHabitacion(null);
+		}	
 	}	
 	
 	/*
@@ -335,10 +347,9 @@ public class Clinica {
 	}
 
 	/**
-	 * crea una consulta en el sistema
-	 * @param paciente al que se le crea una consulta en el sistema
 	 * <b>pre: </b><br>
 	 * paciente != null <br>
+	 * @param paciente al que se le crea una consulta en el sistema
 	 * 
 	 */
 	public void CreaConsulta(Paciente paciente)
@@ -349,11 +360,9 @@ public class Clinica {
 	}
 	
 	/**
-	 * 
-	 * @param paciente paciente del que se busca la consulta
 	 *  <b>pre: </b><br>
 	 *  paciente != null <br>
-	 *  
+	 * @param paciente paciente del que se busca la consulta  
 	 * @return la consulta que hizo el paciente
 	 */
 	public consultasMedicas GetConsultaByPaciente(Paciente paciente)
@@ -366,7 +375,6 @@ public class Clinica {
 			consulta = this.consultas.get(i);
 		
 		return consulta;
-		
 	}
 	
 	
@@ -377,17 +385,9 @@ public class Clinica {
 	 *  medico!=null<br>
 	 * @return un booleano que indica si el medico esta en la clinica
 	 */
-	
-	private boolean MedicoInClinica(IMedico medico)
+	public boolean MedicoInClinica(IMedico medico) 
 	{
-		boolean resultado=false; int i=0;
-		while(!this.medicos.get(i).equals(medico))
-		{
-			i++;
-			if(this.medicos.get(i).equals(medico))
-				resultado = true;
-		}
-		return resultado;
+		return this.medicos.contains(medico);
 	}
 		
 	
@@ -405,6 +405,8 @@ public class Clinica {
 	 *  fecha_fin != null <br>
 	 * @throws MedicoNoExisteException si el medico no existe
 	 */
+	
+	
 	public ArrayList <consultasMedicas> getConsultas(IMedico medico, LocalDate fecha_inicio, LocalDate fecha_fin) throws MedicoNoExisteException
 	{
 		if(MedicoInClinica(medico))
@@ -426,10 +428,9 @@ public class Clinica {
 	}
 	
 	/**
-	 * 
-	 * @param tipo de habitacion que busca
 	 *  <b>pre: </b><br>
-	 *  tipo != null;
+	 *  tipo != null<br>
+	 * @param tipo de habitacion que busca
 	 * @return devuelve una habitacion no llena del tipo solicitado, null si no existe el tipo
 	 */
 	private Habitacion getHabitacionNollena(String tipo)
@@ -461,7 +462,7 @@ public class Clinica {
 				}
 					
 			}	
-			case "terapiaIntensiva" :
+			case "intensiva" :
 			{
 				if(this.intensivas.isEmpty())
 					resultado = null;
@@ -478,29 +479,29 @@ public class Clinica {
 	}
 	
 	/** 
-	 * Asigna una habitacion del tipo pedido a un paciente
+	 * Asigna una habitacion del tipo pedido a un paciente<br>
 	 * @param paciente (!=null)
 	 * @param tipo de habitacion ("privada" o "compartida" o " Terapia intensiva")
 	 * @throws NoHayHabitacionDisponibleException si no hay ninguna habitacion con capacidad
 	 */
-	
-	
 	public void InternaPaciente(Paciente p, String tipoHabitacion) throws NoHayHabitacionDisponibleException
 	{
 		
 		Habitacion habitacion = getHabitacionNollena(tipoHabitacion);
-		if(habitacion != null)
+		if(habitacion != null) 
+		{
 			p.setHabitacion(habitacion);
+			this.getFactura(p).setHabitacion(habitacion);
+		}
 		else
 			throw new NoHayHabitacionDisponibleException("Todas las habitaciones estan llenas");
 	}
 	
 	 /**
-	  * 
-	  * @param consultas que se quieren pasar a string
-	  *  <b>pre: </b><br>
+	  * <b>pre: </b><br>
 	  *  consultas no vacia <br>
 	  *  consultas != null <br>
+	  * @param consultas que se quieren pasar a string
 	  * @return String con los datos de todas las consultas del arrayList
 	  */
 	public String PrintConsultas(ArrayList<consultasMedicas> consultas)

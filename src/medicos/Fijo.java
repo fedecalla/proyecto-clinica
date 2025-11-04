@@ -1,5 +1,7 @@
 package medicos;
 
+import java.util.ArrayList;
+
 /**
  * Clase Fijo, extiende de la clase Decorator Contrato
  */
@@ -31,6 +33,11 @@ public class Fijo extends DecoratorContrato{
 	public String getEspecialidad() {
 		// TODO Auto-generated method stub
 		return super.getEspecialidad();
+	}
+	
+	public ArrayList<consultasMedicas> getConsultas()
+	{
+		return super.encapsulado.getConsultas();
 	}
 
 }

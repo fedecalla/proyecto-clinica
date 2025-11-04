@@ -1,8 +1,8 @@
 package hospedaje;
 
 /**
- * Clase HPrivada, hija de Habitacion
- * contiene un estatico de su costo
+ * Clase HPrivada, hija de Habitacion,<br>
+ * contiene un estatico de su costo<br>
  */
 
 public class HTerapiaIntensiva extends Habitacion{
@@ -10,8 +10,8 @@ public class HTerapiaIntensiva extends Habitacion{
 	private static double CostoHabTerapiaIntensiva=150;
 
 	/**
-	 *Constructor de la clase
-	 *Designa su capacidad y tipo
+	 *Constructor de la clase<br>
+	 *Designa su capacidad y tipo<br>
 	 */
 	public HTerapiaIntensiva() {
 		super();

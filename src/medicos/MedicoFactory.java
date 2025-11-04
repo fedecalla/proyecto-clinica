@@ -19,9 +19,9 @@ public class MedicoFactory {
 	 *domicilio != null <br>
 	 *telefono != null <br>
 	 *<b>Excepciones:</b><br>
-	 *NoExisteEspecialidadException 
-	 *NoExistePosgradoException
-	 *NoExisteContratoException
+	 * @exception NoExisteEspecialidadException
+	 *@exception NoExistePosgradoException
+	 *@exception NoExisteContratoException
 	 */
 	
 	public static IMedico crearMedico(String tipo, String posgrado, String contrato, String nom, String dni,  String mat, String ciudad, String dom, String tel) throws NoExisteEspecialidadException, NoExistePosgradoException, NoExisteContratoException {

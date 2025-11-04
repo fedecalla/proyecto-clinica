@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"clinica"},{"l":"excepciones"},{"l":"facturacion"},{"l":"hospedaje"},{"l":"individuos"},{"l":"medicos"},{"l":"pacientes"},{"l":"prueba"},{"l":"Sistema"}];updateSearchResults();

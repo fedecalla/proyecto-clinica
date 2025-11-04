@@ -1,0 +1,1 @@
+tagSearchIndex = [{"l":"Pre-condiciones:","h":"pacientes.PacienteFactory.crearPaciente(String, String, String, String, String, int, String)","d":"Section","u":"pacientes/PacienteFactory.html#pre-condiciones--heading"},{"l":"Serialized Form","h":"","u":"serialized-form.html"}];updateSearchResults();

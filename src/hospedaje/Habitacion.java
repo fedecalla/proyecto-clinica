@@ -1,9 +1,9 @@
 package hospedaje;
 
 /**
- * Clase Habitacion
- * clase padre asbtracta de los tipos de habitacion concretas
- * Contiene su capacidad, costo y tipo
+ * Clase Habitacion<br>
+ * clase padre asbtracta de los tipos de habitacion concretas<br>
+ * Contiene su capacidad, costo y tipo<br>
  */
 public abstract class Habitacion {
 	

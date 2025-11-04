@@ -10,16 +10,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 /**
- * Clase factura
- * numero auto-incremental
- * informa toda actividad del paciente dentro de la clinica y sus costos
+ * Clase factura<br>
+ * numero auto incremental<br>
+ * informa toda actividad del paciente dentro de la clinica y sus costos<br>
  */
 
 public class Factura {
 	
 	private static int contador=0;
 	private ArrayList<IMedico> medicos;
-	private Medico aux;
 	private LocalDate ingreso, egreso;
 	private int nro, i;
 	private double total;
@@ -31,7 +30,7 @@ public class Factura {
 
 	
 	/**
-	 *Constructor de la clase factura
+	 *Constructor de la clase factura<br>
 	 *<b>Pre:</b><br>
 	 *nombre != null <br>
 	 */
@@ -89,7 +88,7 @@ public class Factura {
 		           "Cantidad de dias:" + cant_dias + "\n";
 		    
 		    		if(habitacion != null) {
-		    			texto += "Habitacion tipo:" + this.habitacion.getTipo() + "\t Costo: "+ this.habitacion.getCosto(cant_dias)+ "\n" +"\n" ;
+		    			texto += "Habitacion tipo:" + this.habitacion.getTipo() + "\t Costo: $"+ this.habitacion.getCosto(cant_dias)+ "\n" +"\n" ;
 		    		}
 		    		
 		    		texto+="Consultas medicas:"+ "\n" +"\n";
