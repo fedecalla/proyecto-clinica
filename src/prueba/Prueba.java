@@ -7,8 +7,8 @@ import facturacion.Factura;
 import hospedaje.*;
 import Sistema.SistemaClinica;
 import pacientes.Paciente;
+import patrones.PacienteFactory;
 import medicos.*;
-import pacientes.PacienteFactory;
 
 import java.time.LocalDate;
 import java.util.*;

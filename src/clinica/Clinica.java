@@ -1,15 +1,19 @@
 package clinica;
 
-import medicos.IMedico;
-import medicos.Medico;
-
-import pacientes.Paciente;
-import facturacion.Factura;
-import medicos.consultasMedicas;
-import hospedaje.*;
-import java.util.*;
 import java.time.LocalDate;
-import excepciones.*;
+import java.util.*;
+
+import excepciones.MedicoNoExisteException;
+import excepciones.NoHayHabitacionDisponibleException;
+import excepciones.NoHayPacientesEnEsperaException;
+import facturacion.Factura;
+import hospedaje.HCompartida;
+import hospedaje.HPrivada;
+import hospedaje.HTerapiaIntensiva;
+import hospedaje.Habitacion;
+import medicos.IMedico;
+import medicos.consultasMedicas;
+import pacientes.Paciente;
 
 
 

@@ -4,7 +4,7 @@ package pacientes;
  * 
  */
 
-class Mayor extends Paciente{
+public class Mayor extends Paciente{
 	public Mayor(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad,
 			int historiaclinica) {
 		super(dni, nombreyapellido, telefono, domicilio, ciudad, historiaclinica);

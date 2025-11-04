@@ -1,4 +1,10 @@
-package pacientes;
+package patrones;
+
+import pacientes.Joven;
+import pacientes.Mayor;
+import pacientes.Ninio;
+import pacientes.Paciente;
+
 /**
  * Clase correspondiente al patron factory para la creacion de pacientes determinados por edad.
  */
