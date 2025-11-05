@@ -1,15 +1,15 @@
 package clinica;
 
-<<<<<<< HEAD
-=======
+
+
 import medicos.IMedico;
+
 
 import pacientes.Paciente;
 import facturacion.Factura;
 import medicos.consultasMedicas;
 import hospedaje.*;
 import java.util.*;
->>>>>>> a9fdba061a9a84556e8cd58eb7fd66ec4c8f225a
 import java.time.LocalDate;
 import java.util.*;
 
