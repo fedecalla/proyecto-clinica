@@ -1,4 +1,4 @@
-package individuos;
+package modelo.individuos;
 
 public abstract class Persona {
 	protected String dni;
