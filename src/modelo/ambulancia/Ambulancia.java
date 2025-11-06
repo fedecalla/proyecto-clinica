@@ -44,7 +44,7 @@ public class Ambulancia {
 		}
 		
 		this.atendiendo=1;
-		a.toString();
+		a.toString1();
 		notifyAll();	
 	}
 	
@@ -56,6 +56,22 @@ public class Ambulancia {
 	public synchronized void dejarAmbulancia () {
 		this.atendiendo=0;
 		notifyAll();
+	}
+
+
+	public synchronized void pedirTraslado(Asociado a) {
+		
+		while(this.atendiendo==1) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		this.atendiendo=1;
+		a.toString2();
+		notifyAll();	
 	}
 
 }
