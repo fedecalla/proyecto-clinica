@@ -14,7 +14,11 @@ public class Asociado extends Thread{
 	public void run(){
 		this.ambulancia.pedirAmbulancia(this);
 		try {
-			Thread.sleep(2000); // espera 2 segundos
+			if (Math.random()>0.5) {
+				Thread.sleep(2000); // espera 2 segundos
+				
+			}
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
