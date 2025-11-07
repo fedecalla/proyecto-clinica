@@ -74,4 +74,20 @@ public class Ambulancia {
 		notifyAll();	
 	}
 
+
+	public synchronized void realizarMantenimiento(Llamador llamador) {
+		
+		while(this.atendiendo==1) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		this.atendiendo=1;
+		llamador.toString();
+		notifyAll();
+	}
+
 }
