@@ -1,4 +1,4 @@
-package excepciones;
+package modelo.excepciones;
 
 public class NoHayPacientesEnEsperaException extends Exception{
 

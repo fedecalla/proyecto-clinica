@@ -1,8 +1,9 @@
-package medicos;
-import individuos.Persona;
-import java.lang.String;
+package modelo.medicos;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+
+import modelo.individuos.Persona;
 	
 public abstract class Medico extends Persona implements IMedico{
 	protected String matricula, especialidad;

@@ -1,6 +1,8 @@
-package medicos;
+package modelo.medicos;
 
 import java.util.ArrayList;
+
+import patrones.decorator.DecoratorPosgrado;
 
 /**
  * Clase magister, extiende de la clase Decorator Posgrado

@@ -1,5 +1,6 @@
-package pacientes;
+package patrones.double_dispatch;
 
+import modelo.pacientes.Paciente;
 
 /* Clase que modela el comportamiento de los pacientes jovenes y su double dispatch
  * 

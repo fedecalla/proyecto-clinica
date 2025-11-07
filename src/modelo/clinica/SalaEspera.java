@@ -1,5 +1,6 @@
-package clinica;
-import pacientes.Paciente;
+package modelo.clinica;
+
+import modelo.pacientes.Paciente;
 public class SalaEspera {
 	
 	private Paciente actual;

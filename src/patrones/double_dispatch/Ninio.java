@@ -1,5 +1,6 @@
-package pacientes;
+package patrones.double_dispatch;
 
+import modelo.pacientes.Paciente;
 
 public class Ninio extends Paciente{
 

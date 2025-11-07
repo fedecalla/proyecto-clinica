@@ -1,8 +1,16 @@
-package medicos;
+package patrones.factory;
 
-import excepciones.NoExisteContratoException;
-import excepciones.NoExisteEspecialidadException;
-import excepciones.NoExistePosgradoException;
+import modelo.excepciones.NoExisteContratoException;
+import modelo.excepciones.NoExisteEspecialidadException;
+import modelo.excepciones.NoExistePosgradoException;
+import modelo.medicos.Cirujano;
+import modelo.medicos.Clinico;
+import modelo.medicos.Fijo;
+import modelo.medicos.IMedico;
+import modelo.medicos.Magister;
+import modelo.medicos.Pediatra;
+import modelo.medicos.Temporal;
+import patrones.decorator.Doctorado;
 
 /**
  * Clase Factory de medico, permite la creacion de un medico solo con su especialidad
