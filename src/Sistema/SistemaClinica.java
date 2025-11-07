@@ -1,7 +1,7 @@
 package Sistema;
 import clinica.Clinica;
-import facturacion.Factura;
-import medicos.consultasMedicas;
+import Modelo.facturacion.Factura;
+import Modelo.medicos.consultasMedicas;
 import medicos.*;
 import pacientes.Paciente;
 import excepciones.*;
