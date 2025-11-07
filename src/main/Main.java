@@ -1,10 +1,7 @@
 package main;
-import Modelo.clinica.*;
-import InterfazGrafica.VentanaPrincipal;
-
-import java.awt.event.ActionListener;
-
 import Controlador.AsociadosController;
+import InterfazGrafica.VentanaPrincipal;
+import modelo.clinica.Clinica;
 
 public class Main {
 

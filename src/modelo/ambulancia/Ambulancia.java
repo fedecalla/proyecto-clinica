@@ -1,10 +1,14 @@
-package Modelo.ambulancia;
+package modelo.ambulancia;
 
-public class Ambulancia {
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+
+public class Ambulancia extends Observable{
 	
 	private int atendiendo = 0;
 	private EstadoAmbulancia estado;
-	//private List<Observer> observers = new ArrayList<>();
+	private ArrayList<Observer> observers = new ArrayList<>();
 	
 	
 	public Ambulancia() {
@@ -29,6 +33,8 @@ public class Ambulancia {
 
 	public synchronized void setEstado(EstadoAmbulancia nuevo) {
 		this.estado = nuevo;
+		setChanged();
+		notifyObservers(nuevo);
 		notifyAll();
 	}
 

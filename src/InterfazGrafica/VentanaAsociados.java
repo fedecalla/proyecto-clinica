@@ -12,7 +12,7 @@ public class VentanaAsociados extends JDialog {
     private CardLayout cardLayout;
     private JPanel panelDerechoContenedor;
     private String nombreAsociado, apellidoAsociado, dniAsociado;
-    private JTextArea areaListado;8
+    private JTextArea areaListado;
 
     public VentanaAsociados(JFrame parent) {
         super(parent, "Asociados", true); // Ventana modal

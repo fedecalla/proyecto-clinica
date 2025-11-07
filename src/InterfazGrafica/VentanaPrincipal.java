@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class VentanaPrincipal extends JFrame {
+
+    public JLabel lblEstado;
+
     public VentanaPrincipal() {
         setTitle("Panel Clínica");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +46,7 @@ public class VentanaPrincipal extends JFrame {
         lblEstadoAct.setFont(new Font("Arial", Font.BOLD, 12));
         lblEstadoAct.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel lblEstado = new JLabel("ESTADO");
+        this.lblEstado = new JLabel("ESTADO");
         lblEstado.setAlignmentX(Component.CENTER_ALIGNMENT);
         lblEstado.setForeground(new Color(0, 32, 1));
         lblEstado.setFont(new Font("Arial", Font.BOLD, 12));
@@ -105,6 +108,9 @@ public class VentanaPrincipal extends JFrame {
         centro.add(colDer);
         this.setVisible(true);
     }
+
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new VentanaPrincipal().setVisible(true));
