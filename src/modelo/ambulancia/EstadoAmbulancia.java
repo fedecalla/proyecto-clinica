@@ -1,4 +1,4 @@
-package modelo.ambulancia;
+package Modelo.ambulancia;
 
 public interface EstadoAmbulancia {
 	void solicitaAtencionaDomicilio(Ambulancia a) throws SolicitudNoAtendidaException;

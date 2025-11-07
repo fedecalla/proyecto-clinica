@@ -1,6 +1,6 @@
-package modelo.ambulancia;
+package Modelo.ambulancia;
 
-import modelo.individuos.Persona;
+import Modelo.individuos.Persona;
 
 public class Asociado extends Thread{ 
 	private Persona persona;
@@ -9,6 +9,10 @@ public class Asociado extends Thread{
 	public Asociado(Persona p, Ambulancia a) {
 		this.persona=p;
 		this.ambulancia=a;
+	}
+	public Persona getPersona()
+	{
+		return this.persona;
 	}
 	
 	/*public void run(){

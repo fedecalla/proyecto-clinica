@@ -1,4 +1,4 @@
-package modelo.ambulancia;
+package Modelo.ambulancia;
 
 public class Operario extends Thread{
 	private Llamador llamador;

@@ -102,16 +102,22 @@ public class Clinica {
 		}
 		
 	}
-	public void removeAsociado(String dni)
+	public void removeAsociado(String dni) throws AsociadoInvalidoException
 	{
-		int i = 0;
-		while(this.asociados.get(i).getPersona().getDni != dni && this.asociados.get(i) != null)
-			i++;
-		if(this.asociados.get(i)!=null) {
-			this.asociados.remove(i);
-		}
-		
-		//esta parte se encargaria de eliminar el asociado de la base de datos, aunque la excepcion lo tiraria el dao
+			int i = 0;
+			while(this.asociados.get(i).getPersona().getDni() != dni && this.asociados.get(i) != null)
+				i++;
+			if(this.asociados.get(i)!=null) {
+				this.asociados.remove(i);
+			}
+			//esta parte se encargaria de eliminar el asociado de la base de datos, aunque la excepcion lo tiraria el dao
+	}
+	
+	public ArrayList<Persona> getAllAsociados()
+	{
+		ArrayList personas = new ArrayList<Persona>();
+		//aca tendria que llamar a alguna funcion del dao que traiga a todas las personas de la base de datos y las guarde en un arrayList
+		return personas;
 	}
 /*	
 	public void agregaPrivada(Habitacion privada) {

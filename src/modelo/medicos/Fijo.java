@@ -1,6 +1,7 @@
-package modelo.medicos;
+package Modelo.medicos;
 
 import java.util.ArrayList;
+
 
 import patrones.decorator.DecoratorContrato;
 

@@ -1,11 +1,16 @@
 package InterfazGrafica;
 
 import javax.swing.*;
+
+import Controlador.AsociadosController;
+
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class VentanaPrincipal extends JFrame {
-
-    public VentanaPrincipal() {
+	private AsociadosController asociadosController;
+    public VentanaPrincipal(AsociadosController asociadosController) {
+    	this.asociadosController = asociadosController;
         setTitle("Panel Clínica");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
@@ -66,7 +71,9 @@ public class VentanaPrincipal extends JFrame {
         JButton btnAsociados = new JButton("<html><b><u>ASOCIADOS</u></b></html>");
         
         btnAsociados.addActionListener(e -> {
-            new VentanaAsociados(this).setVisible(true);
+            VentanaAsociados va = new VentanaAsociados(this,this.asociadosController);
+            va.setVisible(true);
+            this.asociadosController.setVista(va);
         });
         
         
@@ -100,9 +107,10 @@ public class VentanaPrincipal extends JFrame {
         centro.add(colIzq);
         centro.add(colCentro);
         centro.add(colDer);
+        this.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new VentanaPrincipal().setVisible(true));
-    }
+    }*/
 }

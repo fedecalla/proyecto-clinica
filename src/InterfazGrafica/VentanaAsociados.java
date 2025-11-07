@@ -2,6 +2,7 @@ package InterfazGrafica;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class VentanaAsociados extends JDialog {
 
@@ -10,9 +11,15 @@ public class VentanaAsociados extends JDialog {
     // desde los ActionListeners
     private CardLayout cardLayout;
     private JPanel panelDerechoContenedor;
+    private ActionListener controlador;
+    private String nombreAsociado, apellidoAsociado, dniAsociado;
 
-    public VentanaAsociados(JFrame parent) {
+    public VentanaAsociados(JFrame parent, ActionListener controlador) {
         super(parent, "Asociados", true); // Ventana modal
+        this.controlador = controlador;
+        this.nombreAsociado = null;
+        this.apellidoAsociado = null;
+        this.dniAsociado = null;
         setSize(700, 400);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -106,6 +113,8 @@ public class VentanaAsociados extends JDialog {
         panelForm.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
         JButton btnAgregarForm = new JButton("<html><b><u>AGREGAR</u></b></html>");
+        btnAgregarForm.setActionCommand("AgregarAsociado");
+        btnAgregarForm.addActionListener(this.controlador);
         btnAgregarForm.setFont(new Font("Arial", Font.BOLD, 16));
         btnAgregarForm.setBackground(new Color(153, 255, 204)); // verde claro
         btnAgregarForm.setFocusPainted(false);
@@ -136,9 +145,9 @@ public class VentanaAsociados extends JDialog {
         panelForm.add(Box.createVerticalGlue());
 
         btnAgregarForm.addActionListener(e -> {
-            String dato1 = campo1.getText();
-            String dato2 = campo2.getText();
-            String dato3 = campo3.getText();
+            this.nombreAsociado= campo1.getText();
+            this.apellidoAsociado= campo2.getText();
+            this.dniAsociado= campo3.getText();
             String dato4 = campo4.getText();
         });
 
@@ -189,6 +198,8 @@ public class VentanaAsociados extends JDialog {
 
         // Botón "ELIMINAR"
         JButton btnEliminarForm = new JButton("<html><b><u>ELIMINAR</u></b></html>");
+        btnEliminarForm.setActionCommand("EliminarAsociado");
+        btnEliminarForm.addActionListener(this.controlador);
         // Mismos estilos que el botón de agregar
         btnEliminarForm.setFont(new Font("Arial", Font.BOLD, 16));
         btnEliminarForm.setBackground(new Color(153, 255, 204));
@@ -211,13 +222,29 @@ public class VentanaAsociados extends JDialog {
 
         // ActionListener para el botón de eliminar
         btnEliminarForm.addActionListener(e -> {
-            String dni = txtDni.getText();
+            this.dniAsociado = txtDni.getText();
             
         });
 
         return panel;
     }
-
+    
+    public void getDatosAsociado(String nombre, String apellido, String dni)
+    {
+    	nombre = this.nombreAsociado;
+    	apellido = this.apellidoAsociado;
+    	dni = this.dniAsociado;
+    }
+    
+    public void getDniAsociado(String dni)
+    {
+    	dni = this.dniAsociado;
+    }
+    
+    public void popUp(String mensaje)
+    {
+    	JOptionPane.showMessageDialog(this, mensaje);
+    }
 
     // Ejemplo para probar de forma independiente
     public static void main(String[] args) {
@@ -228,7 +255,7 @@ public class VentanaAsociados extends JDialog {
             dummy.setLocation(-2000, -2000); // Moverlo fuera de la pantalla
             dummy.setVisible(true);
             
-            VentanaAsociados dialog = new VentanaAsociados(dummy);
+            VentanaAsociados dialog = new VentanaAsociados(dummy,null);
             dialog.setVisible(true);
             
             // Cuando el diálogo se cierra, cerramos el dummy frame también

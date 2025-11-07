@@ -1,4 +1,4 @@
-package modelo.excepciones;
+package Modelo.excepciones;
 
 /**
  * Clase excepcion ante posgrado desconocido

@@ -1,4 +1,4 @@
-package modelo.medicos;
+package Modelo.medicos;
 
 /**
  * Clase clinico, extiende de la clase abstracta Medico<br>

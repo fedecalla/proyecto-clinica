@@ -1,4 +1,4 @@
-package modelo.ambulancia;
+package Modelo.ambulancia;
 
 public class RegresandoDeAtencion implements EstadoAmbulancia{
 

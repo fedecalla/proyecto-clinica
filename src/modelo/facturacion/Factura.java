@@ -1,11 +1,12 @@
-package modelo.facturacion;
+package Modelo.facturacion;
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-import modelo.hospedaje.Habitacion;
-import modelo.medicos.IMedico;
+import Modelo.hospedaje.Habitacion;
+import Modelo.medicos.IMedico;
 
 /**
  * Clase factura<br>
