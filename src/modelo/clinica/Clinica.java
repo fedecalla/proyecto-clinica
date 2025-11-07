@@ -1,29 +1,24 @@
-package clinica;
+package modelo.clinica;
 
 
 
-import medicos.IMedico;
-
-
-import pacientes.Paciente;
-import facturacion.Factura;
-import medicos.consultasMedicas;
-import hospedaje.*;
-import java.util.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
 
-import excepciones.MedicoNoExisteException;
-import excepciones.NoHayHabitacionDisponibleException;
-import excepciones.NoHayPacientesEnEsperaException;
-import facturacion.Factura;
-import hospedaje.HCompartida;
-import hospedaje.HPrivada;
-import hospedaje.HTerapiaIntensiva;
-import hospedaje.Habitacion;
-import medicos.IMedico;
-import medicos.consultasMedicas;
-import pacientes.Paciente;
+import modelo.excepciones.MedicoNoExisteException;
+import modelo.excepciones.NoHayHabitacionDisponibleException;
+import modelo.excepciones.NoHayPacientesEnEsperaException;
+import modelo.facturacion.Factura;
+import modelo.hospedaje.HCompartida;
+import modelo.hospedaje.HPrivada;
+import modelo.hospedaje.HTerapiaIntensiva;
+import modelo.hospedaje.Habitacion;
+import modelo.medicos.IMedico;
+import modelo.medicos.consultasMedicas;
+import modelo.pacientes.Paciente;
 
 
 

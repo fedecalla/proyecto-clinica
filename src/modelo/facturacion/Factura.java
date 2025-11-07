@@ -1,13 +1,11 @@
-package facturacion;
-import medicos.IMedico;
-import medicos.Medico;
-import java.util.ArrayList;
-
-import hospedaje.Habitacion;
-
+package modelo.facturacion;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
+import modelo.hospedaje.Habitacion;
+import modelo.medicos.IMedico;
 
 /**
  * Clase factura<br>

@@ -1,10 +1,10 @@
 package Sistema;
 import java.time.LocalDate;
 
-import excepciones.MedicoNoExisteException;
-import facturacion.Factura;
-import medicos.IMedico;
-import pacientes.Paciente;
+import modelo.excepciones.MedicoNoExisteException;
+import modelo.facturacion.Factura;
+import modelo.medicos.IMedico;
+import modelo.pacientes.Paciente;
 
 public interface iSistema {
 

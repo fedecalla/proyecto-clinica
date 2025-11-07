@@ -1,7 +1,7 @@
 package Controlador;
 
 import Vista.VentanaSistema;
-import Modelo.clinica.Clinica;
+import modelo.clinica.Clinica;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

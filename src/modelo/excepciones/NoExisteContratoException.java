@@ -1,4 +1,4 @@
-package excepciones;
+package modelo.excepciones;
 
 /**
  * Clase excepcion ante contrato desconocido

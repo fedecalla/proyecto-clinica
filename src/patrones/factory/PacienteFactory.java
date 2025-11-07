@@ -1,15 +1,12 @@
-<<<<<<< HEAD:src/patrones/PacienteFactory.java
-package patrones;
 
-import pacientes.Joven;
-import pacientes.Mayor;
-import pacientes.Ninio;
-import pacientes.Paciente;
-=======
-package pacientes;
+package patrones.factory;
 
-import excepciones.RangoNoExisteException;
->>>>>>> a9fdba061a9a84556e8cd58eb7fd66ec4c8f225a:src/pacientes/PacienteFactory.java
+import modelo.excepciones.RangoNoExisteException;
+import modelo.pacientes.Paciente;
+import patrones.double_dispatch.Joven;
+import patrones.double_dispatch.Mayor;
+import patrones.double_dispatch.Ninio;
+
 
 /**
  * Clase correspondiente al patron factory para la creacion de pacientes determinados por edad.

@@ -1,4 +1,4 @@
-package medicos;
+package modelo.medicos;
 import java.time.LocalDate;
 import java.util.ArrayList;
 

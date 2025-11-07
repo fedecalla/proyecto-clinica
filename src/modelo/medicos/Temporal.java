@@ -1,6 +1,8 @@
-package medicos;
+package modelo.medicos;
 
 import java.util.ArrayList;
+
+import patrones.decorator.DecoratorContrato;
 
 /**
  * Clase Temporal, extiende de la clase Decorator Contrato

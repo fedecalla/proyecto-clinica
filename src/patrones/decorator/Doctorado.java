@@ -1,6 +1,9 @@
-package medicos;
+package patrones.decorator;
 
 import java.util.ArrayList;
+
+import modelo.medicos.IMedico;
+import modelo.medicos.consultasMedicas;
 
 /**
  * Clase doctorado, extiende de la clase Decorator Posgrado

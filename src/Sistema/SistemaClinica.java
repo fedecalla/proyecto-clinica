@@ -1,12 +1,14 @@
 package Sistema;
-import clinica.Clinica;
-import Modelo.facturacion.Factura;
-import Modelo.medicos.consultasMedicas;
-import medicos.*;
-import pacientes.Paciente;
-import excepciones.*;
-import java.util.ArrayList;
 import java.time.LocalDate;
+
+import modelo.clinica.Clinica;
+import modelo.excepciones.MedicoNoExisteException;
+import modelo.excepciones.NoHayHabitacionDisponibleException;
+import modelo.excepciones.NoHayPacientesEnEsperaException;
+import modelo.facturacion.Factura;
+import modelo.medicos.IMedico;
+import modelo.medicos.consultasMedicas;
+import modelo.pacientes.Paciente;
 
 public class SistemaClinica implements iSistema {
 	public Clinica clinica=null;

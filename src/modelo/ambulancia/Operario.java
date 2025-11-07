@@ -8,7 +8,7 @@ public class Operario extends Thread{
 			//accesibilidad boton();
 			Llamador llamador=new Llamador(); 
 			llamador.start();
-		}while();									//un do algo y activar el boton para que se presione?
+		}while(true);									//un do algo y activar el boton para que se presione?
 	}
 	
 }
