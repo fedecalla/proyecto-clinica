@@ -8,9 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class VentanaPrincipal extends JFrame {
-	private AsociadosController asociadosController;
-    public VentanaPrincipal(AsociadosController asociadosController) {
-    	this.asociadosController = asociadosController;
+    public VentanaPrincipal() {
         setTitle("Panel Clínica");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
@@ -71,9 +69,7 @@ public class VentanaPrincipal extends JFrame {
         JButton btnAsociados = new JButton("<html><b><u>ASOCIADOS</u></b></html>");
         
         btnAsociados.addActionListener(e -> {
-            VentanaAsociados va = new VentanaAsociados(this,this.asociadosController);
-            va.setVisible(true);
-            this.asociadosController.setVista(va);
+        	new VentanaAsociados(this).setVisible(true);
         });
         
         
@@ -110,7 +106,7 @@ public class VentanaPrincipal extends JFrame {
         this.setVisible(true);
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new VentanaPrincipal().setVisible(true));
-    }*/
+    }
 }
