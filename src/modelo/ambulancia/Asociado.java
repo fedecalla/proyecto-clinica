@@ -59,4 +59,8 @@ public class Asociado extends Thread{
 		return "Ambulancia atiende en el domicilio al asociado " + this.persona.getNombreyapellido() + ", dni: "+ this.persona.getDni();
 	}
 
+	public Persona getPersona() {
+		return this.persona;
+	}
+
 }
