@@ -10,6 +10,7 @@ public class VentanaAsociados extends JDialog {
     // desde los ActionListeners
     private CardLayout cardLayout;
     private JPanel panelDerechoContenedor;
+    private JTextArea areaListado;
 
     public VentanaAsociados(JFrame parent) {
         super(parent, "Asociados", true); // Ventana modal
@@ -70,11 +71,13 @@ public class VentanaAsociados extends JDialog {
         // 2. Creamos los paneles individuales ("cartas") llamando a métodos
         JPanel panelAgregar = crearPanelAgregar();
         JPanel panelEliminar = crearPanelEliminar();
+        JPanel panelListar = crearPanelListar();
         // (Aquí podrías crear también un panelListar)
 
         // 3. Añadimos las "cartas" al contenedor con un nombre único
         panelDerechoContenedor.add(panelAgregar, "AGREGAR");
         panelDerechoContenedor.add(panelEliminar, "ELIMINAR");
+        panelDerechoContenedor.add(panelListar, "LISTAR");
         // panelDerechoContenedor.add(panelListar, "LISTAR");
 
         // 4. Añadimos el contenedor principal de la derecha al contenido
@@ -90,8 +93,11 @@ public class VentanaAsociados extends JDialog {
         });
         
         btnListar.addActionListener(e -> {
-            // cardLayout.show(panelDerechoContenedor, "LISTAR");
-            JOptionPane.showMessageDialog(this, "Aún no implementado");
+            // Aquí deberías cargar los datos reales.
+            // Por ahora, simulamos la carga por si los datos cambian.
+            cargarDatosDeEjemplo(); 
+            
+            cardLayout.show(panelDerechoContenedor, "LISTAR");
         });
     }
 
@@ -216,6 +222,55 @@ public class VentanaAsociados extends JDialog {
         });
 
         return panel;
+    }
+    
+    private JPanel crearPanelListar() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(204, 255, 204));
+        // BorderLayout es ideal: Título al NORTE, Lista (con scroll) al CENTRO.
+        panel.setLayout(new BorderLayout()); 
+        panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+
+        // Título
+        JLabel title = new JLabel("<html><u>LISTADO DE ASOCIADOS</u></html>");
+        title.setFont(new Font("Arial", Font.BOLD, 18));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        // Añadimos un borde vacío para darle espacio antes del área de texto
+        title.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0)); 
+        panel.add(title, BorderLayout.NORTH);
+
+        // Área de Texto (donde irá la lista)
+        areaListado = new JTextArea();
+        areaListado.setEditable(false); // Para que el usuario no pueda escribir
+        areaListado.setFont(new Font("Monospaced", Font.PLAIN, 12)); // Letra monoespaciada
+        
+        // Panel con Scroll (¡la clave!)
+        // Añadimos el areaListado DENTRO del JScrollPane
+        JScrollPane scrollPane = new JScrollPane(areaListado);
+        
+        // Añadimos el scrollPane (que contiene el área de texto) al centro
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        return panel;
+    }
+    
+    private void cargarDatosDeEjemplo() {
+        // Usamos StringBuilder para construir el texto eficientemente
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("--- LISTADO DE ASOCIADOS ACTIVOS ---\n\n");
+        
+        // Generamos 50 líneas para forzar el scroll
+        for (int i = 1; i <= 50; i++) {
+            sb.append(String.format("Asociado N°%03d - DNI: %d - Nombre: Juan Perez %d\n", i, (20000000 + i*10), i));
+        }
+
+        // Ponemos el texto en el área
+        areaListado.setText(sb.toString());
+        
+        // --- IMPORTANTE ---
+        // Mueve el cursor (y el scroll) al inicio del texto.
+        areaListado.setCaretPosition(0); 
     }
 
 
