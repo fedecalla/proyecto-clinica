@@ -1,24 +1,25 @@
-package modelo.clinica;
+package Modelo.clinica;
 
 
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import modelo.excepciones.MedicoNoExisteException;
-import modelo.excepciones.NoHayHabitacionDisponibleException;
-import modelo.excepciones.NoHayPacientesEnEsperaException;
-import modelo.facturacion.Factura;
-import modelo.hospedaje.HCompartida;
-import modelo.hospedaje.HPrivada;
-import modelo.hospedaje.HTerapiaIntensiva;
-import modelo.hospedaje.Habitacion;
-import modelo.medicos.IMedico;
-import modelo.medicos.consultasMedicas;
-import modelo.pacientes.Paciente;
+import Modelo.excepciones.*;
+import Modelo.facturacion.Factura;
+import Modelo.hospedaje.HCompartida;
+import Modelo.hospedaje.HPrivada;
+import Modelo.hospedaje.HTerapiaIntensiva;
+import Modelo.hospedaje.Habitacion;
+import Modelo.medicos.IMedico;
+import Modelo.medicos.consultasMedicas;
+import Modelo.pacientes.Paciente;
+import Modelo.ambulancia.Asociado;
+import Modelo.individuos.Persona;
 
 
 
@@ -29,6 +30,7 @@ public class Clinica {
 	private ArrayList <IMedico> medicos;
 	private ArrayList <Paciente> pacientes;
 	private ArrayList <Factura> facturas;
+	private ArrayList <Asociado> asociados;
 	private Stack <Habitacion> privadas;
 	private Stack <Habitacion> compartidas;
 	private Stack <Habitacion> intensivas;
@@ -49,6 +51,7 @@ public class Clinica {
 		this.facturas = new ArrayList<>();
 		this.salaEspera  = new SalaEspera();
 		this.patio = new ArrayList<>();
+		this.asociados = new ArrayList<>();
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
@@ -80,6 +83,41 @@ public class Clinica {
 	
 	public void agregaMedico(IMedico m) {
 		this.medicos.add(m);
+	}
+	
+	public void nuevoAsociado(String nombre, String apellido, String dni) throws AsociadoInvalidoException
+	{
+		if(nombre == null || apellido == null || dni == null)
+		{
+			throw new AsociadoInvalidoException("todos los campos tienen que estar completos");
+		}
+		else {
+			nombre.concat(apellido);
+			Persona p = new Persona(dni,nombre);
+			Asociado a = new Asociado(p,null);
+			this.asociados.add(a);
+			
+			//aca llama al dao para que lo agregue a la base de datos la ec
+		
+		}
+		
+	}
+	public void removeAsociado(String dni) throws AsociadoInvalidoException
+	{
+			int i = 0;
+			while(this.asociados.get(i).getPersona().getDni() != dni && this.asociados.get(i) != null)
+				i++;
+			if(this.asociados.get(i)!=null) {
+				this.asociados.remove(i);
+			}
+			//esta parte se encargaria de eliminar el asociado de la base de datos, aunque la excepcion lo tiraria el dao
+	}
+	
+	public ArrayList<Persona> getAllAsociados()
+	{
+		ArrayList personas = new ArrayList<Persona>();
+		//aca tendria que llamar a alguna funcion del dao que traiga a todas las personas de la base de datos y las guarde en un arrayList
+		return personas;
 	}
 /*	
 	public void agregaPrivada(Habitacion privada) {

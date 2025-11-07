@@ -1,4 +1,4 @@
-package modelo.medicos;
+package Modelo.medicos;
 
 import java.util.ArrayList;
 

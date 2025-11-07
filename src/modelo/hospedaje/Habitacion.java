@@ -1,4 +1,4 @@
-package modelo.hospedaje;
+package Modelo.hospedaje;
 
 /**
  * Clase Habitacion<br>

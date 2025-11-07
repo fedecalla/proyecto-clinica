@@ -2,6 +2,7 @@ package InterfazGrafica;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class VentanaAsociados extends JDialog {
 
@@ -10,9 +11,14 @@ public class VentanaAsociados extends JDialog {
     // desde los ActionListeners
     private CardLayout cardLayout;
     private JPanel panelDerechoContenedor;
+    private String nombreAsociado, apellidoAsociado, dniAsociado;
+    private JTextArea areaListado;8
 
     public VentanaAsociados(JFrame parent) {
         super(parent, "Asociados", true); // Ventana modal
+        this.nombreAsociado = null;
+        this.apellidoAsociado = null;
+        this.dniAsociado = null;
         setSize(700, 400);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -70,11 +76,13 @@ public class VentanaAsociados extends JDialog {
         // 2. Creamos los paneles individuales ("cartas") llamando a métodos
         JPanel panelAgregar = crearPanelAgregar();
         JPanel panelEliminar = crearPanelEliminar();
+        JPanel panelListar = crearPanelListar();
         // (Aquí podrías crear también un panelListar)
 
         // 3. Añadimos las "cartas" al contenedor con un nombre único
         panelDerechoContenedor.add(panelAgregar, "AGREGAR");
         panelDerechoContenedor.add(panelEliminar, "ELIMINAR");
+        panelDerechoContenedor.add(panelListar, "LISTAR");
         // panelDerechoContenedor.add(panelListar, "LISTAR");
 
         // 4. Añadimos el contenedor principal de la derecha al contenido
@@ -90,8 +98,11 @@ public class VentanaAsociados extends JDialog {
         });
         
         btnListar.addActionListener(e -> {
-            // cardLayout.show(panelDerechoContenedor, "LISTAR");
-            JOptionPane.showMessageDialog(this, "Aún no implementado");
+            // Aquí deberías cargar los datos reales.
+            // Por ahora, simulamos la carga por si los datos cambian.
+            cargarDatosDeEjemplo(); 
+            
+            cardLayout.show(panelDerechoContenedor, "LISTAR");
         });
     }
 
@@ -106,6 +117,8 @@ public class VentanaAsociados extends JDialog {
         panelForm.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
         JButton btnAgregarForm = new JButton("<html><b><u>AGREGAR</u></b></html>");
+        btnAgregarForm.setActionCommand("AgregarAsociado");
+        btnAgregarForm.addActionListener(this.controlador);
         btnAgregarForm.setFont(new Font("Arial", Font.BOLD, 16));
         btnAgregarForm.setBackground(new Color(153, 255, 204)); // verde claro
         btnAgregarForm.setFocusPainted(false);
@@ -136,9 +149,9 @@ public class VentanaAsociados extends JDialog {
         panelForm.add(Box.createVerticalGlue());
 
         btnAgregarForm.addActionListener(e -> {
-            String dato1 = campo1.getText();
-            String dato2 = campo2.getText();
-            String dato3 = campo3.getText();
+            this.nombreAsociado= campo1.getText();
+            this.apellidoAsociado= campo2.getText();
+            this.dniAsociado= campo3.getText();
             String dato4 = campo4.getText();
         });
 
@@ -189,6 +202,8 @@ public class VentanaAsociados extends JDialog {
 
         // Botón "ELIMINAR"
         JButton btnEliminarForm = new JButton("<html><b><u>ELIMINAR</u></b></html>");
+        btnEliminarForm.setActionCommand("EliminarAsociado");
+        btnEliminarForm.addActionListener(this.controlador);
         // Mismos estilos que el botón de agregar
         btnEliminarForm.setFont(new Font("Arial", Font.BOLD, 16));
         btnEliminarForm.setBackground(new Color(153, 255, 204));
@@ -211,13 +226,81 @@ public class VentanaAsociados extends JDialog {
 
         // ActionListener para el botón de eliminar
         btnEliminarForm.addActionListener(e -> {
-            String dni = txtDni.getText();
+            this.dniAsociado = txtDni.getText();
             
         });
 
         return panel;
     }
+    
+<<<<<<< HEAD
+    public void getDatosAsociado(String nombre, String apellido, String dni)
+    {
+    	nombre = this.nombreAsociado;
+    	apellido = this.apellidoAsociado;
+    	dni = this.dniAsociado;
+    }
+    
+    public void getDniAsociado(String dni)
+    {
+    	dni = this.dniAsociado;
+    }
+    
+    public void popUp(String mensaje)
+    {
+    	JOptionPane.showMessageDialog(this, mensaje);
+    }
+=======
+    private JPanel crearPanelListar() {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(204, 255, 204));
+        // BorderLayout es ideal: Título al NORTE, Lista (con scroll) al CENTRO.
+        panel.setLayout(new BorderLayout()); 
+        panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
+        // Título
+        JLabel title = new JLabel("<html><u>LISTADO DE ASOCIADOS</u></html>");
+        title.setFont(new Font("Arial", Font.BOLD, 18));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        // Añadimos un borde vacío para darle espacio antes del área de texto
+        title.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0)); 
+        panel.add(title, BorderLayout.NORTH);
+
+        // Área de Texto (donde irá la lista)
+        areaListado = new JTextArea();
+        areaListado.setEditable(false); // Para que el usuario no pueda escribir
+        areaListado.setFont(new Font("Monospaced", Font.PLAIN, 12)); // Letra monoespaciada
+        
+        // Panel con Scroll (¡la clave!)
+        // Añadimos el areaListado DENTRO del JScrollPane
+        JScrollPane scrollPane = new JScrollPane(areaListado);
+        
+        // Añadimos el scrollPane (que contiene el área de texto) al centro
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        return panel;
+    }
+    
+    private void cargarDatosDeEjemplo() {
+        // Usamos StringBuilder para construir el texto eficientemente
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("--- LISTADO DE ASOCIADOS ACTIVOS ---\n\n");
+        
+        // Generamos 50 líneas para forzar el scroll
+        for (int i = 1; i <= 50; i++) {
+            sb.append(String.format("Asociado N°%03d - DNI: %d - Nombre: Juan Perez %d\n", i, (20000000 + i*10), i));
+        }
+
+        // Ponemos el texto en el área
+        areaListado.setText(sb.toString());
+        
+        // --- IMPORTANTE ---
+        // Mueve el cursor (y el scroll) al inicio del texto.
+        areaListado.setCaretPosition(0); 
+    }
+
+>>>>>>> 45215961d34b7bf5a0d8c599647acb21b4cf31e8
 
     // Ejemplo para probar de forma independiente
     public static void main(String[] args) {
@@ -228,7 +311,7 @@ public class VentanaAsociados extends JDialog {
             dummy.setLocation(-2000, -2000); // Moverlo fuera de la pantalla
             dummy.setVisible(true);
             
-            VentanaAsociados dialog = new VentanaAsociados(dummy);
+            VentanaAsociados dialog = new VentanaAsociados(dummy,null);
             dialog.setVisible(true);
             
             // Cuando el diálogo se cierra, cerramos el dummy frame también

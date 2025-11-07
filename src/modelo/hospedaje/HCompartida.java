@@ -1,4 +1,4 @@
-package modelo.hospedaje;
+package Modelo.hospedaje;
 
 /**
  * Clase HCompartida, hija de Habitacion<br>

@@ -1,4 +1,4 @@
-package modelo.excepciones;
+package Modelo.excepciones;
 
 public class RangoNoExisteException extends Exception {
 	public RangoNoExisteException(String mensaje) {
