@@ -3,44 +3,68 @@ package modelo.persistencia;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement; // ⭐ ¡IMPORTACIÓN NECESARIA!
 
 public class ConexionManager {
     
-    // --- ⚠️ Parámetros de Conexión a tu BD 'grupo_3' ---
-    // URL: jdbc:tipo_bd://host:puerto/nombre_bd
     private static final String URL = "jdbc:mariadb://localhost:3306/grupo_3"; 
-    
-    // USUARIO: Típicamente 'root' si usas XAMPP/WAMP/MariaDB por defecto.
     private static final String USUARIO = "progra_c"; 
-    
-    // PASSWORD: Normalmente es vacía ("") si no la configuraste.
     private static final String PASSWORD = "progra_c"; 
 
+    // --- Sentencia SQL para la creación automática de la tabla ---
+    private static final String SQL_CREACION = 
+        "CREATE TABLE IF NOT EXISTS Asociados (" + 
+        "dni VARCHAR(8) PRIMARY KEY, " +
+        "nombre VARCHAR(50) NOT NULL, " +
+        "telefono VARCHAR(50), " +
+        "ciudad VARCHAR(100), " +    
+        "domicilio VARCHAR(255) " +  
+        ");";
+
     /**
-     * Bloque estático: Se ejecuta una sola vez cuando la JVM carga esta clase.
-     * Su función es cargar el Driver JDBC de MariaDB.
+     * Bloque estático: Carga el Driver y llama a la inicialización del esquema.
      */
     static {
         try {
-            // Carga la clase del driver de MariaDB.
             Class.forName("org.mariadb.jdbc.Driver"); 
-            System.out.println("Driver JDBC de MariaDB cargado correctamente.");
+            System.out.println("✅ Driver JDBC de MariaDB cargado correctamente.");
+            
+            // ⭐ LLAMADA PARA CREAR LA TABLA (SE EJECUTA AQUÍ)
+            inicializarEsquema(); 
+            
         } catch (ClassNotFoundException e) {
-            System.err.println("ERROR: No se encontró el driver JDBC de MariaDB.");
+            System.err.println("ERROR: No se encontró el driver JDBC.");
             System.err.println("Asegúrate de que el archivo 'mariadb-java-client.jar' esté en el Classpath.");
             e.printStackTrace();
         }
     }
     
     /**
-     * Método público para obtener una nueva conexión a la base de datos.
-     * @return Una instancia de java.sql.Connection.
-     * @throws SQLException Si ocurre un error al intentar conectar.
+     * Método para obtener una nueva conexión.
      */
     public static Connection getConnection() throws SQLException {
-        // DriverManager intenta establecer la conexión con los parámetros definidos.
         return DriverManager.getConnection(URL, USUARIO, PASSWORD);
     }
+    
+    // ⭐ NUEVO MÉTODO PARA CREAR LA TABLA SI NO EXISTE
+    private static void inicializarEsquema() {
+        try (Connection conn = getConnection(); // Abre la conexión
+             Statement stmt = conn.createStatement()) { // Crea un Statement para ejecutar SQL
+            
+            stmt.execute(SQL_CREACION); // Ejecuta la sentencia DDL (CREATE TABLE)
+            System.out.println("✅ Esquema verificado/creado: Tabla 'Asociados' lista.");
+            
+        } catch (SQLException e) {
+            // Este bloque captura errores si, por ejemplo, la base de datos 'grupo_3' no existe.
+            if (e.getSQLState().startsWith("42")) { 
+                 System.err.println("ERROR FATAL: La Base de Datos 'grupo_3' no existe o hay un problema de credenciales.");
+                 System.err.println("Solución: El compañero debe crear la BD vacía 'grupo_3' en su servidor MariaDB.");
+            } else {
+                 System.err.println("ERROR al inicializar el esquema: " + e.getMessage());
+            }
+        }
+    }
+    
 
     /**
      * Método de prueba simple para verificar la configuración de la conexión.
