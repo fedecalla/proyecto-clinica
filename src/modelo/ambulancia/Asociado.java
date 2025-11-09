@@ -21,9 +21,6 @@ public class Asociado extends Thread {
 		this.activo = false;
 	}
 
-	public Persona getPersona() {
-		return this.persona;
-	}
 
 	/*
 	 * public void run(){

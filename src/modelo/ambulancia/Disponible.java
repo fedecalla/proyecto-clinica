@@ -1,4 +1,4 @@
-package Modelo.ambulancia;
+package modelo.ambulancia;
 
 public class Disponible implements EstadoAmbulancia{
 

@@ -1,9 +1,10 @@
 package Controlador;
 
 import InterfazGrafica.VentanaAsociados;
-import Modelo.excepciones.AsociadoInvalidoException;
-import Modelo.individuos.Persona;
-import Modelo.clinica.Clinica;
+import modelo.clinica.*;
+import modelo.excepciones.AsociadoInvalidoException;
+import modelo.individuos.Persona;
+import modelo.clinica.Clinica;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,13 +21,13 @@ public class AsociadosController implements ActionListener{
 	{
 		this.vista = vista;
 	}
-	public void setVista(Clinica modelo)
+	public void setModelo(Clinica modelo)
 	{
 		this.modelo = modelo;
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evento) {
+	public void actionPerformed(ActionEvent evento) throws AsociadoInvalidoException {
 		
 		
 		if(evento.getActionCommand().equalsIgnoreCase("AgregarAsociado"))

@@ -1,4 +1,4 @@
-package Modelo.medicos;
+package modelo.medicos;
 
 
 /**

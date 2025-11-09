@@ -2,7 +2,7 @@ package patrones.decorator;
 import java.time.LocalDate;
 
 
-import Modelo.medicos.IMedico;
+import modelo.medicos.IMedico;
 
 
 

@@ -3,8 +3,8 @@ package patrones.decorator;
 import java.util.ArrayList;
 
 
-import Modelo.medicos.IMedico;
-import Modelo.medicos.consultasMedicas;
+import modelo.medicos.IMedico;
+import modelo.medicos.consultasMedicas;
 
 /**
  * Clase doctorado, extiende de la clase Decorator Posgrado

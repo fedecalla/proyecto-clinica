@@ -1,7 +1,7 @@
 
-package Modelo.pacientes;
-import Modelo.hospedaje.Habitacion;
-import Modelo.individuos.Persona;
+package modelo.pacientes;
+import modelo.hospedaje.Habitacion;
+import modelo.individuos.Persona;
 
 /*
  * Clase abstracta padre de las clases concretas de paciente.

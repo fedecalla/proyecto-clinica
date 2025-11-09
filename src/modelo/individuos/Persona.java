@@ -1,4 +1,4 @@
-package Modelo.individuos;
+package modelo.individuos;
 
 public class Persona {
 	protected String dni;

@@ -1,4 +1,4 @@
-package Modelo.clinica;
+package modelo.clinica;
 
 
 
@@ -9,17 +9,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import Modelo.excepciones.*;
-import Modelo.facturacion.Factura;
-import Modelo.hospedaje.HCompartida;
-import Modelo.hospedaje.HPrivada;
-import Modelo.hospedaje.HTerapiaIntensiva;
-import Modelo.hospedaje.Habitacion;
-import Modelo.medicos.IMedico;
-import Modelo.medicos.consultasMedicas;
-import Modelo.pacientes.Paciente;
-import Modelo.ambulancia.Asociado;
-import Modelo.individuos.Persona;
+import modelo.excepciones.*;
+import modelo.facturacion.Factura;
+import modelo.hospedaje.HCompartida;
+import modelo.hospedaje.HPrivada;
+import modelo.hospedaje.HTerapiaIntensiva;
+import modelo.hospedaje.Habitacion;
+import modelo.medicos.IMedico;
+import modelo.medicos.consultasMedicas;
+import modelo.pacientes.Paciente;
+import modelo.ambulancia.Asociado;
+import modelo.individuos.Persona;
 
 
 

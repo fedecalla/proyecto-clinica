@@ -1,4 +1,4 @@
-package Modelo.excepciones;
+package modelo.excepciones;
 
 public class AsociadoInvalidoException extends Exception{
 

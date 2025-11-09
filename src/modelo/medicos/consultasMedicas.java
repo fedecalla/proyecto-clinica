@@ -1,9 +1,9 @@
-package Modelo.medicos;
+package modelo.medicos;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
 
-import Modelo.pacientes.Paciente;
+import modelo.pacientes.Paciente;
 
 public class consultasMedicas {
 	private static int cantidad = 0;
