@@ -233,7 +233,6 @@ public class VentanaAsociados extends JDialog {
         return panel;
     }
     
-<<<<<<< HEAD
     public void getDatosAsociado(String nombre, String apellido, String dni)
     {
     	nombre = this.nombreAsociado;
@@ -250,7 +249,7 @@ public class VentanaAsociados extends JDialog {
     {
     	JOptionPane.showMessageDialog(this, mensaje);
     }
-=======
+
     private JPanel crearPanelListar() {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(204, 255, 204));
@@ -299,8 +298,6 @@ public class VentanaAsociados extends JDialog {
         // Mueve el cursor (y el scroll) al inicio del texto.
         areaListado.setCaretPosition(0); 
     }
-
->>>>>>> 45215961d34b7bf5a0d8c599647acb21b4cf31e8
 
     // Ejemplo para probar de forma independiente
     public static void main(String[] args) {
