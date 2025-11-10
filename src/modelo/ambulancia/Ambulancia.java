@@ -7,6 +7,7 @@ import java.util.Observer;
 public class Ambulancia extends Observable{
 	private static Ambulancia instancia;
 	private int atendiendo = 0;
+	private int entaller = 0;
 	private EstadoAmbulancia estado;
 	private ArrayList<Observer> observers = new ArrayList<>();
 	
@@ -22,6 +23,9 @@ public class Ambulancia extends Observable{
         return instancia;
     }
 	
+	public int getEnTaller() {
+		return this.entaller;
+	}
 	
 	public int getAtendiendo() {
 		return atendiendo;
@@ -41,13 +45,11 @@ public class Ambulancia extends Observable{
 	public synchronized void setEstado(EstadoAmbulancia nuevo) {
 		this.estado = nuevo;
 		setChanged();
-		notifyObservers(nuevo.toString());
+		notifyObservers("ESTADO: "+nuevo.toString());
 		notifyAll();
 	}
 
-
 	public synchronized void pedirAmbulancia(Asociado a) {
-
 		while(this.atendiendo==1) {
 			try {
 				wait();
@@ -55,10 +57,10 @@ public class Ambulancia extends Observable{
 				e.printStackTrace();
 			}
 		}
-		
 		this.atendiendo=1;
-		System.out.println(a.toString1());
-		notifyObservers();
+		this.setEstado(new AtendiendoPaciente());
+		setChanged();
+		notifyObservers("LOG: "+a.toString1());
 		notifyAll();	
 		
 	}
@@ -69,9 +71,9 @@ public class Ambulancia extends Observable{
 	}
 	
 	public synchronized void dejarAmbulancia () {
-		this.atendiendo=0;
-		notifyObservers();
-		notifyAll();
+		this.atendiendo = 0;
+		this.entaller = 0;
+		this.setEstado(new Disponible());
 	}
 
 
@@ -84,24 +86,26 @@ public class Ambulancia extends Observable{
 			}
 		}
 		this.atendiendo=1;
-		System.out.println(a.toString2());
-		notifyObservers();
+		this.setEstado(new TrasladandoPaciente());
+		setChanged();
+		notifyObservers("LOG: "+a.toString2());
 		notifyAll();	
 	}
 
 
 	public synchronized void realizarMantenimiento(Llamador llamador) {
-		while(this.atendiendo==1) {
+		while(this.atendiendo==1 || this.entaller==1) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		this.atendiendo=1;
-		llamador.toString();
-		notifyObservers();
+		this.setEstado(new EnTaller());
+		this.atendiendo = 1;
+		this.entaller = 1;
+		setChanged();
+		notifyObservers("LOG: "+llamador.toString());
 		notifyAll();
 	}
 

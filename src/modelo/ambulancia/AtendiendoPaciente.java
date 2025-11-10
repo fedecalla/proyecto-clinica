@@ -18,6 +18,10 @@ public class AtendiendoPaciente implements EstadoAmbulancia{
 		// TODO Auto-generated method stub
 		throw new SolicitudNoAtendidaException("Ambulancia atendiendo paciente");
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Atendiendo Paciente";
+	}
 
 }

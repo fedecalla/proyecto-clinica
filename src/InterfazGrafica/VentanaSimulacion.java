@@ -165,6 +165,11 @@ public class VentanaSimulacion extends JFrame {
 		this.lblEstado = lblEstado;
 	}
 
+	public JTextArea getAreaMovimientos() {
+		return areaMovimientos;
+	}
+
+	
     
 
 }

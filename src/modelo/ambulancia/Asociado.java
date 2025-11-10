@@ -66,12 +66,12 @@ public class Asociado extends Thread {
 	// falta hacer otro hilo llamador que se controle un boton
 	// habilitar/deshabilitar, hace que no se trabe si un hilo va a wait
 	public String toString1() {
-		return "Ambulancia traslada al asociado " + this.persona.getNombreyapellido() + ", dni: "
+		return "- Trasladando asociado: \n  " + this.persona.getNombreyapellido() + " -  DNI: "
 				+ this.persona.getDni();
 	}
 
 	public String toString2() {
-		return "Ambulancia atiende en el domicilio al asociado " + this.persona.getNombreyapellido() + ", dni: "
+		return "- Atendiendo asociado: \n  " + this.persona.getNombreyapellido() + " -  DNI: "
 				+ this.persona.getDni();
 	}
 	
@@ -81,7 +81,6 @@ public class Asociado extends Thread {
 	}
 	
 	
-
 	public Persona getPersona() {
 		return this.persona;
 	}

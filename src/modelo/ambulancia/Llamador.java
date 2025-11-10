@@ -3,6 +3,18 @@ package modelo.ambulancia;
 public class Llamador extends Thread{
 	private Ambulancia ambulancia;
 	
+	public Llamador(Ambulancia ambulancia) {
+		super();
+		this.ambulancia = ambulancia;
+	}
+	
+
+	public Ambulancia getAmbulancia() {
+		return ambulancia;
+	}
+
+// ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
+	
 	public void run(){
 		this.ambulancia.realizarMantenimiento(this);
 		try {
@@ -13,8 +25,9 @@ public class Llamador extends Thread{
 		}
 		this.ambulancia.dejarAmbulancia();
 		
-		//aca deberia avisar al boton, observer 
 	}
+	
+	
 
 	@Override
 	public String toString() {

@@ -10,6 +10,8 @@ import javax.swing.SwingUtilities;
 import InterfazGrafica.VentanaSimulacion;
 import modelo.simulacion;
 import modelo.ambulancia.Ambulancia;
+import modelo.ambulancia.Llamador;
+import modelo.ambulancia.Operario;
 import modelo.persistencia.AsociadoDAO;
 
 public class SimulacionController implements ActionListener,Observer{
@@ -23,7 +25,7 @@ public class SimulacionController implements ActionListener,Observer{
 		super();
 		this.ambulancia = Ambulancia.getAmbulancia();
 		this.vista = vista;
-		this.modelo = new simulacion(this.ambulancia, new AsociadoDAO());
+		this.modelo = new simulacion(this.ambulancia, new AsociadoDAO(), new Operario(new Llamador(this.ambulancia)));
 	}
 
 	@Override
@@ -53,12 +55,29 @@ public class SimulacionController implements ActionListener,Observer{
 			//una vez que todos los hilos terminaron sus ciclos de peticiones le avisa a la vista para que cierre la venta y haga un popup de simulacion terminada con exito
 
 		}
+		else if (evento.getActionCommand().equalsIgnoreCase("SolicitarMantenimiento")) {
+			this.modelo.getOperario().Llamar();
+		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-	    String estado = (String) arg;
-	    this.vista.getLblEstado().setText(estado.toUpperCase());
+	    String mensaje = (String) arg;
+
+	    SwingUtilities.invokeLater(() -> {
+	        if (mensaje.startsWith("ESTADO:")) {
+	            String estado = mensaje.replace("ESTADO:", "").trim();
+	            vista.getLblEstado().setText(estado);
+	        } else if (mensaje.startsWith("LOG: ")) {
+	            String log = mensaje.replace("LOG: ", "").trim();
+	            vista.getAreaMovimientos().append(log + "\n");
+	            vista.getAreaMovimientos().setCaretPosition(
+	                vista.getAreaMovimientos().getDocument().getLength()
+	            );
+	        }
+	    });
 	}
+
+
 
 }

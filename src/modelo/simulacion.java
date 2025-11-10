@@ -5,49 +5,49 @@ import java.util.List;
 
 import modelo.ambulancia.Ambulancia;
 import modelo.ambulancia.Asociado;
+import modelo.ambulancia.Operario;
 import modelo.persistencia.AsociadoDAO;
 
 public class simulacion extends Thread {
 	private AsociadoDAO dao;
 	private List<Asociado> asociados;
 	private Ambulancia ambulancia;
+	private Operario operario;
 	private int cant_asociados;
 
-	public simulacion(Ambulancia amb, AsociadoDAO dao) {
+	public simulacion(Ambulancia amb, AsociadoDAO dao, Operario op) {
 		this.ambulancia = amb;
 		this.dao = dao;
+		this.operario = op;
 	}
 	
+	public Operario getOperario() {
+		return this.operario;
+	}
 	
 	
 	public Ambulancia getAmbulancia() {
 		return ambulancia;
 	}
 
-
-
 	public void setAmbulancia(Ambulancia ambulancia) {
 		this.ambulancia = ambulancia;
 	}
-
-
 
 	public int getCant_asociados() {
 		return cant_asociados;
 	}
 
-
-
 	public void setCant_asociados(int cant_asociados) {
 		this.cant_asociados = cant_asociados;
 	}
-
-
 
 	public void setCant(int cant) {
 		this.cant_asociados = cant;
 	}
 
+	// ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
+	
 	public void detener() {
 		for (Asociado a : this.asociados) {
             a.detener();
@@ -67,6 +67,8 @@ public class simulacion extends Thread {
 		}
 		catch (SQLException e) {
 		}
-
 	}
+	
+	
+	
 }
