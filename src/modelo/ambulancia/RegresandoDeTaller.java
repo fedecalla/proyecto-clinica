@@ -21,5 +21,12 @@ public class RegresandoDeTaller implements EstadoAmbulancia{
 	public void mantenimiento(Ambulancia a) throws SolicitudNoAtendidaException{
 		throw new SolicitudNoAtendidaException("Ambulancia regresando del taller");
 	}
+
+	@Override
+	public String toString() {
+		return "Regresando del Taller";
+	}
+	
+	
 	
 }

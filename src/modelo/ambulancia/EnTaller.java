@@ -23,4 +23,11 @@ public class EnTaller implements EstadoAmbulancia{
 		a.setEstado(new RegresandoDeTaller());
 	}
 
+	@Override
+	public String toString() {
+		return "En el Taller";
+	}
+	
+	
+
 }

@@ -18,5 +18,10 @@ public class Disponible implements EstadoAmbulancia{
 	public void mantenimiento(Ambulancia a) throws SolicitudNoAtendidaException{
 		a.setEstado(new EnTaller());
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Disponible";
+	}
+	
 }

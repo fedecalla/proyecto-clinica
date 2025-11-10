@@ -18,4 +18,10 @@ public class TrasladandoPaciente implements EstadoAmbulancia {
 		throw new SolicitudNoAtendidaException("Ambulancia haciendo traslado");
 	}
 
+	@Override
+	public String toString() {
+		return "Trasladando Paciente";
+	}
+
+	
 }

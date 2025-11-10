@@ -5,7 +5,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Ambulancia extends Observable{
-	
 	private static Ambulancia instancia;
 	private int atendiendo = 0;
 	private EstadoAmbulancia estado;
@@ -42,13 +41,13 @@ public class Ambulancia extends Observable{
 	public synchronized void setEstado(EstadoAmbulancia nuevo) {
 		this.estado = nuevo;
 		setChanged();
-		notifyObservers(nuevo);
+		notifyObservers(nuevo.toString());
 		notifyAll();
 	}
 
 
 	public synchronized void pedirAmbulancia(Asociado a) {
-		
+
 		while(this.atendiendo==1) {
 			try {
 				wait();
@@ -58,8 +57,10 @@ public class Ambulancia extends Observable{
 		}
 		
 		this.atendiendo=1;
-		a.toString1();
+		System.out.println(a.toString1());
+		notifyObservers();
 		notifyAll();	
+		
 	}
 	
 	public void eventoAtencionDomicilio(Asociado a) throws SolicitudNoAtendidaException {
@@ -69,12 +70,12 @@ public class Ambulancia extends Observable{
 	
 	public synchronized void dejarAmbulancia () {
 		this.atendiendo=0;
+		notifyObservers();
 		notifyAll();
 	}
 
 
 	public synchronized void pedirTraslado(Asociado a) {
-		
 		while(this.atendiendo==1) {
 			try {
 				wait();
@@ -82,15 +83,14 @@ public class Ambulancia extends Observable{
 				e.printStackTrace();
 			}
 		}
-		
 		this.atendiendo=1;
-		a.toString2();
+		System.out.println(a.toString2());
+		notifyObservers();
 		notifyAll();	
 	}
 
 
 	public synchronized void realizarMantenimiento(Llamador llamador) {
-		
 		while(this.atendiendo==1) {
 			try {
 				wait();
@@ -101,6 +101,7 @@ public class Ambulancia extends Observable{
 		
 		this.atendiendo=1;
 		llamador.toString();
+		notifyObservers();
 		notifyAll();
 	}
 

@@ -40,18 +40,14 @@ public class Asociado extends Thread {
 
 	@Override
 	public void run() {
-		//System.out.println("Ejecutnado run...");
-		//System.out.println("Activo: "+ this.activo);
 		while (activo) {
 			// Decidir al azar qué acción realizar
 			boolean quiereTraslado = Math.random() > 0.5;
-
-			if (quiereTraslado) {
+			if (quiereTraslado) 
 				this.ambulancia.pedirTraslado(this);
-			} else {
+			else 
 				this.ambulancia.pedirAmbulancia(this);
-			}
-
+			
 			try {
 				// Simular el tiempo de uso del recurso o viaje
 				if (Math.random() > 0.5) {
@@ -60,9 +56,10 @@ public class Asociado extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-			// Liberar la ambulancia
-			this.ambulancia.dejarAmbulancia();
+			finally { 
+				// Liberar la ambulancia
+				this.ambulancia.dejarAmbulancia();
+			}
 		}
 	}
 
@@ -77,6 +74,13 @@ public class Asociado extends Thread {
 		return "Ambulancia atiende en el domicilio al asociado " + this.persona.getNombreyapellido() + ", dni: "
 				+ this.persona.getDni();
 	}
+	
+	@Override
+	public String toString() {
+		return this.persona.toString();
+	}
+	
+	
 
 	public Persona getPersona() {
 		return this.persona;

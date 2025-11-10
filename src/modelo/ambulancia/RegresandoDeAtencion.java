@@ -18,6 +18,13 @@ public class RegresandoDeAtencion implements EstadoAmbulancia{
 	public void mantenimiento(Ambulancia a) throws SolicitudNoAtendidaException{
 		throw new SolicitudNoAtendidaException("Regresando a la clinica");
 	}
+
+	@Override
+	public String toString() {
+		return "Regresando de Atencion";
+	}
+	
+	
 	
 
 }

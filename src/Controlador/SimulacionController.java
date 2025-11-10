@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.SwingUtilities;
+
 import InterfazGrafica.VentanaSimulacion;
 import modelo.simulacion;
 import modelo.ambulancia.Ambulancia;
@@ -32,6 +34,8 @@ public class SimulacionController implements ActionListener,Observer{
 			cantidad_asociados = Integer.parseInt(vista.getTxtCantAsociados().getText());
 			this.modelo.setCant(cantidad_asociados);
 			this.modelo.getAmbulancia().addObserver(this);
+			
+			this.vista.getLblEstado().setText((this.ambulancia.getEstado().toString()).toUpperCase());
 			this.modelo.run();  //arranca los hilos y comienza la simulacion de los asociados
 			
 			//pasa a la interfaz grafica todos los objetos que tiene que mostrar
@@ -53,11 +57,8 @@ public class SimulacionController implements ActionListener,Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		String estado = (String) arg;
-		this.vista.getLblEstado().setText(estado);
-		//si update es llamado entonces es porque algun observado cambio su estado
-		
-		//chequea el cambio de estado, lo modifica en el arrayList y lo manda devuelta a la interfaz grafica para que muestre el cambio
+	    String estado = (String) arg;
+	    this.vista.getLblEstado().setText(estado.toUpperCase());
 	}
 
 }
