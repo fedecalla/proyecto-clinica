@@ -21,7 +21,7 @@ public class VentanaEvolucionAsociado extends JFrame {
 
         // Panel violeta (derecha)
         JPanel panelDerecho = new JPanel();
-        panelDerecho.setBackground(new Color(200, 180, 255)); // violeta claro
+        panelDerecho.setBackground( new Color(204, 204, 255)); // violeta claro
         panelDerecho.setBounds(350, 0, 650, 600);
         panelDerecho.setLayout(null);
         add(panelDerecho);
@@ -37,7 +37,7 @@ public class VentanaEvolucionAsociado extends JFrame {
         int y = 80;
         for (String nombre : asociados) {
             JButton boton = new JButton(nombre);
-            boton.setBackground(Color.BLACK);
+            boton.setBackground(Color.DARK_GRAY);
             boton.setForeground(Color.WHITE);
             boton.setFont(new Font("Arial", Font.BOLD, 14));
             boton.setBounds(50, y, 250, 35);
@@ -46,7 +46,8 @@ public class VentanaEvolucionAsociado extends JFrame {
         }
 
         // Cuadro gris (simulación o evolución)
-        JPanel panelEvolucion = new JPanel();
+        JTextArea panelEvolucion = new JTextArea();
+        panelEvolucion.setEditable(false);
         panelEvolucion.setBackground(Color.LIGHT_GRAY);
         panelEvolucion.setBounds(100, 100, 450, 350);
         panelDerecho.add(panelEvolucion);

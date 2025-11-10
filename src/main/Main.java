@@ -9,7 +9,7 @@ public class Main {
 		
 		Clinica c = Clinica.getClinica("sadasd", "sadsad123213", "mardel", "12344556");
 		AsociadosController asociadosController = new AsociadosController();
-		VentanaPrincipal ventanaP = new VentanaPrincipal("Clinica Re Pro");
+		VentanaPrincipal ventanaP = new VentanaPrincipal("Clinica progra");
 		ventanaP.setVisible(true);
 		
 
