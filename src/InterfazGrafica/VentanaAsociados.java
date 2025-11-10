@@ -14,7 +14,7 @@ public class VentanaAsociados extends JDialog {
     private String nombreAsociado, apellidoAsociado, dniAsociado;
     private JTextArea areaListado;
 
-    public VentanaAsociados(JFrame parent) {
+    public VentanaAsociados(JFrame parent, String nombre) {
         super(parent, "Asociados", true); // Ventana modal
         this.nombreAsociado = null;
         this.apellidoAsociado = null;
@@ -27,7 +27,7 @@ public class VentanaAsociados extends JDialog {
         // === HEADER ===
         JPanel header = new JPanel();
         header.setBackground(new Color(102, 255, 153)); // verde
-        JLabel lblTitulo = new JLabel("<nombre_clinica>");
+        JLabel lblTitulo = new JLabel(nombre);
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 22));
         header.add(lblTitulo);
         getContentPane().add(header, BorderLayout.NORTH);
@@ -118,7 +118,7 @@ public class VentanaAsociados extends JDialog {
 
         JButton btnAgregarForm = new JButton("<html><b><u>AGREGAR</u></b></html>");
         btnAgregarForm.setActionCommand("AgregarAsociado");
-        btnAgregarForm.addActionListener(this.controlador);
+        //btnAgregarForm.addActionListener(this.controlador);
         btnAgregarForm.setFont(new Font("Arial", Font.BOLD, 16));
         btnAgregarForm.setBackground(new Color(153, 255, 204)); // verde claro
         btnAgregarForm.setFocusPainted(false);
@@ -131,12 +131,65 @@ public class VentanaAsociados extends JDialog {
         lblagregar.setAlignmentX(0.5f);
         panelForm.add(lblagregar);
 
-        JTextField campo1 = new JTextField();
-        JTextField campo2 = new JTextField();
-        JTextField campo3 = new JTextField();
-        JTextField campo4 = new JTextField();
+        JTextField campo1 = new JTextField("Nombre del Asociado...");
+        campo1.setForeground(Color.gray);
+        campo1.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (campo1.getText().equals("Nombre del Asociado...")) {
+                    campo1.setText("");
+                    campo1.setForeground(Color.BLACK);
+                }
+            }
 
-        JTextField[] campos = {campo1, campo2, campo3, campo4};
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (campo1.getText().isEmpty()) {
+                    campo1.setText("Nombre del Asociado...");
+                    campo1.setForeground(Color.GRAY);
+                }
+            }
+        });
+        JTextField campo2 = new JTextField("Apellido del asociado...");
+        campo2.setForeground(Color.gray);
+        campo2.addFocusListener(new java.awt.event.FocusAdapter() {
+        	@Override
+        	public void focusGained(java.awt.event.FocusEvent e) {
+        		if (campo2.getText().equals("Apellido del asociado...")) {
+        			campo2.setText("");
+        			campo2.setForeground(Color.BLACK);
+        		}
+        	}
+        	
+        	@Override
+        	public void focusLost(java.awt.event.FocusEvent e) {
+        		if (campo2.getText().isEmpty()) {
+        			campo2.setText("Apellido del asociado...");
+        			campo2.setForeground(Color.GRAY);
+        		}
+        	}
+        });
+        JTextField campo3 = new JTextField("DNI...");
+        campo3.setForeground(Color.gray);
+        campo3.addFocusListener(new java.awt.event.FocusAdapter() {
+        	@Override
+        	public void focusGained(java.awt.event.FocusEvent e) {
+        		if (campo3.getText().equals("DNI...")) {
+        			campo3.setText("");
+        			campo3.setForeground(Color.BLACK);
+        		}
+        	}
+        	
+        	@Override
+        	public void focusLost(java.awt.event.FocusEvent e) {
+        		if (campo3.getText().isEmpty()) {
+        			campo3.setText("DNI...");
+        			campo3.setForeground(Color.GRAY);
+        		}
+        	}
+        });
+
+        JTextField[] campos = {campo1, campo2, campo3};
         for (JTextField c : campos) {
             c.setMaximumSize(new Dimension(300, 30));
             c.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -152,7 +205,6 @@ public class VentanaAsociados extends JDialog {
             this.nombreAsociado= campo1.getText();
             this.apellidoAsociado= campo2.getText();
             this.dniAsociado= campo3.getText();
-            String dato4 = campo4.getText();
         });
 
         return panelForm;
@@ -182,28 +234,41 @@ public class VentanaAsociados extends JDialog {
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(title, gbc);
 
-        // Etiqueta "DNI"
-        JLabel lblDni = new JLabel("DNI:");
-        lblDni.setFont(new Font("Arial", Font.BOLD, 14));
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.EAST; // Alineado a la derecha
-        panel.add(lblDni, gbc);
+
 
         // Campo de texto para DNI
-        JTextField txtDni = new JTextField(15);
+        JTextField txtDni = new JTextField("DNI...");
+        txtDni.setForeground(Color.gray);
+        txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                if (txtDni.getText().equals("DNI...")) {
+                    txtDni.setText("");
+                    txtDni.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                if (txtDni.getText().isEmpty()) {
+                    txtDni.setText("DNI...");
+                    txtDni.setForeground(Color.GRAY);
+                }
+            }
+        });
         txtDni.setMaximumSize(new Dimension(300, 30));
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST; // Alineado a la izquierda
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(txtDni, gbc);
+        
+        
 
         // Botón "ELIMINAR"
         JButton btnEliminarForm = new JButton("<html><b><u>ELIMINAR</u></b></html>");
         btnEliminarForm.setActionCommand("EliminarAsociado");
-        btnEliminarForm.addActionListener(this.controlador);
+        //btnEliminarForm.addActionListener(this.controlador);
         // Mismos estilos que el botón de agregar
         btnEliminarForm.setFont(new Font("Arial", Font.BOLD, 16));
         btnEliminarForm.setBackground(new Color(153, 255, 204));
@@ -300,24 +365,5 @@ public class VentanaAsociados extends JDialog {
     }
 
     // Ejemplo para probar de forma independiente
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            // Creamos un JFrame "dummy" (vacío) solo para que JDialog tenga un "padre"
-            JFrame dummy = new JFrame();
-            dummy.setUndecorated(true); // Que no se vea
-            dummy.setLocation(-2000, -2000); // Moverlo fuera de la pantalla
-            dummy.setVisible(true);
-            
-            VentanaAsociados dialog = new VentanaAsociados(dummy,null);
-            dialog.setVisible(true);
-            
-            // Cuando el diálogo se cierra, cerramos el dummy frame también
-            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override
-                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                    dummy.dispose();
-                }
-            });
-        });
-    }
+   
 }

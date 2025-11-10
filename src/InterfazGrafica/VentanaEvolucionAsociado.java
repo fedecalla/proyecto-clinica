@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class VentanaEvolucionAsociado extends JFrame {
 
-    public VentanaEvolucionAsociado() {
+    public VentanaEvolucionAsociado(String name) {
         setTitle("Evolución del Asociado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -27,7 +27,7 @@ public class VentanaEvolucionAsociado extends JFrame {
         add(panelDerecho);
 
         // Título (nombre clínica)
-        JLabel lblTitulo = new JLabel("<nombre_clinica>", SwingConstants.CENTER);
+        JLabel lblTitulo = new JLabel(name, SwingConstants.CENTER);
         lblTitulo.setFont(new Font("Arial Black", Font.PLAIN, 22));
         lblTitulo.setBounds(0, 20, 350, 40);
         panelIzquierdo.add(lblTitulo);
@@ -59,7 +59,7 @@ public class VentanaEvolucionAsociado extends JFrame {
 
         // Acción del botón volver
         btnVolver.addActionListener(e -> {
-            new VentanaSimulacion(null).setVisible(true); // volver a simulación
+            new VentanaSimulacion(null, name).setVisible(true); // volver a simulación
             dispose();
         });
     }

@@ -9,7 +9,7 @@ public class VentanaSimulacion extends JFrame {
     private JTextField txtCantAsociados;
     private JTextArea areaMovimientos;
 
-    public VentanaSimulacion(JFrame ventanaPrincipal) {
+    public VentanaSimulacion(JFrame ventanaPrincipal, String nombre) {
         setTitle("Simulación - Clínica");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1000, 600);
@@ -19,7 +19,7 @@ public class VentanaSimulacion extends JFrame {
         // === PANEL SUPERIOR ===
         JPanel header = new JPanel();
         header.setBackground(new Color(144, 255, 144)); // verde claro
-        JLabel lblTitulo = new JLabel("<nombre_clinica>");
+        JLabel lblTitulo = new JLabel(nombre);
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
         header.add(lblTitulo);
         getContentPane().add(header, BorderLayout.NORTH);
@@ -129,12 +129,10 @@ public class VentanaSimulacion extends JFrame {
         
         
         btnVerEvol.addActionListener(e -> {
-            new VentanaEvolucionAsociado().setVisible(true);
+            new VentanaEvolucionAsociado(nombre).setVisible(true);
             dispose();
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new VentanaSimulacion(null).setVisible(true));
-    }
+
 }

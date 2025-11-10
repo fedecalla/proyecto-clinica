@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
 
-    public VentanaPrincipal() {
+    public VentanaPrincipal(String nombre) {
         setTitle("Panel Clínica");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900, 600);
@@ -15,7 +15,7 @@ public class VentanaPrincipal extends JFrame {
         // === PANEL SUPERIOR ===
         JPanel header = new JPanel();
         header.setBackground(new Color(144, 255, 144)); // verde claro
-        JLabel lblTitulo = new JLabel("<nombre_clinica>");
+        JLabel lblTitulo = new JLabel(nombre);
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
         header.add(lblTitulo);
         getContentPane().add(header, BorderLayout.NORTH);
@@ -50,13 +50,13 @@ public class VentanaPrincipal extends JFrame {
         // Acción del botón "ASOCIADOS"
         btnAsociados.addActionListener(e -> {
             // Abre la ventana de asociados
-            new VentanaAsociados(this).setVisible(true);
+            new VentanaAsociados(this, nombre).setVisible(true);
             // Opcional: ocultar la ventana principal mientras tanto
             // this.setVisible(false);
         });
         
         btnSimulacion.addActionListener(e -> {
-            new VentanaSimulacion(this).setVisible(true);
+            new VentanaSimulacion(this, nombre).setVisible(true);
         });
 
         central.add(Box.createVerticalGlue());
@@ -70,7 +70,4 @@ public class VentanaPrincipal extends JFrame {
         centro.add(derecha);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new VentanaPrincipal().setVisible(true));
-    }
 }
