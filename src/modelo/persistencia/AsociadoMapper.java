@@ -6,8 +6,7 @@ import modelo.individuos.AsociadoPersistible;
 public class AsociadoMapper {
 	// De modelo (Asociado) → DTO (para persistencia / capa vista, etc.)
     public static AsociadoDTO toDTO(Asociado asociado) {
-        Persona persona = asociado.getPersona();  // asumo que tenés este getter
-
+        Persona persona = asociado.getPersona(); 
         return new AsociadoDTO(
                 persona.getDni(),
                 persona.getNombreyapellido(),
