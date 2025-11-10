@@ -47,8 +47,7 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "(Persona) Dni: " + dni + ", nombreyapellido: " + nombreyapellido + ", telefono: " + telefono
-				+ ", domicilio: " + domicilio + ", ciudad: " + ciudad + "";
+		return "(Persona) Dni: " + dni + ", nombreyapellido: " + nombreyapellido;
 	}
 	
 	

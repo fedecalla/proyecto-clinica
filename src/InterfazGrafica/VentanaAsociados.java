@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import Controlador.AsociadosController;
-
+import modelo.ambulancia.Asociado;
+import modelo.individuos.Persona;
 public class VentanaAsociados extends JDialog {
 
     // --- CAMBIO ---
@@ -19,7 +20,6 @@ public class VentanaAsociados extends JDialog {
     public VentanaAsociados(JFrame parent, String nombre) {
     	
     	super(parent, "Asociados", true); // Ventana modal
-    	
     	this.controlador = new AsociadosController(this);
 
         this.nombreAsociado = null;
@@ -57,6 +57,8 @@ public class VentanaAsociados extends JDialog {
         JButton btnAgregar = new JButton("<html><b><u>AGREGAR</u></b></html>");
         JButton btnEliminar = new JButton("<html><b><u>ELIMINAR</u></b></html>");
         JButton btnListar = new JButton("<html><b><u>LISTAR</u></b></html>");
+        btnListar.addActionListener(this.controlador);
+        btnListar.setActionCommand("ListarAsociados");
 
         for (JButton b : new JButton[]{btnAgregar, btnEliminar, btnListar}) {
             b.setBackground(new Color(128, 204, 153));
@@ -90,7 +92,7 @@ public class VentanaAsociados extends JDialog {
         panelDerechoContenedor.add(panelEliminar, "ELIMINAR");
         panelDerechoContenedor.add(panelListar, "LISTAR");
         // panelDerechoContenedor.add(panelListar, "LISTAR");
-
+        
         // 4. Añadimos el contenedor principal de la derecha al contenido
         contenido.add(panelDerechoContenedor);
 
@@ -123,6 +125,7 @@ public class VentanaAsociados extends JDialog {
         panelForm.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
         JButton btnAgregarForm = new JButton("<html><b><u>AGREGAR</u></b></html>");
+        btnAgregarForm.addActionListener(this.controlador);
         btnAgregarForm.setActionCommand("AgregarAsociado");
         //btnAgregarForm.addActionListener(this.controlador);
         btnAgregarForm.setFont(new Font("Arial", Font.BOLD, 16));
@@ -273,6 +276,7 @@ public class VentanaAsociados extends JDialog {
 
         // Botón "ELIMINAR"
         JButton btnEliminarForm = new JButton("<html><b><u>ELIMINAR</u></b></html>");
+        btnEliminarForm.addActionListener(this.controlador);
         btnEliminarForm.setActionCommand("EliminarAsociado");
         //btnEliminarForm.addActionListener(this.controlador);
         // Mismos estilos que el botón de agregar
@@ -349,6 +353,14 @@ public class VentanaAsociados extends JDialog {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         return panel;
+    }
+    
+    private void Mostrar_Asociados(ArrayList<Asociado> asociados) {
+    	
+    	for(Asociado a : asociados){
+    		areaListado.setText(a.getPersona().toString());
+    	}
+    	
     }
     
     private void cargarDatosDeEjemplo() {
