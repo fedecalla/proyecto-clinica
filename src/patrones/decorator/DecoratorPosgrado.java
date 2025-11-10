@@ -1,4 +1,7 @@
-package medicos;
+package patrones.decorator;
+
+import modelo.medicos.IMedico;
+
 /**
  * Clase decoradora de Medico
  */

@@ -1,4 +1,4 @@
-package excepciones;
+package modelo.excepciones;
 
 public class NoHayHabitacionDisponibleException extends Exception {
 	

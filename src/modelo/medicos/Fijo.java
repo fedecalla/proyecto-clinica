@@ -1,6 +1,9 @@
-package medicos;
+package modelo.medicos;
 
 import java.util.ArrayList;
+
+
+import patrones.decorator.DecoratorContrato;
 
 /**
  * Clase Fijo, extiende de la clase Decorator Contrato

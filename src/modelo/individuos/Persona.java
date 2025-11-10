@@ -1,6 +1,6 @@
-package individuos;
+package modelo.individuos;
 
-public abstract class Persona {
+public class Persona {
 	protected String dni;
 	protected String nombreyapellido;
 	protected String telefono;
@@ -14,6 +14,11 @@ public abstract class Persona {
 		this.telefono = telefono;
 		this.domicilio = domicilio;
 		this.ciudad = ciudad;
+	}
+	public Persona(String dni, String nombreyapellido)
+	{
+		this.dni = dni;
+		this.nombreyapellido = nombreyapellido;
 	}
 
 	public String getDni() {
