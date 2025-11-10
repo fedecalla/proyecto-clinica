@@ -6,14 +6,22 @@ import java.util.Observer;
 
 public class Ambulancia extends Observable{
 	
+	private static Ambulancia instancia;
 	private int atendiendo = 0;
 	private EstadoAmbulancia estado;
 	private ArrayList<Observer> observers = new ArrayList<>();
 	
 	
-	public Ambulancia() {
+	private Ambulancia() {
 		this.estado = new Disponible();
 	}
+	
+	public static Ambulancia getAmbulancia() {
+        if (instancia == null) {
+            instancia = new Ambulancia();
+        }
+        return instancia;
+    }
 	
 	
 	public int getAtendiendo() {

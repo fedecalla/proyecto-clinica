@@ -3,19 +3,25 @@ package InterfazGrafica;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import Controlador.AsociadosController;
 
 public class VentanaAsociados extends JDialog {
 
     // --- CAMBIO ---
     // Necesitamos que sean miembros de la clase para acceder a ellos
     // desde los ActionListeners
+	private AsociadosController controlador;
     private CardLayout cardLayout;
     private JPanel panelDerechoContenedor;
     private String nombreAsociado, apellidoAsociado, dniAsociado;
     private JTextArea areaListado;
 
     public VentanaAsociados(JFrame parent, String nombre) {
-        super(parent, "Asociados", true); // Ventana modal
+    	
+    	super(parent, "Asociados", true); // Ventana modal
+    	
+    	this.controlador = new AsociadosController(this);
+
         this.nombreAsociado = null;
         this.apellidoAsociado = null;
         this.dniAsociado = null;

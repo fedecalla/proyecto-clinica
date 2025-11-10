@@ -17,6 +17,12 @@ public class AsociadosController implements ActionListener{
 	
 	private VentanaAsociados vista;
 	private Clinica modelo;
+	
+	public AsociadosController(VentanaAsociados vista) {
+		super();
+		this.vista = vista;
+	}
+	
 	public void setVista(VentanaAsociados vista)
 	{
 		this.vista = vista;
@@ -27,7 +33,7 @@ public class AsociadosController implements ActionListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent evento) throws AsociadoInvalidoException {
+	public void actionPerformed(ActionEvent evento) {
 		
 		
 		if(evento.getActionCommand().equalsIgnoreCase("AgregarAsociado"))

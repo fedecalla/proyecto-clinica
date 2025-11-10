@@ -2,14 +2,20 @@ package InterfazGrafica;
 
 import javax.swing.*;
 import java.awt.*;
+import Controlador.SimulacionController;
+import modelo.ambulancia.*;
 
 public class VentanaSimulacion extends JFrame {
 
+	private SimulacionController controlador;
     private JLabel lblEstado;
     private JTextField txtCantAsociados;
     private JTextArea areaMovimientos;
 
     public VentanaSimulacion(JFrame ventanaPrincipal, String nombre) {
+    	
+    	this.controlador = new SimulacionController(this);
+    	
         setTitle("Simulación - Clínica");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1000, 600);
@@ -127,6 +133,15 @@ public class VentanaSimulacion extends JFrame {
         centro.add(colCentro);
         centro.add(colDer);
         
+        btnComenzar.setActionCommand("comenzarsimulacion");
+        btnComenzar.addActionListener(controlador);
+
+        btnFinalizar.setActionCommand("TerminaSimulacion");
+        btnFinalizar.addActionListener(controlador);
+
+        btnMant.setActionCommand("SolicitarMantenimiento");
+        btnMant.addActionListener(controlador);
+        
         
         btnVerEvol.addActionListener(e -> {
             new VentanaEvolucionAsociado(nombre).setVisible(true);
@@ -134,5 +149,22 @@ public class VentanaSimulacion extends JFrame {
         });
     }
 
+	public JLabel getLblEstado() {
+		return lblEstado;
+	}
+
+	public JTextField getTxtCantAsociados() {
+		return txtCantAsociados;
+	}
+
+	public void setTxtCantAsociados(JTextField txtCantAsociados) {
+		this.txtCantAsociados = txtCantAsociados;
+	}
+
+	public void setLblEstado(JLabel lblEstado) {
+		this.lblEstado = lblEstado;
+	}
+
+    
 
 }
