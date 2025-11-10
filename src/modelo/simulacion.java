@@ -59,8 +59,10 @@ public class simulacion extends Thread {
 		try {
 			List<Asociado> todos = this.dao.listarAsociados(this.ambulancia);
 			int limite = Math.min(this.cant_asociados, todos.size());
+			//System.out.println("limite: "+ limite);
 			this.asociados = todos.subList(0, limite);
 			for (Asociado a : this.asociados) {
+				//System.out.println(a.toString1()  + "\n");
 	            a.run();
 	        }
 		}

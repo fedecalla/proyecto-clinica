@@ -40,6 +40,8 @@ public class Asociado extends Thread {
 
 	@Override
 	public void run() {
+		//System.out.println("Ejecutnado run...");
+		//System.out.println("Activo: "+ this.activo);
 		while (activo) {
 			// Decidir al azar qué acción realizar
 			boolean quiereTraslado = Math.random() > 0.5;
