@@ -4,23 +4,25 @@ package modelo.clinica;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import modelo.excepciones.*;
+import modelo.ambulancia.Asociado;
+import modelo.excepciones.AsociadoInvalidoException;
+import modelo.excepciones.MedicoNoExisteException;
+import modelo.excepciones.NoHayHabitacionDisponibleException;
+import modelo.excepciones.NoHayPacientesEnEsperaException;
 import modelo.facturacion.Factura;
 import modelo.hospedaje.HCompartida;
 import modelo.hospedaje.HPrivada;
 import modelo.hospedaje.HTerapiaIntensiva;
 import modelo.hospedaje.Habitacion;
+import modelo.individuos.Persona;
 import modelo.medicos.IMedico;
 import modelo.medicos.consultasMedicas;
 import modelo.pacientes.Paciente;
-import modelo.ambulancia.Asociado;
-import modelo.individuos.Persona;
 import modelo.persistencia.AsociadoDAO;
 
 
@@ -122,12 +124,13 @@ public class Clinica {
 					this.asociadoDAO.bajaAsociado(dni);
 				}
 			}
-			catch(Exception e) {
-				throw new AsociadoInvalidoException(e.getMessage());
-			}
 			catch(SQLException SQLe) {
 				System.out.println(SQLe.getMessage());
 			}	
+			catch(Exception e) {
+				throw new AsociadoInvalidoException(e.getMessage());
+			}
+			
 	}
 	
 	public ArrayList<Asociado> getAllAsociados()
@@ -137,7 +140,7 @@ public class Clinica {
 			asociados = this.asociadoDAO.listarAsociados(null); // no me importa la ambulancia para los ABM
 		}
 		catch(SQLException e) {
-			system.out.println(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 		return asociados;
 	}

@@ -1,13 +1,13 @@
 package Controlador;
 
-import InterfazGrafica.VentanaAsociados;
-import modelo.clinica.*;
-import modelo.excepciones.AsociadoInvalidoException;
-import modelo.individuos.Persona;
-import modelo.clinica.Clinica;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import InterfazGrafica.VentanaAsociados;
+import modelo.ambulancia.Asociado;
+import modelo.clinica.Clinica;
+import modelo.excepciones.AsociadoInvalidoException;
 
 
 

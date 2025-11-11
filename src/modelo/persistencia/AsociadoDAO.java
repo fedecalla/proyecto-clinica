@@ -1,13 +1,14 @@
 package modelo.persistencia;
 
-import java.sql.*;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.ambulancia.Asociado; // clase Asociado (que tiene Persona)
-import modelo.individuos.AsociadoPersistible;
-import modelo.individuos.Persona; // clase Persona
-import modelo.ambulancia.Ambulancia; 
+
+import modelo.ambulancia.Ambulancia;
+import modelo.ambulancia.Asociado; // clase Asociado (que tiene Persona) 
 
 public class AsociadoDAO {
 
@@ -100,8 +101,8 @@ public class AsociadoDAO {
         }
         return lista;
     }
-    public List<Asociado> listarAsociados(Ambulancia ambulanciaUnica) throws SQLException {
-        List<Asociado> asociados = new ArrayList<>();
+    public ArrayList<Asociado> listarAsociados(Ambulancia ambulanciaUnica) throws SQLException {
+    	ArrayList<Asociado> asociados = new ArrayList<>();
 
         for (AsociadoDTO dto : listarAsociadosDTO()) {
             Asociado asociado = AsociadoMapper.fromDTO(dto, ambulanciaUnica);

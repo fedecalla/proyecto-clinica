@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-package medicos;
 
-import pacientes.Paciente;
-
-=======
 package modelo.medicos;
->>>>>>> 079d8d463aeb433910b521e889c3c8ed8164eb37
-import java.time.LocalDate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import modelo.pacientes.Paciente;

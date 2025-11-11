@@ -1,11 +1,33 @@
 package InterfazGrafica;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import Controlador.AsociadosController;
 import modelo.ambulancia.Asociado;
-import modelo.individuos.Persona;
 public class VentanaAsociados extends JDialog {
 
     // --- CAMBIO ---
@@ -355,7 +377,7 @@ public class VentanaAsociados extends JDialog {
         return panel;
     }
     
-    private void Mostrar_Asociados(ArrayList<Asociado> asociados) {
+    public void Mostrar_Asociados(ArrayList<Asociado> asociados) {
     	
     	for(Asociado a : asociados){
     		areaListado.setText(a.getPersona().toString());
