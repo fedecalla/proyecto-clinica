@@ -5,7 +5,7 @@ import java.awt.*;
 import Controlador.SimulacionController;
 import modelo.ambulancia.*;
 
-public class VentanaSimulacion extends JFrame {
+public class VentanaSimulacion extends JDialog {
 
 	private SimulacionController controlador;
     private JLabel lblEstado;
@@ -15,6 +15,8 @@ public class VentanaSimulacion extends JFrame {
     private JButton btnComenzar,btnFinalizar, btnMant;
 
     public VentanaSimulacion(JFrame ventanaPrincipal, String nombre) {
+    	
+    	super(ventanaPrincipal, "Simulación - Clínica", true);
     	
     	this.controlador = new SimulacionController(this);
     	
@@ -149,7 +151,7 @@ public class VentanaSimulacion extends JFrame {
 		btnMant.setEnabled(false);
         
         btnVerEvol.addActionListener(e -> {
-            new VentanaEvolucionAsociado(nombre).setVisible(true);
+            new VentanaEvolucionAsociado(ventanaPrincipal, nombre).setVisible(true);
             dispose();
         });
     }

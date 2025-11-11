@@ -3,9 +3,11 @@ package InterfazGrafica;
 import javax.swing.*;
 import java.awt.*;
 
-public class VentanaEvolucionAsociado extends JFrame {
+public class VentanaEvolucionAsociado extends JDialog {
 
-    public VentanaEvolucionAsociado(String name) {
+    public VentanaEvolucionAsociado(JFrame ventana, String name) {
+    	
+    	super(ventana, "Simulación - Clínica", true);
         setTitle("Evolución del Asociado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
