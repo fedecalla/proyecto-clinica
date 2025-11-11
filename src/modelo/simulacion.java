@@ -54,12 +54,11 @@ public class simulacion extends Thread {
         }
 	}
 
-	@Override
-	public void run() {
+	public void comenzar() {
 		try {
 			List<Asociado> todos = this.dao.listarAsociados(this.ambulancia);
 			int limite = Math.min(this.cant_asociados, todos.size());
-			System.out.println("limite: "+ limite);
+			//System.out.println("limite: "+ limite);
 			this.asociados = todos.subList(0, limite);
 			for (Asociado a : this.asociados) 
 	            a.start();
@@ -67,6 +66,10 @@ public class simulacion extends Thread {
 		}
 		catch (SQLException e) {
 		}
+	}
+	
+	public boolean enTaller() {
+		return (this.ambulancia.getEnTaller()==1);
 	}
 	
 	

@@ -60,7 +60,7 @@ public class Ambulancia extends Observable{
 		this.atendiendo=1;
 		this.setEstado(new AtendiendoPaciente());
 		setChanged();
-		notifyObservers("LOG: "+a.toString1());
+		notifyObservers("LOG: "+a.toString2());
 		notifyAll();	
 		
 	}
@@ -88,7 +88,7 @@ public class Ambulancia extends Observable{
 		this.atendiendo=1;
 		this.setEstado(new TrasladandoPaciente());
 		setChanged();
-		notifyObservers("LOG: "+a.toString2());
+		notifyObservers("LOG: "+a.toString1());
 		notifyAll();	
 	}
 
@@ -101,9 +101,10 @@ public class Ambulancia extends Observable{
 				e.printStackTrace();
 			}
 		}
-		this.setEstado(new EnTaller());
+		
 		this.atendiendo = 1;
 		this.entaller = 1;
+		this.setEstado(new EnTaller());
 		setChanged();
 		notifyObservers("LOG: "+llamador.toString());
 		notifyAll();

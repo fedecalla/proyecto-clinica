@@ -2,9 +2,6 @@ package InterfazGrafica;
 
 import javax.swing.*;
 import java.awt.*;
-import Controlador.SimulacionController;
-import Controlador.AsociadosController;
-import modelo.ambulancia.*;
 
 public class VentanaPrincipal extends JFrame {
 

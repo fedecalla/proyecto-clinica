@@ -11,6 +11,8 @@ public class VentanaSimulacion extends JFrame {
     private JLabel lblEstado;
     private JTextField txtCantAsociados;
     private JTextArea areaMovimientos;
+    
+    private JButton btnComenzar,btnFinalizar, btnMant;
 
     public VentanaSimulacion(JFrame ventanaPrincipal, String nombre) {
     	
@@ -52,7 +54,7 @@ public class VentanaSimulacion extends JFrame {
         lblEstadoAct.setFont(new Font("Arial", Font.BOLD, 14));
         lblEstadoAct.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        lblEstado = new JLabel("ESTADO");
+        lblEstado = new JLabel("...");
         lblEstado.setFont(new Font("Arial", Font.PLAIN, 14));
         lblEstado.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -75,7 +77,7 @@ public class VentanaSimulacion extends JFrame {
         colCentro.setLayout(new BoxLayout(colCentro, BoxLayout.Y_AXIS));
         colCentro.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
 
-        JButton btnMant = new JButton("SOLICITAR MANTENIMIENTO");
+        btnMant = new JButton("SOLICITAR MANTENIMIENTO");
         btnMant.setBackground(verdeBoton);
         btnMant.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -87,22 +89,22 @@ public class VentanaSimulacion extends JFrame {
         txtCantAsociados.setMaximumSize(new Dimension(200, 30));
         txtCantAsociados.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton btnComenzar = new JButton("COMENZAR");
-        JButton btnFinalizar = new JButton("FINALIZAR");
+        btnComenzar = new JButton("COMENZAR");
+        btnFinalizar = new JButton("FINALIZAR");
         for (JButton b : new JButton[]{btnComenzar, btnFinalizar}) {
             b.setBackground(verdeBoton);
             b.setAlignmentX(Component.CENTER_ALIGNMENT);
             b.setFocusPainted(false);
         }
 
-        colCentro.add(Box.createVerticalStrut(20));
-        colCentro.add(btnMant);
         colCentro.add(Box.createVerticalStrut(30));
         colCentro.add(lblCant);
         colCentro.add(Box.createVerticalStrut(10));
         colCentro.add(txtCantAsociados);
         colCentro.add(Box.createVerticalStrut(40));
         colCentro.add(btnComenzar);
+        colCentro.add(Box.createVerticalStrut(20));
+        colCentro.add(btnMant);
         colCentro.add(Box.createVerticalStrut(20));
         colCentro.add(btnFinalizar);
         colCentro.add(Box.createVerticalGlue());
@@ -141,7 +143,10 @@ public class VentanaSimulacion extends JFrame {
 
         btnMant.setActionCommand("SolicitarMantenimiento");
         btnMant.addActionListener(controlador);
-        
+
+        btnComenzar.setEnabled(true);
+		btnFinalizar.setEnabled(false);
+		btnMant.setEnabled(false);
         
         btnVerEvol.addActionListener(e -> {
             new VentanaEvolucionAsociado(nombre).setVisible(true);
@@ -157,19 +162,23 @@ public class VentanaSimulacion extends JFrame {
 		return txtCantAsociados;
 	}
 
-	public void setTxtCantAsociados(JTextField txtCantAsociados) {
-		this.txtCantAsociados = txtCantAsociados;
-	}
-
-	public void setLblEstado(JLabel lblEstado) {
-		this.lblEstado = lblEstado;
-	}
-
 	public JTextArea getAreaMovimientos() {
 		return areaMovimientos;
 	}
 
+
+	public JButton getBtnComenzar() {
+		return btnComenzar;
+	}
+
+	public JButton getBtnFinalizar() {
+		return btnFinalizar;
+	}
+
+	public JButton getBtnMant() {
+		return btnMant;
+	}
+
 	
-    
 
 }
