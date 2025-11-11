@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
-
+	
     public VentanaPrincipal(String nombre) {
         setTitle("Panel Clínica");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

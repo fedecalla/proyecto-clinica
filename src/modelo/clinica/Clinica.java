@@ -2,6 +2,7 @@ package modelo.clinica;
 
 
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import modelo.medicos.consultasMedicas;
 import modelo.pacientes.Paciente;
 import modelo.ambulancia.Asociado;
 import modelo.individuos.Persona;
-
+import modelo.persistencia.AsociadoDAO;
 
 
 
@@ -43,6 +44,7 @@ public class Clinica {
 	private String telefono;
 	private LinkedList <Paciente> colaDeEspera;
 	private static int cantHabitaciones=10;
+	private AsociadoDAO asociadoDAO;
 	
 	//constructor
 	private Clinica(String nombre, String direccion, String ciudad, String telefono) {
@@ -61,6 +63,7 @@ public class Clinica {
 		this.privadas = new Stack<Habitacion>();
 		this.compartidas = new Stack<Habitacion>();
 		this.intensivas = new Stack<Habitacion>();
+		this.asociadoDAO = new AsociadoDAO();
 		inicializarHabitaciones();
 	}
 	
@@ -92,32 +95,51 @@ public class Clinica {
 			throw new AsociadoInvalidoException("todos los campos tienen que estar completos");
 		}
 		else {
+			try {
 			nombre.concat(apellido);
 			Persona p = new Persona(dni,nombre);
 			Asociado a = new Asociado(p,null);
 			this.asociados.add(a);
-			
-			//aca llama al dao para que lo agregue a la base de datos la ec
-		
+			this.asociadoDAO.altaAsociado(a);
+			}
+			catch(IllegalArgumentException e) {
+				throw new AsociadoInvalidoException(e.getMessage());
+			}
+			catch(SQLException SQLe) {
+				System.out.println(SQLe.getMessage());
+			}
 		}
 		
 	}
 	public void removeAsociado(String dni) throws AsociadoInvalidoException
 	{
-			int i = 0;
-			while(this.asociados.get(i).getPersona().getDni() != dni && this.asociados.get(i) != null)
-				i++;
-			if(this.asociados.get(i)!=null) {
-				this.asociados.remove(i);
+			try {
+				int i = 0;
+				while(this.asociados.get(i).getPersona().getDni() != dni && this.asociados.get(i) != null)
+					i++;
+				if(this.asociados.get(i)!=null) {
+					this.asociados.remove(i);
+					this.asociadoDAO.bajaAsociado(dni);
+				}
 			}
-			//esta parte se encargaria de eliminar el asociado de la base de datos, aunque la excepcion lo tiraria el dao
+			catch(Exception e) {
+				throw new AsociadoInvalidoException(e.getMessage());
+			}
+			catch(SQLException SQLe) {
+				System.out.println(SQLe.getMessage());
+			}	
 	}
 	
-	public ArrayList<Persona> getAllAsociados()
+	public ArrayList<Asociado> getAllAsociados()
 	{
-		ArrayList personas = new ArrayList<Persona>();
-		//aca tendria que llamar a alguna funcion del dao que traiga a todas las personas de la base de datos y las guarde en un arrayList
-		return personas;
+		ArrayList<Asociado> asociados = null;
+		try {
+			asociados = this.asociadoDAO.listarAsociados(null); // no me importa la ambulancia para los ABM
+		}
+		catch(SQLException e) {
+			system.out.println(e.getMessage());
+		}
+		return asociados;
 	}
 /*	
 	public void agregaPrivada(Habitacion privada) {

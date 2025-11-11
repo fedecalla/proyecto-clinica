@@ -1,6 +1,7 @@
 package modelo.persistencia;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import modelo.ambulancia.Asociado; // clase Asociado (que tiene Persona)
