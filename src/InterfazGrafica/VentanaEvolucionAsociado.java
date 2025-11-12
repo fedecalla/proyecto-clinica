@@ -1,7 +1,18 @@
 package InterfazGrafica;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+
+import Controlador.SimulacionController;
+import modelo.ambulancia.Ambulancia;
 
 public class VentanaEvolucionAsociado extends JDialog {
 
@@ -61,9 +72,9 @@ public class VentanaEvolucionAsociado extends JDialog {
         panelDerecho.add(btnVolver);
 
         // Acción del botón volver
-        btnVolver.addActionListener(e -> {
-            new VentanaSimulacion(null, name).setVisible(true); // volver a simulación
-            dispose();
-        });
+        //btnVolver.addActionListener(e -> {
+        //    new VentanaSimulacion(null, name, new SimulacionController(null,null,Ambulancia.getAmbulancia())).setVisible(true); // volver a simulación
+        //    dispose();
+        //});
     }
 }

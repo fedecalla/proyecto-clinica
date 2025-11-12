@@ -11,14 +11,17 @@ public class VentanaSimulacion extends JDialog {
     private JLabel lblEstado;
     private JTextField txtCantAsociados;
     private JTextArea areaMovimientos;
+
+    private JTextField txtCantSolicitudes;
     
     private JButton btnComenzar,btnFinalizar, btnMant;
 
-    public VentanaSimulacion(JFrame ventanaPrincipal, String nombre) {
+    public VentanaSimulacion(JFrame ventanaPrincipal, String nombre, SimulacionController controlador) {
     	
-    	super(ventanaPrincipal, "Simulación - Clínica", true);
+    	//super(ventanaPrincipal, "Simulación - Clínica", true);
     	
-    	this.controlador = new SimulacionController(this);
+    	this.controlador = controlador;
+    	this.controlador.setVista(this);
     	
         setTitle("Simulación - Clínica");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -33,6 +36,7 @@ public class VentanaSimulacion extends JDialog {
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
         header.add(lblTitulo);
         getContentPane().add(header, BorderLayout.NORTH);
+        header.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
 
         // === PANEL CENTRAL ===
         JPanel centro = new JPanel(new GridLayout(1, 3));
@@ -79,34 +83,65 @@ public class VentanaSimulacion extends JDialog {
         colCentro.setLayout(new BoxLayout(colCentro, BoxLayout.Y_AXIS));
         colCentro.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
 
-        btnMant = new JButton("SOLICITAR MANTENIMIENTO");
+        btnMant = new JButton(" SOLICITAR MANTENIMIENTO ");
         btnMant.setBackground(verdeBoton);
         btnMant.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel lblCant = new JLabel("CANT. ASOCIADOS");
+        JLabel lblCant = new JLabel("CANTIDAD ASOCIADOS");
         lblCant.setFont(new Font("Arial", Font.BOLD, 14));
         lblCant.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+        
         txtCantAsociados = new JTextField(10);
-        txtCantAsociados.setMaximumSize(new Dimension(200, 30));
+        txtCantAsociados.setMaximumSize(new Dimension(70, 30));
         txtCantAsociados.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtCantAsociados.setOpaque(false);
+        txtCantAsociados.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+        txtCantAsociados.setHorizontalAlignment(JTextField.CENTER);
+        txtCantAsociados.setFont(new Font("Arial", Font.BOLD, 17));
 
-        btnComenzar = new JButton("COMENZAR");
-        btnFinalizar = new JButton("FINALIZAR");
-        for (JButton b : new JButton[]{btnComenzar, btnFinalizar}) {
-            b.setBackground(verdeBoton);
+        
+        JLabel lblCantSolicitudes = new JLabel("CANTIDAD DE SOLICITUDES");
+        lblCantSolicitudes.setFont(new Font("Arial", Font.BOLD, 14));
+        lblCantSolicitudes.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        txtCantSolicitudes = new JTextField(10);
+        txtCantSolicitudes.setMaximumSize(new Dimension(70, 30));
+        txtCantSolicitudes.setAlignmentX(Component.CENTER_ALIGNMENT);
+        txtCantSolicitudes.setOpaque(false);
+        txtCantSolicitudes.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLACK));
+        txtCantSolicitudes.setHorizontalAlignment(JTextField.CENTER);
+        txtCantSolicitudes.setFont(new Font("Arial", Font.BOLD, 17));
+
+        btnComenzar = new JButton(" COMENZAR ");
+        btnFinalizar = new JButton(" FINALIZAR ");
+        for (JButton b : new JButton[]{btnComenzar, btnFinalizar, btnMant}) {            
+            b.setPreferredSize(new Dimension(210, 29));
+            b.setMaximumSize(new Dimension(210, 29));
+            b.setBackground(Color.decode("#4C845E"));
+            b.setForeground(verde);
             b.setAlignmentX(Component.CENTER_ALIGNMENT);
             b.setFocusPainted(false);
+            b.setFont(new Font("Arial", Font.BOLD, 14));
+            b.setOpaque(true);
+            b.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.decode("#4C845E")));
         }
 
         colCentro.add(Box.createVerticalStrut(30));
         colCentro.add(lblCant);
         colCentro.add(Box.createVerticalStrut(10));
         colCentro.add(txtCantAsociados);
+        
+        colCentro.add(Box.createVerticalStrut(30));
+        colCentro.add(lblCantSolicitudes);
+        colCentro.add(Box.createVerticalStrut(10));
+        colCentro.add(txtCantSolicitudes);
+        
         colCentro.add(Box.createVerticalStrut(40));
         colCentro.add(btnComenzar);
+        
         colCentro.add(Box.createVerticalStrut(20));
         colCentro.add(btnMant);
+        
         colCentro.add(Box.createVerticalStrut(20));
         colCentro.add(btnFinalizar);
         colCentro.add(Box.createVerticalGlue());
@@ -123,10 +158,26 @@ public class VentanaSimulacion extends JDialog {
 
         areaMovimientos = new JTextArea();
         areaMovimientos.setEditable(false);
+        
+        areaMovimientos.setBorder(BorderFactory.createCompoundBorder(
+        	    BorderFactory.createLineBorder(Color.decode("#8484A7"), 3, true), // borde redondeado
+        	    BorderFactory.createEmptyBorder(5, 5, 5, 5) // margen interno
+        	));
+        
+        areaMovimientos.setFont(new Font("Poppins", Font.BOLD, 13));
+        
         JScrollPane scroll = new JScrollPane(areaMovimientos);
         scroll.setPreferredSize(new Dimension(250, 300));
         scroll.setAlignmentX(Component.CENTER_ALIGNMENT);
         scroll.getViewport().setBackground(Color.LIGHT_GRAY);
+        // Saque la barra fea del scroll
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBorder(null); // Sin borde del scroll
+        scroll.setOpaque(false);
+        scroll.getViewport().setOpaque(false);
+        
+        
 
         colDer.add(lblMov);
         colDer.add(Box.createVerticalStrut(20));
@@ -166,6 +217,10 @@ public class VentanaSimulacion extends JDialog {
 
 	public JTextArea getAreaMovimientos() {
 		return areaMovimientos;
+	}
+	
+	public JTextField getTxtCantSolicitudes() {
+	    return txtCantSolicitudes;
 	}
 
 

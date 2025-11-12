@@ -18,9 +18,9 @@ public class AsociadosController implements ActionListener{
 	private VentanaAsociados vista;
 	private Clinica modelo;
 	
-	public AsociadosController(VentanaAsociados vista) {
+	public AsociadosController(Clinica modelo) {
 		super();
-		this.vista = vista;
+		this.modelo = modelo;
 	}
 	
 	public void setVista(VentanaAsociados vista)

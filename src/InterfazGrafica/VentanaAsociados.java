@@ -39,10 +39,11 @@ public class VentanaAsociados extends JDialog {
     private String nombreAsociado, apellidoAsociado, dniAsociado;
     private JTextArea areaListado;
 
-    public VentanaAsociados(JFrame parent, String nombre) {
+    public VentanaAsociados(JFrame parent, String nombre, AsociadosController controlador) {
     	
     	super(parent, "Asociados", true); // Ventana modal
-    	this.controlador = new AsociadosController(this);
+    	this.controlador = controlador;
+    	this.controlador.setVista(this);
 
         this.nombreAsociado = null;
         this.apellidoAsociado = null;
@@ -59,6 +60,7 @@ public class VentanaAsociados extends JDialog {
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 22));
         header.add(lblTitulo);
         getContentPane().add(header, BorderLayout.NORTH);
+        header.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
 
         // === CONTENIDO PRINCIPAL ===
         JPanel contenido = new JPanel(new GridLayout(1, 2));
@@ -404,6 +406,4 @@ public class VentanaAsociados extends JDialog {
         areaListado.setCaretPosition(0); 
     }
 
-    // Ejemplo para probar de forma independiente
-   
 }

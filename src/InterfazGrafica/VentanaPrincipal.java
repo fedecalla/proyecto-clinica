@@ -1,11 +1,29 @@
 package InterfazGrafica;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import Controlador.PrincipalController;
 
 public class VentanaPrincipal extends JFrame {
+	private PrincipalController controlador;
 	
-    public VentanaPrincipal(String nombre) {
+    public VentanaPrincipal(PrincipalController controlador, String nombre) {
+    	
+    	this.controlador = controlador;
+    	this.controlador.setVista(this);
+    	
         setTitle("Panel Clínica");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900, 600);
@@ -19,6 +37,7 @@ public class VentanaPrincipal extends JFrame {
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
         header.add(lblTitulo);
         getContentPane().add(header, BorderLayout.NORTH);
+        header.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE));
 
         // === PANEL CENTRAL (3 columnas) ===
         JPanel centro = new JPanel(new GridLayout(1, 3));
@@ -47,17 +66,12 @@ public class VentanaPrincipal extends JFrame {
             b.setFocusPainted(false);
         }
         
-        // Acción del botón "ASOCIADOS"
-        btnAsociados.addActionListener(e -> {
-            // Abre la ventana de asociados
-            new VentanaAsociados(this, nombre).setVisible(true);
-            // Opcional: ocultar la ventana principal mientras tanto
-            // this.setVisible(false);
-        });
         
-        btnSimulacion.addActionListener(e -> {
-            new VentanaSimulacion(this, nombre).setVisible(true);
-        });
+        btnAsociados.setActionCommand("VentanaAsociados");
+        btnAsociados.addActionListener(this.controlador);
+        
+        btnSimulacion.setActionCommand("VentanaSimulacion");
+        btnSimulacion.addActionListener(this.controlador);
 
         central.add(Box.createVerticalGlue());
         central.add(btnAsociados);

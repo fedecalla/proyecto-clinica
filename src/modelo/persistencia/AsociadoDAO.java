@@ -12,7 +12,11 @@ import modelo.ambulancia.Asociado; // clase Asociado (que tiene Persona)
 
 public class AsociadoDAO {
 
-    // --- Método Auxiliar: 1. Verificar Duplicados por DNI ---
+    public AsociadoDAO() {
+		super();
+	}
+
+	// --- Método Auxiliar: 1. Verificar Duplicados por DNI ---
 
     private boolean existeAsociado(String dni) throws SQLException {
         String sql = "SELECT 1 FROM Asociados WHERE dni = ?";

@@ -15,9 +15,9 @@ public class simulacion extends Thread {
 	private Operario operario;
 	private int cant_asociados;
 
-	public simulacion(Ambulancia amb, AsociadoDAO dao, Operario op) {
+	public simulacion(Ambulancia amb, Operario op) {
 		this.ambulancia = amb;
-		this.dao = dao;
+		this.dao = new AsociadoDAO();
 		this.operario = op;
 	}
 	

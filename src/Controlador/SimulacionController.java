@@ -24,14 +24,27 @@ public class SimulacionController implements ActionListener,Observer{
 	// Flags para saber el estado de las tareas
 	private boolean simulando, manteniendo,deteniendo;
 
-
-	public SimulacionController(VentanaSimulacion vista) {
+	public SimulacionController(simulacion modelo) {
 		super();
-		this.ambulancia = Ambulancia.getAmbulancia();
-		this.vista = vista;
-		this.modelo = new simulacion(this.ambulancia, new AsociadoDAO(), new Operario(this.ambulancia));
+		this.modelo = modelo;
+		this.ambulancia = this.modelo.getAmbulancia();
 		this.simulando = this.manteniendo = this.deteniendo = false;
+	}
 
+	public simulacion getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(simulacion modelo) {
+		this.modelo = modelo;
+	}
+
+	public VentanaSimulacion getVista() {
+		return vista;
+	}
+
+	public void setVista(VentanaSimulacion vista) {
+		this.vista = vista;
 	}
 
 	@Override
@@ -59,11 +72,7 @@ public class SimulacionController implements ActionListener,Observer{
 			this.modelo.getAmbulancia().addObserver(this);
 
 			this.vista.getLblEstado().setText((this.ambulancia.getEstado().toString()).toUpperCase());
-			this.modelo.comenzar();  //arranca los hilos y comienza la simulacion de los asociados
-
-			//pasa a la interfaz grafica todos los objetos que tiene que mostrar
-			//cada vez que update es llamado muestra el cambio en la interfaz grafica
-
+			this.modelo.comenzar(); 
 		}
 		else if(evento.getActionCommand().equalsIgnoreCase("TerminaSimulacion"))
 		{
@@ -75,12 +84,6 @@ public class SimulacionController implements ActionListener,Observer{
 			this.vista.getBtnMant().setEnabled(false);
 
 			this.modelo.detener();
-			//espera a que terminen de ejecutarse los hilos
-
-			//una vez que los hilos terminan la solicitud pendiente les corta el ciclo de peticiones
-
-			//una vez que todos los hilos terminaron sus ciclos de peticiones le avisa a la vista para que cierre la venta y haga un popup de simulacion terminada con exito
-
 		}
 		else if (evento.getActionCommand().equalsIgnoreCase("SolicitarMantenimiento")) {
 

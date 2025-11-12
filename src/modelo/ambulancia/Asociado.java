@@ -50,9 +50,8 @@ public class Asociado extends Thread {
 			
 			try {
 				// Simular el tiempo de uso del recurso o viaje
-				if (Math.random() > 0.5) {
 					Thread.sleep(2000); // espera 2 segundos
-				}
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -1,0 +1,40 @@
+package Controlador;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import InterfazGrafica.VentanaAsociados;
+import InterfazGrafica.VentanaPrincipal;
+import InterfazGrafica.VentanaSimulacion;
+import modelo.simulacion;
+import modelo.clinica.Clinica;
+
+public class PrincipalController implements ActionListener{
+	private VentanaPrincipal vista;
+	private simulacion modelo_simulacion;
+	private Clinica modelo_asociados;
+
+	public PrincipalController(simulacion modelo_simulacion,Clinica modelo_asociados) {
+		super();
+		this.modelo_simulacion = modelo_simulacion;
+		this.modelo_asociados = modelo_asociados;
+	}
+
+	public void setVista(VentanaPrincipal vista) {
+		this.vista = vista;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent evento) {
+		if(evento.getActionCommand().equalsIgnoreCase("VentanaSimulacion"))
+		{
+			VentanaSimulacion vs = new VentanaSimulacion(this.vista,"SIMULACION", new SimulacionController(this.modelo_simulacion));
+			vs.setVisible(true);
+		}
+		else if (evento.getActionCommand().equalsIgnoreCase("VentanaAsociados"))
+		{
+			VentanaAsociados va = new VentanaAsociados(this.vista,"SIMULACION", new AsociadosController(this.modelo_asociados));
+			va.setVisible(true);
+		}
+	}
+}
