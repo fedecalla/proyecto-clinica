@@ -5,15 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import InterfazGrafica.VentanaEvolucionAsociado;
 import InterfazGrafica.VentanaSimulacion;
 import modelo.simulacion;
 import modelo.ambulancia.Ambulancia;
-import modelo.ambulancia.Llamador;
-import modelo.ambulancia.Operario;
-import modelo.persistencia.AsociadoDAO;
 
 public class SimulacionController implements ActionListener,Observer{
 
@@ -94,6 +93,10 @@ public class SimulacionController implements ActionListener,Observer{
 			this.vista.getBtnMant().setEnabled(false);	
 
 			this.modelo.getOperario().Llamar();
+		}
+		else if (evento.getActionCommand().equalsIgnoreCase("EvolucionPacientes")) {
+			VentanaEvolucionAsociado vea = new VentanaEvolucionAsociado("Evolucion Pacientes");
+			vea.setVisible(true);
 		}
 	}
 

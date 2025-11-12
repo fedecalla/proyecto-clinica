@@ -50,7 +50,7 @@ public class VentanaAsociados extends JDialog {
         this.dniAsociado = null;
         setSize(700, 400);
         setLocationRelativeTo(parent);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout());
 
         // === HEADER ===

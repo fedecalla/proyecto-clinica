@@ -7,24 +7,24 @@ import modelo.ambulancia.*;
 
 public class VentanaSimulacion extends JDialog {
 
+	private JFrame ventanaPrincipal;
 	private SimulacionController controlador;
     private JLabel lblEstado;
     private JTextField txtCantAsociados;
     private JTextArea areaMovimientos;
-
     private JTextField txtCantSolicitudes;
-    
     private JButton btnComenzar,btnFinalizar, btnMant;
 
     public VentanaSimulacion(JFrame ventanaPrincipal, String nombre, SimulacionController controlador) {
     	
-    	//super(ventanaPrincipal, "Simulación - Clínica", true);
-    	
+    	super(ventanaPrincipal, "Simulación - Clínica", true);
+    	this.ventanaPrincipal = ventanaPrincipal;
     	this.controlador = controlador;
     	this.controlador.setVista(this);
     	
+    	
         setTitle("Simulación - Clínica");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setSize(1000, 600);
         setLocationRelativeTo(null);
         getContentPane().setLayout(new BorderLayout());
@@ -201,11 +201,21 @@ public class VentanaSimulacion extends JDialog {
 		btnFinalizar.setEnabled(false);
 		btnMant.setEnabled(false);
         
-        btnVerEvol.addActionListener(e -> {
-            new VentanaEvolucionAsociado(ventanaPrincipal, nombre).setVisible(true);
-            dispose();
-        });
+        btnVerEvol.setActionCommand("EvolucionPacientes");
+        btnVerEvol.addActionListener(controlador);
     }
+
+	public SimulacionController getControlador() {
+		return controlador;
+	}
+
+	public void setControlador(SimulacionController controlador) {
+		this.controlador = controlador;
+	}
+
+	public JFrame getVentanaPrincipal() {
+		return ventanaPrincipal;
+	}
 
 	public JLabel getLblEstado() {
 		return lblEstado;

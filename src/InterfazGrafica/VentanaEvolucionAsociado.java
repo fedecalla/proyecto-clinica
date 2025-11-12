@@ -16,11 +16,11 @@ import modelo.ambulancia.Ambulancia;
 
 public class VentanaEvolucionAsociado extends JDialog {
 
-    public VentanaEvolucionAsociado(JFrame ventana, String name) {
+    public VentanaEvolucionAsociado(String name) {
     	
-    	super(ventana, "Simulación - Clínica", true);
+    	super((JFrame)null, "Simulación - Clínica", true);
         setTitle("Evolución del Asociado");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setSize(1000, 600);
         setLocationRelativeTo(null);
         setLayout(null); // usaremos posiciones absolutas para asemejar el diseño del Figma
@@ -71,10 +71,10 @@ public class VentanaEvolucionAsociado extends JDialog {
         btnVolver.setFont(new Font("Arial", Font.BOLD, 14));
         panelDerecho.add(btnVolver);
 
-        // Acción del botón volver
-        //btnVolver.addActionListener(e -> {
-        //    new VentanaSimulacion(null, name, new SimulacionController(null,null,Ambulancia.getAmbulancia())).setVisible(true); // volver a simulación
-        //    dispose();
-        //});
+       btnVolver.addActionListener(e -> 
+        {
+        	dispose();
+        });
+    
     }
-}
+    }
