@@ -56,20 +56,40 @@ public class VentanaSimulacion extends JDialog {
 
         JLabel lblAmb = new JLabel("<html><u>AMBULANCIA</u></html>");
         lblAmb.setFont(new Font("Arial", Font.BOLD, 16));
+        lblAmb.setHorizontalAlignment(SwingConstants.CENTER);
         lblAmb.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel lblEstadoAct = new JLabel("<html><u>ESTADO ACTUAL</u></html>");
+        lblEstadoAct.setHorizontalAlignment(SwingConstants.CENTER);
         lblEstadoAct.setFont(new Font("Arial", Font.BOLD, 14));
         lblEstadoAct.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         lblEstado = new JLabel("...");
-        lblEstado.setFont(new Font("Arial", Font.PLAIN, 14));
+        lblEstado.setBackground(Color.white);
+        lblEstado.setOpaque(true);
+        lblEstado.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        lblEstado.setHorizontalAlignment(SwingConstants.CENTER);
+        lblEstado.setBorder(BorderFactory.createCompoundBorder(
+        	    BorderFactory.createLineBorder(Color.decode("#8484A7"), 3, true), // Borde redondeado (es medio leve)
+        	    BorderFactory.createEmptyBorder(5, 5, 5, 5) // Padding
+        	));
+        lblEstado.setPreferredSize(new Dimension(215, 29));
+        lblEstado.setMaximumSize(new Dimension(215, 29));
         lblEstado.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton btnVerEvol = new JButton("VER EVOLUCION ASOC.");
-        btnVerEvol.setBackground(verdeBoton);
+        JButton btnVerEvol = new JButton("VER EVOLUCION ASOCIADOS");
+        btnVerEvol.setPreferredSize(new Dimension(230, 31));
+        btnVerEvol.setMaximumSize(new Dimension(230, 31));
+        btnVerEvol.setBackground(Color.WHITE);
         btnVerEvol.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnVerEvol.setHorizontalAlignment(SwingConstants.CENTER);
         btnVerEvol.setFocusPainted(false);
+        btnVerEvol.setFont(new Font("Arial", Font.BOLD, 14));
+        btnVerEvol.setForeground(Color.decode("#8484A7"));
+        btnVerEvol.setBorder(BorderFactory.createCompoundBorder(
+        	    BorderFactory.createLineBorder(Color.decode("#8484A7"), 3, true), // Borde redondeado (es medio leve)
+        	    BorderFactory.createEmptyBorder(5, 5, 5, 5) // Padding
+        	));
 
         colIzq.add(lblAmb);
         colIzq.add(Box.createVerticalStrut(15));
@@ -122,6 +142,7 @@ public class VentanaSimulacion extends JDialog {
             b.setBackground(Color.decode("#4C845E"));
             b.setForeground(verde);
             b.setAlignmentX(Component.CENTER_ALIGNMENT);
+            b.setHorizontalAlignment(SwingConstants.CENTER);
             b.setFocusPainted(false);
             b.setFont(new Font("Arial", Font.BOLD, 14));
             b.setOpaque(true);
@@ -156,14 +177,15 @@ public class VentanaSimulacion extends JDialog {
 
         JLabel lblMov = new JLabel("<html><u>MOVIMIENTOS</u></html>");
         lblMov.setFont(new Font("Arial", Font.BOLD, 16));
+        lblMov.setHorizontalAlignment(SwingConstants.CENTER);
         lblMov.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         areaMovimientos = new JTextArea();
         areaMovimientos.setEditable(false);
         
         areaMovimientos.setBorder(BorderFactory.createCompoundBorder(
-        	    BorderFactory.createLineBorder(Color.decode("#8484A7"), 3, true), // borde redondeado
-        	    BorderFactory.createEmptyBorder(5, 5, 5, 5) // margen interno
+        	    BorderFactory.createLineBorder(Color.decode("#8484A7"), 3, true), // Borde redondeado (es medio leve)
+        	    BorderFactory.createEmptyBorder(5, 5, 5, 5) // Padding
         	));
         
         areaMovimientos.setFont(new Font("Poppins", Font.BOLD, 13));
@@ -247,6 +269,25 @@ public class VentanaSimulacion extends JDialog {
 	public JButton getBtnMant() {
 		return btnMant;
 	}
-
+	
+	public void actualizarEstado(String nuevoEstado) {
+		nuevoEstado = nuevoEstado.toUpperCase();
+		Color color_fondo = Color.white;
+		if (nuevoEstado.equalsIgnoreCase("EN EL TALLER")) 
+			color_fondo = Color.decode("#8CCDFF");
+		else if (nuevoEstado.equalsIgnoreCase("DISPONIBLE"))
+			color_fondo = Color.decode("#8BFFA0");
+		else
+			color_fondo = Color.decode("#FF8C8C");
+			
+		lblEstado.setBackground(color_fondo);
+		this.getLblEstado().setText(nuevoEstado);
+	}
+	
+	public void actualizarLog(String nuevoLog) {
+		this.getAreaMovimientos().append(nuevoLog + "\n");
+		this.getAreaMovimientos().setCaretPosition(
+				this.getAreaMovimientos().getDocument().getLength() );
+	}
 
 }

@@ -133,13 +133,12 @@ public class SimulacionController implements ActionListener,Observer{
 				if (estado.equalsIgnoreCase("En el taller")) {
 					this.manteniendo = false;
 				}
-				ventana_sim.getLblEstado().setText(estado);			
+				
+				ventana_sim.actualizarEstado(estado);
+		
 			} else if (mensaje.startsWith("LOG: ")) {
 				String log = mensaje.replace("LOG: ", "").trim();
-				ventana_sim.getAreaMovimientos().append(log + "\n");
-				ventana_sim.getAreaMovimientos().setCaretPosition(
-						ventana_sim.getAreaMovimientos().getDocument().getLength()
-						);
+				ventana_sim.actualizarLog(log);
 			}
 
 			if (this.manteniendo) {
