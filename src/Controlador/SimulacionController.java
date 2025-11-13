@@ -2,10 +2,13 @@ package Controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -13,15 +16,18 @@ import InterfazGrafica.VentanaEvolucionAsociado;
 import InterfazGrafica.VentanaSimulacion;
 import modelo.simulacion;
 import modelo.ambulancia.Ambulancia;
+import modelo.ambulancia.Asociado;
 
 public class SimulacionController implements ActionListener,Observer{
 
 	private Ambulancia ambulancia;
 	private simulacion modelo;
-	private VentanaSimulacion vista;
+	private JDialog vista;
 
 	// Flags para saber el estado de las tareas
 	private boolean simulando, manteniendo,deteniendo;
+	private int simulados = 0; //cantidad de asociados simulados
+	int solicitudesxasociado = 3; //valor default
 
 	public SimulacionController(simulacion modelo) {
 		super();
@@ -38,71 +44,88 @@ public class SimulacionController implements ActionListener,Observer{
 		this.modelo = modelo;
 	}
 
-	public VentanaSimulacion getVista() {
+	public JDialog getVista() {
 		return vista;
 	}
 
-	public void setVista(VentanaSimulacion vista) {
+	public void setVista(JDialog vista) {
 		this.vista = vista;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evento) {
-		int cantidad_asociados;
 		if(evento.getActionCommand().equalsIgnoreCase("comenzarsimulacion"))
 		{
-
-			String input = vista.getTxtCantAsociados().getText().trim();
+			VentanaSimulacion ventana_sim = (VentanaSimulacion) this.vista;
+			String input = ventana_sim.getTxtCantAsociados().getText().trim();
+			String input2 = ventana_sim.getTxtCantSolicitudes().getText().trim();
 			try {
-				cantidad_asociados = Integer.parseInt(input);
+				this.solicitudesxasociado = Integer.parseInt(input2);
+				this.simulados = Integer.parseInt(input);
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(vista, "Ingrese solo números válidos.", "Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
+			
 
 			// Setting de flags:
 			this.simulando = true;
 			this.deteniendo = this.manteniendo = false;
-			this.vista.getBtnComenzar().setEnabled(false);
-			this.vista.getBtnFinalizar().setEnabled(true);
-			this.vista.getBtnMant().setEnabled(true);
-
-			this.modelo.setCant(cantidad_asociados);
+			ventana_sim.getBtnComenzar().setEnabled(false);
+			ventana_sim.getBtnFinalizar().setEnabled(true);
+			ventana_sim.getBtnMant().setEnabled(true);
+			
+			this.modelo.setSolicitudesxasociado(solicitudesxasociado);
+			this.modelo.setCant(this.simulados);
 			this.modelo.getAmbulancia().addObserver(this);
 
-			this.vista.getLblEstado().setText((this.ambulancia.getEstado().toString()).toUpperCase());
+			ventana_sim.getLblEstado().setText((this.ambulancia.getEstado().toString()).toUpperCase());
 			this.modelo.comenzar(); 
 		}
 		else if(evento.getActionCommand().equalsIgnoreCase("TerminaSimulacion"))
 		{
-			// Setting de flags:
+			VentanaSimulacion ventana_sim = (VentanaSimulacion) this.vista;
 			this.deteniendo = true;
 			this.simulando = this.manteniendo = false;
-			this.vista.getBtnComenzar().setEnabled(true);
-			this.vista.getBtnFinalizar().setEnabled(false);
-			this.vista.getBtnMant().setEnabled(false);
+			ventana_sim.getBtnComenzar().setEnabled(true);
+			ventana_sim.getBtnFinalizar().setEnabled(false);
+			ventana_sim.getBtnMant().setEnabled(false);
 
 			this.modelo.detener();
 		}
 		else if (evento.getActionCommand().equalsIgnoreCase("SolicitarMantenimiento")) {
 
+			VentanaSimulacion ventana_sim = (VentanaSimulacion) this.vista;
 			this.manteniendo = true;
 			this.simulando = this.deteniendo = false;
-			this.vista.getBtnComenzar().setEnabled(false);
-			this.vista.getBtnFinalizar().setEnabled(true);
-			this.vista.getBtnMant().setEnabled(false);	
+			ventana_sim.getBtnComenzar().setEnabled(false);
+			ventana_sim.getBtnFinalizar().setEnabled(true);
+			ventana_sim.getBtnMant().setEnabled(false);	
 
 			this.modelo.getOperario().Llamar();
 		}
 		else if (evento.getActionCommand().equalsIgnoreCase("EvolucionPacientes")) {
-			VentanaEvolucionAsociado vea = new VentanaEvolucionAsociado("Evolucion Pacientes");
+			SimulacionController s = new SimulacionController(this.modelo);
+			JDialog vea = new VentanaEvolucionAsociado("Evolucion Pacientes",s, this.simulados);
+			s.setVista(vea);
 			vea.setVisible(true);
 		}
-	}
+		
+		else if (evento.getActionCommand().equalsIgnoreCase("mostrarSolicitudes")) {
+			VentanaEvolucionAsociado ventana_evo = (VentanaEvolucionAsociado) this.vista;
+			 JButton fuente = (JButton) evento.getSource();
+			 int indice = (int) fuente.getClientProperty("id");
 
+			 Asociado seleccionado = modelo.getAsociados().get(indice);
+			 ArrayList<String> solicitudes = seleccionado.getSolicitudes();
+			 ventana_evo.mostrarSolicitudes(solicitudes,seleccionado);
+		}
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		String mensaje = (String) arg;
+		VentanaSimulacion ventana_sim = (VentanaSimulacion) this.vista;
 
 		SwingUtilities.invokeLater(() -> {
 			if (mensaje.startsWith("ESTADO:")) {
@@ -110,29 +133,31 @@ public class SimulacionController implements ActionListener,Observer{
 				if (estado.equalsIgnoreCase("En el taller")) {
 					this.manteniendo = false;
 				}
-				vista.getLblEstado().setText(estado);			
+				ventana_sim.getLblEstado().setText(estado);			
 			} else if (mensaje.startsWith("LOG: ")) {
 				String log = mensaje.replace("LOG: ", "").trim();
-				vista.getAreaMovimientos().append(log + "\n");
-				vista.getAreaMovimientos().setCaretPosition(
-						vista.getAreaMovimientos().getDocument().getLength()
+				ventana_sim.getAreaMovimientos().append(log + "\n");
+				ventana_sim.getAreaMovimientos().setCaretPosition(
+						ventana_sim.getAreaMovimientos().getDocument().getLength()
 						);
 			}
 
 			if (this.manteniendo) {
-				this.vista.getBtnMant().setEnabled(false);
+				ventana_sim.getBtnMant().setEnabled(false);
 			} else
 				if (this.modelo.enTaller()) 
-					this.vista.getBtnMant().setEnabled(false);
+					ventana_sim.getBtnMant().setEnabled(false);
 				else
 					if (this.deteniendo)
-						this.vista.getBtnMant().setEnabled(false);
+						ventana_sim.getBtnMant().setEnabled(false);
 					else
-						this.vista.getBtnMant().setEnabled(true);
+						ventana_sim.getBtnMant().setEnabled(true);
 
 
 			});
 		}
 
-	
+	public List<Asociado> getAsociados() {
+		return this.modelo.getAsociados();
+	}
 }

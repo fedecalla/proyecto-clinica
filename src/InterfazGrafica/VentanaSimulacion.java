@@ -2,6 +2,8 @@ package InterfazGrafica;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+
 import Controlador.SimulacionController;
 import modelo.ambulancia.*;
 
@@ -246,6 +248,5 @@ public class VentanaSimulacion extends JDialog {
 		return btnMant;
 	}
 
-	
 
 }

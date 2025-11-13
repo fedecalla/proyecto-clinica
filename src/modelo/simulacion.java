@@ -14,11 +14,24 @@ public class simulacion extends Thread {
 	private Ambulancia ambulancia;
 	private Operario operario;
 	private int cant_asociados;
+	private int solicitudesxasociado;
+	
+	
+
+	
 
 	public simulacion(Ambulancia amb, Operario op) {
 		this.ambulancia = amb;
 		this.dao = new AsociadoDAO();
 		this.operario = op;
+	}
+	
+	public int getSolicitudesxasociado() {
+		return solicitudesxasociado;
+	}
+
+	public void setSolicitudesxasociado(int solicitudesxasociado) {
+		this.solicitudesxasociado = solicitudesxasociado;
 	}
 	
 	public Operario getOperario() {
@@ -45,9 +58,16 @@ public class simulacion extends Thread {
 	public void setCant(int cant) {
 		this.cant_asociados = cant;
 	}
-
+	
+	public List<Asociado> getAsociados() {
+		return asociados;
+	}
+	
+	
 	// ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
 	
+	
+
 	public void detener() {
 		for (Asociado a : this.asociados) {
             a.detener();
@@ -58,10 +78,12 @@ public class simulacion extends Thread {
 		try {
 			List<Asociado> todos = this.dao.listarAsociados(this.ambulancia);
 			int limite = Math.min(this.cant_asociados, todos.size());
-			//System.out.println("limite: "+ limite);
 			this.asociados = todos.subList(0, limite);
-			for (Asociado a : this.asociados) 
-	            a.start();
+			for (Asociado a : this.asociados) {
+				a.setCantSolicitudes(this.solicitudesxasociado);
+				a.start();
+			}
+	            
 	        
 		}
 		catch (SQLException e) {

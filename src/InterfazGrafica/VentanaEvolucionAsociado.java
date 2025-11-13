@@ -3,6 +3,7 @@ package InterfazGrafica;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -11,70 +12,108 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import java.util.*;
+
 import Controlador.SimulacionController;
-import modelo.ambulancia.Ambulancia;
+import modelo.ambulancia.Asociado;
 
 public class VentanaEvolucionAsociado extends JDialog {
+	private JTextArea panelEvolucion;
+	private SimulacionController controlador;
+	private int cant_asociados;
 
-    public VentanaEvolucionAsociado(String name) {
-    	
-    	super((JFrame)null, "Simulación - Clínica", true);
-        setTitle("Evolución del Asociado");
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setSize(1000, 600);
-        setLocationRelativeTo(null);
-        setLayout(null); // usaremos posiciones absolutas para asemejar el diseño del Figma
+	public VentanaEvolucionAsociado(String name, SimulacionController controlador,int cant_asociados) {
+		super((JFrame)null, "Simulación - Clínica", true);
+		this.controlador = controlador;
 
-        // Panel verde (izquierda)
-        JPanel panelIzquierdo = new JPanel();
-        panelIzquierdo.setBackground(new Color(144, 238, 144)); // verde claro
-        panelIzquierdo.setBounds(0, 0, 350, 600);
-        panelIzquierdo.setLayout(null);
-        add(panelIzquierdo);
+		setTitle("Evolución del Asociado");
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setSize(1000, 600);
+		setLocationRelativeTo(null);
+		setLayout(null); // usaremos posiciones absolutas para asemejar el diseño del Figma
 
-        // Panel violeta (derecha)
-        JPanel panelDerecho = new JPanel();
-        panelDerecho.setBackground( new Color(204, 204, 255)); // violeta claro
-        panelDerecho.setBounds(350, 0, 650, 600);
-        panelDerecho.setLayout(null);
-        add(panelDerecho);
+		// Panel verde (izquierda)
+		JPanel panelIzquierdo = new JPanel();
+		panelIzquierdo.setBackground(new Color(144, 238, 144)); // verde claro
+		panelIzquierdo.setBounds(0, 0, 350, 600);
+		panelIzquierdo.setLayout(null);
+		add(panelIzquierdo);
 
-        // Título (nombre clínica)
-        JLabel lblTitulo = new JLabel(name, SwingConstants.CENTER);
-        lblTitulo.setFont(new Font("Arial Black", Font.PLAIN, 22));
-        lblTitulo.setBounds(0, 20, 350, 40);
-        panelIzquierdo.add(lblTitulo);
+		// Panel violeta (derecha)
+		JPanel panelDerecho = new JPanel();
+		panelDerecho.setBackground( new Color(204, 204, 255)); // violeta claro
+		panelDerecho.setBounds(350, 0, 650, 600);
+		panelDerecho.setLayout(null);
+		add(panelDerecho);
 
-        // Botones de asociados
-        String[] asociados = {"ASOCIADO 1", "ASOCIADO 2", "ASOCIADO 3", "ASOCIADO 4", "ASOCIADO 5", "ASOCIADO 6", "ASOCIADO 7"};
-        int y = 80;
-        for (String nombre : asociados) {
-            JButton boton = new JButton(nombre);
-            boton.setBackground(Color.DARK_GRAY);
-            boton.setForeground(Color.WHITE);
-            boton.setFont(new Font("Arial", Font.BOLD, 14));
-            boton.setBounds(50, y, 250, 35);
-            panelIzquierdo.add(boton);
-            y += 55;
-        }
+		// Título (nombre clínica)
+		JLabel lblTitulo = new JLabel(name, SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Arial Black", Font.PLAIN, 22));
+		lblTitulo.setBounds(0, 20, 350, 40);
+		panelIzquierdo.add(lblTitulo);
 
-        // Cuadro gris (simulación o evolución)
-        JTextArea panelEvolucion = new JTextArea();
-        panelEvolucion.setEditable(false);
-        panelEvolucion.setBackground(Color.LIGHT_GRAY);
-        panelEvolucion.setBounds(100, 100, 450, 350);
-        panelDerecho.add(panelEvolucion);
+		// Botones de asociados
 
-        // Botón de volver
-        JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(430, 480, 150, 40);
-        btnVolver.setFont(new Font("Arial", Font.BOLD, 14));
-        panelDerecho.add(btnVolver);
 
-       btnVolver.addActionListener(e -> 
-        {
-        	dispose();
-        });
-    
-    }
-    }
+		if (this.controlador.getAsociados()!=null) {
+			int y = 80;
+			int i = 0;
+			for (Asociado a : this.controlador.getAsociados()) {
+				JButton boton = new JButton(a.getNombre());
+				boton.putClientProperty("id", i);
+				boton.setBackground(Color.DARK_GRAY);
+				boton.setForeground(Color.WHITE);
+				boton.setFont(new Font("Arial", Font.BOLD, 14));
+				boton.setBounds(50, y, 250, 35);
+				panelIzquierdo.add(boton);
+
+				boton.setActionCommand("mostrarSolicitudes");
+				boton.addActionListener(this.controlador);
+
+				y += 55;
+				i++;
+			}
+		}
+
+		// Cuadro gris (simulación o evolución)
+		panelEvolucion = new JTextArea();
+		panelEvolucion.setEditable(false);
+		panelEvolucion.setBackground(Color.white);
+		panelEvolucion.setBounds(100, 100, 450, 350);
+		panelDerecho.add(panelEvolucion);
+		panelEvolucion.setFont(new Font("Arial", Font.BOLD, 13));
+		panelEvolucion.setBorder(BorderFactory.createCompoundBorder(
+        	    BorderFactory.createLineBorder(Color.decode("#8484A7"), 3, true), // borde redondeado
+        	    BorderFactory.createEmptyBorder(5, 5, 5, 5) // margen interno
+        	));
+		
+		
+
+		// Botón de volver
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(430, 480, 150, 40);
+		btnVolver.setFont(new Font("Arial", Font.BOLD, 14));
+		panelDerecho.add(btnVolver);
+
+		btnVolver.addActionListener(e -> 
+		{
+			dispose();
+		});
+
+	}
+	
+	public JTextArea getPanelEvolucion() {
+		return panelEvolucion;
+	}
+
+
+	public void mostrarSolicitudes(ArrayList<String> solicitudes,Asociado a) {
+		this.getPanelEvolucion().setFont(new Font("Arial", Font.ITALIC, 13));
+		this.getPanelEvolucion().setText(a.getNombre() + " - " + a.getDNI() + "\n ... \n");
+		int i = 0;
+		for (String s : solicitudes) {
+			i++;
+			this.getPanelEvolucion().append(i + " - " + s);
+		}
+	}
+}

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import Controlador.SimulacionController;
+
 public class Ambulancia extends Observable{
 	private static Ambulancia instancia;
 	private int atendiendo = 0;
@@ -30,7 +32,7 @@ public class Ambulancia extends Observable{
 	public int getAtendiendo() {
 		return atendiendo;
 	}
-
+	
 
 	public void setAtendiendo(int atendiendo) {
 		this.atendiendo = atendiendo;
@@ -59,6 +61,7 @@ public class Ambulancia extends Observable{
 		}
 		this.atendiendo=1;
 		this.setEstado(new AtendiendoPaciente());
+		a.getSolicitudes().add(a.stringAtencion());
 		setChanged();
 		notifyObservers("LOG: "+a.toString2());
 		notifyAll();	
@@ -87,6 +90,7 @@ public class Ambulancia extends Observable{
 		}
 		this.atendiendo=1;
 		this.setEstado(new TrasladandoPaciente());
+		a.getSolicitudes().add(a.stringTraslado());
 		setChanged();
 		notifyObservers("LOG: "+a.toString1());
 		notifyAll();	
