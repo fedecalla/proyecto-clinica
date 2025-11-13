@@ -90,7 +90,7 @@ public class Clinica {
 		this.medicos.add(m);
 	}
 	
-	public void nuevoAsociado(String nombre, String apellido, String dni, String telefono, String domicilio, String ciudad) throws AsociadoIvalidoException
+	public void nuevoAsociado(String nombre, String apellido, String dni, String telefono, String domicilio, String ciudad) throws AsociadoInvalidoException
 	{
 			try {
 			nombre.concat(apellido);
@@ -107,25 +107,46 @@ public class Clinica {
 			}
 		}
 		
-	}
-	public void removeAsociado(String dni) throws AsociadoInvalidoException
-	{
-			try {
-				int i = 0;
-				while(this.asociados.get(i).getPersona().getDni() != dni && this.asociados.get(i) != null)
-					i++;
-				if(this.asociados.get(i)!=null) {
-					this.asociados.remove(i);
-				}
-				this.asociadoDAO.bajaAsociado(dni);
-			}
-			catch(SQLException SQLe) {
-				System.out.println(SQLe.getMessage());
-			}	
-			catch(Exception e) {
-				throw new AsociadoInvalidoException(e.getMessage());
-			}
-			
+
+
+	public void removeAsociado(String dni) throws AsociadoInvalidoException {
+	    
+	    // 1. Verificar si la lista local está vacía
+	    if (this.asociados.isEmpty()) {
+	        // Podrías lanzar una excepción o simplemente continuar para intentar el borrado en la DB.
+	        System.out.println("Lista local de asociados vacía. Intentando eliminar solo en la DB.");
+	    }
+	    
+	    int indiceEncontrado = -1;
+
+	    // 2. Usar un bucle for seguro para buscar el DNI
+	    for (int i = 0; i < this.asociados.size(); i++) {
+	        // Usar equals() para comparar Strings y verificar nulos antes de acceder
+	        Asociado actual = this.asociados.get(i);
+	        
+	        if (actual != null && dni.equals(actual.getPersona().getDni())) {
+	            indiceEncontrado = i;
+	            break; // Detener el bucle tan pronto como se encuentre
+	        }
+	    }
+	    
+	    // 3. Eliminar de la lista local si se encontró
+	    if (indiceEncontrado != -1) {
+	        this.asociados.remove(indiceEncontrado);
+	    }
+	    
+	    // 4. Eliminar de la base de datos (parte original)
+	    try {
+	        this.asociadoDAO.bajaAsociado(dni);
+	    }
+	    catch(SQLException SQLe) {
+	        System.out.println("Error SQL al intentar dar de baja: " + SQLe.getMessage());
+	        // Podrías relanzar la excepción SQLe si es un error crítico
+	    }	
+	    catch(Exception e) {
+	        // Esto captura la AsociadoNoEncontradoException de tu código anterior.
+	        throw new AsociadoInvalidoException(e.getMessage());
+	    }
 	}
 	
 	public ArrayList<Asociado> getAllAsociados()
