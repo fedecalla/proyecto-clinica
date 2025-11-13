@@ -57,7 +57,8 @@ public class AsociadosController implements ActionListener{
 		{
 			String dni = null;
 			try {
-				this.vista.getDniAsociado(dni);
+				dni = this.vista.getDniAsociado();
+				System.out.println(dni);
 				this.modelo.removeAsociado(dni);
 				this.vista.popUp("asociado eliminado con exito");
 			}
