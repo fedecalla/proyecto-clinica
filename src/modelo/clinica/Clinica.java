@@ -90,16 +90,11 @@ public class Clinica {
 		this.medicos.add(m);
 	}
 	
-	public void nuevoAsociado(String nombre, String apellido, String dni) throws AsociadoInvalidoException
+	public void nuevoAsociado(String nombre, String apellido, String dni, String telefono, String domicilio, String ciudad) throws AsociadoIvalidoException
 	{
-		if(nombre == null || apellido == null || dni == null)
-		{
-			throw new AsociadoInvalidoException("todos los campos tienen que estar completos");
-		}
-		else {
 			try {
 			nombre.concat(apellido);
-			Persona p = new Persona(dni,nombre);
+			Persona p = new Persona(dni,nombre,telefono,domicilio,ciudad);
 			Asociado a = new Asociado(p,null);
 			this.asociados.add(a);
 			this.asociadoDAO.altaAsociado(a);
@@ -121,8 +116,8 @@ public class Clinica {
 					i++;
 				if(this.asociados.get(i)!=null) {
 					this.asociados.remove(i);
-					this.asociadoDAO.bajaAsociado(dni);
 				}
+				this.asociadoDAO.bajaAsociado(dni);
 			}
 			catch(SQLException SQLe) {
 				System.out.println(SQLe.getMessage());

@@ -25,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import excepciones.AsociadoInvalidoException;
 
 import Controlador.AsociadosController;
 import modelo.ambulancia.Asociado;
@@ -36,7 +37,7 @@ public class VentanaAsociados extends JDialog {
 	private AsociadosController controlador;
     private CardLayout cardLayout;
     private JPanel panelDerechoContenedor;
-    private String nombreAsociado, apellidoAsociado, dniAsociado;
+    private String nombreAsociado, apellidoAsociado, dniAsociado, telefonoAsociado, domicilioAsociado, ciudadAsociado;
     private JTextArea areaListado;
 
     public VentanaAsociados(JFrame parent, String nombre, AsociadosController controlador) {
@@ -221,8 +222,65 @@ public class VentanaAsociados extends JDialog {
         		}
         	}
         });
+        JTextField campo4 = new JTextField("TELEFONO...");
+        campo4.setForeground(Color.gray);
+        campo4.addFocusListener(new java.awt.event.FocusAdapter() {
+        	@Override
+        	public void focusGained(java.awt.event.FocusEvent e) {
+        		if (campo4.getText().equals("TELEFONO...")) {
+        			campo4.setText("");
+        			campo4.setForeground(Color.BLACK);
+        		}
+        	}
+        	
+        	@Override
+        	public void focusLost(java.awt.event.FocusEvent e) {
+        		if (campo4.getText().isEmpty()) {
+        			campo4.setText("TELEFONO...");
+        			campo4.setForeground(Color.GRAY);
+        		}
+        	}
+        });
+        JTextField campo5 = new JTextField("DOMICILIO...");
+        campo5.setForeground(Color.gray);
+        campo5.addFocusListener(new java.awt.event.FocusAdapter() {
+        	@Override
+        	public void focusGained(java.awt.event.FocusEvent e) {
+        		if (campo5.getText().equals("DOMICILIO...")) {
+        			campo5.setText("");
+        			campo5.setForeground(Color.BLACK);
+        		}
+        	}
+        	
+        	@Override
+        	public void focusLost(java.awt.event.FocusEvent e) {
+        		if (campo5.getText().isEmpty()) {
+        			campo5.setText("DOMICILIO...");
+        			campo5.setForeground(Color.GRAY);
+        		}
+        	}
+        });
+        JTextField campo6 = new JTextField("CIUDAD...");
+        campo6.setForeground(Color.gray);
+        campo6.addFocusListener(new java.awt.event.FocusAdapter() {
+        	@Override
+        	public void focusGained(java.awt.event.FocusEvent e) {
+        		if (campo6.getText().equals("CIUDAD...")) {
+        			campo6.setText("");
+        			campo6.setForeground(Color.BLACK);
+        		}
+        	}
+        	
+        	@Override
+        	public void focusLost(java.awt.event.FocusEvent e) {
+        		if (campo6.getText().isEmpty()) {
+        			campo6.setText("CIUDAD...");
+        			campo6.setForeground(Color.GRAY);
+        		}
+        	}
+        });
 
-        JTextField[] campos = {campo1, campo2, campo3};
+        JTextField[] campos = {campo1, campo2, campo3, campo4, campo5, campo6};
         for (JTextField c : campos) {
             c.setMaximumSize(new Dimension(300, 30));
             c.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -238,6 +296,9 @@ public class VentanaAsociados extends JDialog {
             this.nombreAsociado= campo1.getText();
             this.apellidoAsociado= campo2.getText();
             this.dniAsociado= campo3.getText();
+            this.telefonoAsociado = campo4.getText();
+            this.domicilioAsociado = campo5.getText();
+            this.ciudadAsociado = campo6.getText();
         });
 
         return panelForm;
@@ -325,23 +386,65 @@ public class VentanaAsociados extends JDialog {
 
         // ActionListener para el botón de eliminar
         btnEliminarForm.addActionListener(e -> {
-            this.dniAsociado = txtDni.getText();
-            
+            this.dniAsociado = txtDni.getText();           
         });
 
         return panel;
     }
+        
     
-    public void getDatosAsociado(String nombre, String apellido, String dni)
+    public boolean SonNumeros(String texto)
     {
-    	nombre = this.nombreAsociado;
-    	apellido = this.apellidoAsociado;
-    	dni = this.dniAsociado;
+    	boolean Esnumero = true;
+    	for(char c: texto.toCharArray())
+    	{
+    		if(!Character.isDigit(c))
+    		{
+    			Esnumero = false;
+    			break;
+    		}
+    	}
+    	return Esnumero;
     }
     
-    public void getDniAsociado(String dni)
+    public String getNombreAsociado() throws AsociadoInvalidoException
     {
-    	dni = this.dniAsociado;
+    	if(this.nombreAsociado == null || this.nombreAsociado.isBlank())
+    		throw new AsociadoInvalidoException("Tiene que completar el campo: Nombre");
+    	else
+    		return this.nombreAsociado;
+    }
+    public String getApellidoAsociado() throws AsociadoInvalidoException
+    {
+    	if(this.apellidoAsociado== null || this.apellidoAsociado.isBlank())
+    		throw new AsociadoInvalidoException("Tiene que completar el campo: Apellido");
+    	return this.apellidoAsociado;
+    }
+    public String getTelefonoAsociado() throws AsociadoInvalidoException
+    {
+    	if(this.telefonoAsociado == null || this.telefonoAsociado.isBlank() || !this.SonNumeros(this.telefonoAsociado))
+    		throw new AsociadoInvalidoException("Tiene que completar el campo con el formato correcto: Telefono");
+    	return this.telefonoAsociado;
+    }
+    public String getDomicilioAsociado() throws AsociadoInvalidoException
+    {
+    	if(this.domicilioAsociado == null || this.domicilioAsociado.isBlank())
+    		throw new AsociadoInvalidoException("Tiene que completar el campo: Domicilio");
+    	return this.domicilioAsociado;
+    }
+    
+    public String getCiudadAsociado() throws AsociadoInvalidoException
+    {
+    	if(this.ciudadAsociado == null || this.ciudadAsociado.isBlank())
+    		throw new AsociadoInvalidoException("Tiene que completar el campo: Ciudad");
+    	return this.ciudadAsociado;
+    }
+    public String getDniAsociado() throws AsociadoInvalidoException
+    {
+    	if(this.dniAsociado == null || this.dniAsociado.isBlank() || !this.SonNumeros(this.dniAsociado))
+    		throw new AsociadoInvalidoException("Tiene que completar el campo con el formato correcto: Dni");
+    	else
+    		return this.dniAsociado;
     }
     
     public void popUp(String mensaje)

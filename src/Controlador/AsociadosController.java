@@ -38,10 +38,15 @@ public class AsociadosController implements ActionListener{
 		
 		if(evento.getActionCommand().equalsIgnoreCase("AgregarAsociado"))
 		{
-			String nombre = null, apellido = null, dni=null;
+			String nombre = null, apellido = null, dni=null, telefono = null, domicilio = null, ciudad = null;
 			try {
-				this.vista.getDatosAsociado(nombre, apellido, dni);
-				this.modelo.nuevoAsociado(nombre, apellido, dni);
+				nombre = this.vista.getNombreAsociado();
+				apellido = this.vista.getApellidoAsociado();
+				dni = this.vista.getDniAsociado();
+				telefono = this.vista.getTelefonoAsociado();
+				domicilio = this.vista.getDomicilioAsociado();
+				ciudad = this.vista.getCiudadAsociado();
+				this.modelo.nuevoAsociado(nombre, apellido, dni, telefono, domicilio, ciudad);
 				this.vista.popUp("asociado agregado con exito");
 			}
 			catch(AsociadoInvalidoException e) {
