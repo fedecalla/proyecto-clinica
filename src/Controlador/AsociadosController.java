@@ -69,7 +69,7 @@ public class AsociadosController implements ActionListener{
 		}
 		else if(evento.getActionCommand().equalsIgnoreCase("ListarAsociados"))
 		{
-			ArrayList<Asociado> asociados = null;
+			ArrayList<Asociado> asociados = new ArrayList<Asociado>();
 			asociados = this.modelo.getAllAsociados();
 			this.vista.Mostrar_Asociados(asociados);
 		}
