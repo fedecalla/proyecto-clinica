@@ -484,9 +484,11 @@ public class VentanaAsociados extends JDialog {
     
     public void Mostrar_Asociados(ArrayList<Asociado> asociados) {
     	
+    	String cad = "";
     	for(Asociado a : asociados){
-    		areaListado.setText(a.getPersona().toString());
+    		cad = cad + a.getPersona().toString() + '\n';
     	}
+    	areaListado.setText(cad);
     	
     }
     
