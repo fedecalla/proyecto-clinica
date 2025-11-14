@@ -93,11 +93,23 @@ public class Clinica {
 	public void nuevoAsociado(String nombre, String apellido, String dni, String telefono, String domicilio, String ciudad) throws AsociadoInvalidoException
 	{
 			try {
+				
 			nombre.concat(apellido);
-			Persona p = new Persona(dni,nombre,telefono,domicilio,ciudad);
-			Asociado a = new Asociado(p,null);
-			this.asociados.add(a);
-			this.asociadoDAO.altaAsociado(a);
+			if(!nombre.matches(".*\\d.*")) {
+				if(dni.matches("^\\d+$")) {
+					
+				Persona p = new Persona(dni,nombre,telefono,domicilio,ciudad);
+				Asociado a = new Asociado(p,null);
+				this.asociados.add(a);
+				this.asociadoDAO.altaAsociado(a);
+				}
+				else {
+					throw new AsociadoInvalidoException("El DNI tiene formato invalido");
+				}
+				}
+			else {
+				throw new AsociadoInvalidoException("El nombre y/o apellido tiene un formato invalido");
+			}
 			}
 			catch(IllegalArgumentException e) {
 				throw new AsociadoInvalidoException(e.getMessage());
