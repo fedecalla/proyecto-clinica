@@ -101,12 +101,23 @@ public class VentanaEvolucionAsociado extends JDialog {
 		});
 
 	}
-	
+	/**
+	 * getter de panel de evolucion<br>
+	 * @return el panel en el que se va a mostrar la evolucion de los asociados<br>
+	 * pre: panel tiene que existir y ser != null<br>
+	 * post: devuelve el panel donde se coloca la informacion de la evoluvion de los asociados<br>
+	 */
 	public JTextArea getPanelEvolucion() {
 		return panelEvolucion;
 	}
 
-
+	/**
+	 * 
+	 * @param solicitudes arrayList de las solicitudes que van pidiendo los asociados
+	 * @param a asociado que va pidiendo las solicutides
+	 * pre: asociado existente != null<br>
+	 * post: muestra las solicitudes del asociado<br>
+	 */
 	public void mostrarSolicitudes(ArrayList<String> solicitudes,Asociado a) {
 		this.getPanelEvolucion().setFont(new Font("Arial", Font.ITALIC, 13));
 		this.getPanelEvolucion().setText(a.getNombre() + " - " + a.getDNI() + "\n ... \n");

@@ -19,11 +19,22 @@ public class PrincipalController implements ActionListener{
 		this.modelo_simulacion = modelo_simulacion;
 		this.modelo_asociados = modelo_asociados;
 	}
-
+	/**
+	 * @param vista que va a manejar este controlador<br>
+	 * pre: vista != null<br>
+	 * post: ensambla la vista con este controlador<br>
+	 * 
+	 */
 	public void setVista(VentanaPrincipal vista) {
 		this.vista = vista;
 	}
-
+	/**
+	 * @param ActionEvent evento<br>
+	 * 
+	 * pre: evento existente <br>
+	 * post: Realiza algun cambio en el modelo seguen el evento<br>
+	 *
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		if(evento.getActionCommand().equalsIgnoreCase("VentanaSimulacion"))

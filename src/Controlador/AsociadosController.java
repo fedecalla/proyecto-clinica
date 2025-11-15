@@ -22,7 +22,12 @@ public class AsociadosController implements ActionListener{
 		super();
 		this.modelo = modelo;
 	}
-	
+	/**
+	 * @param vista que va a manejar este controlador<br>
+	 * pre: vista != null<br>
+	 * post: ensambla la vista con este controlador<br>
+	 * 
+	 */
 	public void setVista(VentanaAsociados vista)
 	{
 		this.vista = vista;
@@ -31,7 +36,13 @@ public class AsociadosController implements ActionListener{
 	{
 		this.modelo = modelo;
 	}
-	
+	/**
+	 * @param ActionEvent evento<br>
+	 * 
+	 * pre: evento existente <br>
+	 * post: Realiza algun cambio en el modelo seguen el evento<br>
+	 *
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		

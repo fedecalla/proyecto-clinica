@@ -269,7 +269,12 @@ public class VentanaSimulacion extends JDialog {
 	public JButton getBtnMant() {
 		return btnMant;
 	}
-	
+	/**
+	 * 
+	 * @param nuevoEstado
+	 * pre: estado existente != null<br>
+	 * post actualiza la vista del estado del asociado<br>
+	 */
 	public void actualizarEstado(String nuevoEstado) {
 		nuevoEstado = nuevoEstado.toUpperCase();
 		Color color_fondo = Color.white;

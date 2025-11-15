@@ -392,7 +392,12 @@ public class VentanaAsociados extends JDialog {
         return panel;
     }
         
-    
+    /**
+     * @param texto
+     * @return valor booleano, respecto a si el string era de numeros o no<br>
+     * pre: String ingresado != null<br>
+     * post: devuelve si el texto era de numeros o no
+     */
     public boolean SonNumeros(String texto)
     {
     	boolean Esnumero = true;
@@ -406,7 +411,13 @@ public class VentanaAsociados extends JDialog {
     	}
     	return Esnumero;
     }
-    
+    /**
+     * 
+     * @return
+     * @throws AsociadoInvalidoException si el nombre del asociado es null o esta vacio
+     * pre: ninguna<br>
+     * post devuelve el nombre del asociado que haya leido de algun campo<br>
+     */
     public String getNombreAsociado() throws AsociadoInvalidoException
     {
     	if(this.nombreAsociado == null || this.nombreAsociado.isBlank())
@@ -414,24 +425,52 @@ public class VentanaAsociados extends JDialog {
     	else
     		return this.nombreAsociado;
     }
+    /**
+     * 
+     * @return
+     * @throws AsociadoInvalidoException si el apellido del asociado es null o esta vacio
+     * pre: ninguna<br>
+     * post devuelve el apellido del asociado que haya leido de algun campo<br>
+     */
     public String getApellidoAsociado() throws AsociadoInvalidoException
     {
     	if(this.apellidoAsociado== null || this.apellidoAsociado.isBlank())
     		throw new AsociadoInvalidoException("Tiene que completar el campo: Apellido");
     	return this.apellidoAsociado;
     }
+    /**
+     * 
+     * @return
+     * @throws AsociadoInvalidoException si el nombre del telefono es null o esta vacio o no es un numero
+     * pre: ninguna<br>
+     * post devuelve el telefono del asociado que haya leido de algun campo<br>
+     */
     public String getTelefonoAsociado() throws AsociadoInvalidoException
     {
     	if(this.telefonoAsociado == null || this.telefonoAsociado.isBlank() || !this.SonNumeros(this.telefonoAsociado))
     		throw new AsociadoInvalidoException("Tiene que completar el campo con el formato correcto: Telefono");
     	return this.telefonoAsociado;
     }
+    /**
+     * 
+     * @return
+     * @throws AsociadoInvalidoException si el domicilio del asociado es null o esta vacio
+     * pre: ninguna<br>
+     * post devuelve el domicilio del asociado que haya leido de algun campo<br>
+     */
     public String getDomicilioAsociado() throws AsociadoInvalidoException
     {
     	if(this.domicilioAsociado == null || this.domicilioAsociado.isBlank())
     		throw new AsociadoInvalidoException("Tiene que completar el campo: Domicilio");
     	return this.domicilioAsociado;
     }
+    /**
+     * 
+     * @return
+     * @throws AsociadoInvalidoException si la ciudad del asociado es null o esta vacio
+     * pre: ninguna<br>
+     * post devuelve la ciudad del asociado que haya leido de algun campo<br>
+     */
     
     public String getCiudadAsociado() throws AsociadoInvalidoException
     {
@@ -439,6 +478,14 @@ public class VentanaAsociados extends JDialog {
     		throw new AsociadoInvalidoException("Tiene que completar el campo: Ciudad");
     	return this.ciudadAsociado;
     }
+    /**
+     * 
+     * @return
+     * @throws AsociadoInvalidoException si el dni del asociado es null o esta vacio o no son numeros
+     * pre: ninguna<br>
+     * post devuelve el dni del asociado que haya leido de algun campo<br>
+     */
+    
     public String getDniAsociado() throws AsociadoInvalidoException
     {
     	if(this.dniAsociado == null || this.dniAsociado.isBlank() || !this.SonNumeros(this.dniAsociado))
@@ -446,12 +493,22 @@ public class VentanaAsociados extends JDialog {
     	else
     		return this.dniAsociado;
     }
-    
+    /**
+     * 
+     * @param mensaje a mostrar por pantalla'
+     * pre: mensaje != null<br>
+     * post: popea una ventana de aviso con el mensaje pasado por parametro<br>
+     */
     public void popUp(String mensaje)
     {
     	JOptionPane.showMessageDialog(this, mensaje);
     }
-
+   /**
+    * 
+    * @return panel que contiene los elementos de la vista para listar a los asociados<br>
+    * pre: ninguna<br>
+    * post: crea un panel para almacenar el listado de asociados<br>
+    */
     private JPanel crearPanelListar() {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(204, 255, 204));
@@ -481,7 +538,12 @@ public class VentanaAsociados extends JDialog {
 
         return panel;
     }
-    
+    /**
+     * 
+     * @param asociados arraylist de asociados a listar
+     * pre: ninguna<br>
+     * post: lista en el panel de listado la informacion de todos los asociados
+     */
     public void Mostrar_Asociados(ArrayList<Asociado> asociados) {
     	
     	String cad = "";
