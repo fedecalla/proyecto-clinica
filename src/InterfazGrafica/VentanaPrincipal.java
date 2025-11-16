@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controlador.PrincipalController;
@@ -75,13 +76,19 @@ public class VentanaPrincipal extends JFrame {
 		btnInicializacion.addActionListener(this.controlador);
 		central.add(Box.createVerticalGlue());
 		central.add(btnAsociados);
-		central.add(Box.createVerticalStrut(40));
+		central.add(Box.createVerticalStrut(20));
 		central.add(btnSimulacion);
 		central.add(Box.createVerticalGlue());
+		central.add(btnInicializacion);
 
 		centro.add(izquierda);
 		centro.add(central);
 		centro.add(derecha);
 	}
+	
+	public void popUp(String mensaje)
+    {
+    	JOptionPane.showMessageDialog(this, mensaje);
+    }
 
 }

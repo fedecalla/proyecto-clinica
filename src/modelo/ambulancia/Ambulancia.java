@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import Controlador.SimulacionController;
-
 public class Ambulancia extends Observable{
 	private static Ambulancia instancia;
 	private int atendiendo = 0;

@@ -1,8 +1,8 @@
-package modelo.persistencia;
-import modelo.ambulancia.Asociado;
+package persistencia;
 import modelo.ambulancia.Ambulancia;
-import modelo.individuos.Persona;
+import modelo.ambulancia.Asociado;
 import modelo.individuos.AsociadoPersistible;
+import modelo.individuos.Persona;
 public class AsociadoMapper {
 	/**
 	 * Convierte un objeto {@link Asociado} en su representación {@link AsociadoDTO}.

@@ -2,6 +2,7 @@ package InterfazGrafica;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,8 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
-import java.util.*;
 
 import Controlador.SimulacionController;
 import modelo.ambulancia.Asociado;

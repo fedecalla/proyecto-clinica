@@ -7,7 +7,7 @@ import java.util.List;
 import modelo.ambulancia.Ambulancia;
 import modelo.ambulancia.Asociado;
 import modelo.ambulancia.Operario;
-import modelo.persistencia.AsociadoDAO;
+import persistencia.AsociadoDAO;
 
 public class simulacion extends Thread {
 	private AsociadoDAO dao;

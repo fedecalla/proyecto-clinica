@@ -1,4 +1,4 @@
-package modelo.persistencia;
+package persistencia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import modelo.ambulancia.Ambulancia;
 import modelo.ambulancia.Asociado; // clase Asociado (que tiene Persona) 
+import modelo.individuos.Persona;
 
 public class AsociadoDAO {
 

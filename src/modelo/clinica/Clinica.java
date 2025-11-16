@@ -23,7 +23,7 @@ import modelo.individuos.Persona;
 import modelo.medicos.IMedico;
 import modelo.medicos.consultasMedicas;
 import modelo.pacientes.Paciente;
-import modelo.persistencia.AsociadoDAO;
+import persistencia.AsociadoDAO;
 
 
 

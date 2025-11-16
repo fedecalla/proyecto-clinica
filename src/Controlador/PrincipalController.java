@@ -8,11 +8,13 @@ import InterfazGrafica.VentanaPrincipal;
 import InterfazGrafica.VentanaSimulacion;
 import modelo.simulacion;
 import modelo.clinica.Clinica;
+import persistencia.ConexionManager;
 
 public class PrincipalController implements ActionListener{
 	private VentanaPrincipal vista;
 	private simulacion modelo_simulacion;
 	private Clinica modelo_asociados;
+	private ConexionManager modelo_conexion;
 
 	public PrincipalController(simulacion modelo_simulacion,Clinica modelo_asociados) {
 		super();
@@ -47,6 +49,11 @@ public class PrincipalController implements ActionListener{
 		{
 			VentanaAsociados va = new VentanaAsociados(this.vista,"SIMULACION", new AsociadosController(this.modelo_asociados));
 			va.setVisible(true);
+		}
+		else if (evento.getActionCommand().equalsIgnoreCase("Inicializar"))
+		{
+			ConexionManager.inicializarEsquema();
+			this.vista.popUp("La tabla se ha creado satisfactoriamente!");
 		}
 	}
 }

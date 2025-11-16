@@ -1,4 +1,4 @@
-package modelo.persistencia;
+package persistencia;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,16 +10,27 @@ public class ConexionManager {
     private static final String URL = "jdbc:mariadb://localhost:3306/grupo_3"; 
     private static final String USUARIO = "progra_c"; 
     private static final String PASSWORD = "progra_c"; 
+    private static final String SQL_ELIMINACION = "DROP TABLE IF EXISTS Asociados;";
+    
+    private static final String SQL_ASOCIADOS = 
+    		"INSERT INTO Asociados (dni, nombre, telefono, ciudad, domicilio) VALUES"+
+    		"('12345678', 'Juan Pérez', '3815123456', 'San Miguel de Tucumán', 'Av. Belgrano 1200'),"+
+    		"('23456789', 'María Gómez', '3815234567', 'Yerba Buena', 'Calle Salta 450'),"+
+    		"('34567890', 'Carlos López', '3815345678', 'Tafí Viejo', 'San Martín 220'),"+
+    		"('45678901', 'Lucía Fernández', '3815456789', 'Lules', '25 de Mayo 670'),"+
+    		"('56789012', 'Ana Rodríguez', '3815567890', 'Concepción', 'Rivadavia 330')";
+
 
     // --- Sentencia SQL para la creación automática de la tabla ---
     private static final String SQL_CREACION = 
-        "CREATE TABLE IF NOT EXISTS Asociados (" + 
-        "dni VARCHAR(8) PRIMARY KEY, " +
-        "nombre VARCHAR(50) NOT NULL, " +
-        "telefono VARCHAR(50), " +
-        "ciudad VARCHAR(100), " +    
-        "domicilio VARCHAR(255) " +  
-        ");";
+    	    	    "CREATE TABLE Asociados (" +
+    	    	        "dni VARCHAR(8) PRIMARY KEY, " +
+    	    	        "nombre VARCHAR(50) NOT NULL, " +
+    	    	        "telefono VARCHAR(50), " +
+    	    	        "ciudad VARCHAR(100), " +    
+    	    	        "domicilio VARCHAR(255)" +  
+    	    	    ");";
+
 
     /**
      * Bloque estático: Carga el Driver y llama a la inicialización del esquema.
@@ -28,9 +39,6 @@ public class ConexionManager {
         try {
             Class.forName("org.mariadb.jdbc.Driver"); 
             System.out.println("✅ Driver JDBC de MariaDB cargado correctamente.");
-            
-            // ⭐ LLAMADA PARA CREAR LA TABLA (SE EJECUTA AQUÍ)
-            inicializarEsquema(); 
             
         } catch (ClassNotFoundException e) {
             System.err.println("ERROR: No se encontró el driver JDBC.");
@@ -47,11 +55,13 @@ public class ConexionManager {
     }
     
     // ⭐ NUEVO MÉTODO PARA CREAR LA TABLA SI NO EXISTE
-    private static void inicializarEsquema() {
+    public static void inicializarEsquema() {
         try (Connection conn = getConnection(); // Abre la conexión
              Statement stmt = conn.createStatement()) { // Crea un Statement para ejecutar SQL
-            
+        	
+        	stmt.execute(SQL_ELIMINACION); // Ejecuta la sentencia DDL (CREATE TABLE)
             stmt.execute(SQL_CREACION); // Ejecuta la sentencia DDL (CREATE TABLE)
+            stmt.execute(SQL_ASOCIADOS); // Ejecuta sentencia para insertar Asociados
             System.out.println("✅ Esquema verificado/creado: Tabla 'Asociados' lista.");
             
         } catch (SQLException e) {
@@ -65,7 +75,6 @@ public class ConexionManager {
         }
     }
     
-
     /**
      * Método de prueba simple para verificar la configuración de la conexión.
      */
