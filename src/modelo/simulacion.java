@@ -1,6 +1,7 @@
 package modelo;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import modelo.ambulancia.Ambulancia;
@@ -78,6 +79,7 @@ public class simulacion extends Thread {
 		try {
 			List<Asociado> todos = this.dao.listarAsociados(this.ambulancia);
 			int limite = Math.min(this.cant_asociados, todos.size());
+			Collections.shuffle(todos);
 			this.asociados = todos.subList(0, limite);
 			for (Asociado a : this.asociados) {
 				a.setCantSolicitudes(this.solicitudesxasociado);

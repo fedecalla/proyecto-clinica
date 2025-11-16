@@ -79,7 +79,7 @@ public class SimulacionController implements ActionListener,Observer{
 			this.modelo.setCant(this.simulados);
 			this.modelo.getAmbulancia().addObserver(this);
 
-			ventana_sim.getLblEstado().setText((this.ambulancia.getEstado().toString()).toUpperCase());
+			ventana_sim.actualizarEstado(this.ambulancia.getEstado().toString());
 			this.modelo.comenzar(); 
 		}
 		else if(evento.getActionCommand().equalsIgnoreCase("TerminaSimulacion"))

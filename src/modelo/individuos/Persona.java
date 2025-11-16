@@ -66,7 +66,7 @@ public class Persona {
 
 	@Override
 	public String toString() {
-		return "(Persona) Dni: " + dni + ", nombreyapellido: " + nombreyapellido;
+		return "Dni: " + dni + ", Nombre: " + nombreyapellido;
 	}
 	
 	

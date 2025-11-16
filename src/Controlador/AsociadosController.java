@@ -58,7 +58,7 @@ public class AsociadosController implements ActionListener{
 				domicilio = this.vista.getDomicilioAsociado();
 				ciudad = this.vista.getCiudadAsociado();
 				this.modelo.nuevoAsociado(nombre, apellido, dni, telefono, domicilio, ciudad);
-				this.vista.popUp("asociado agregado con exito");
+				this.vista.popUp("Asociado agregado con exito!");
 			}
 			catch(AsociadoInvalidoException e) {
 				this.vista.popUp(e.getMessage());

@@ -22,13 +22,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import modelo.excepciones.AsociadoInvalidoException;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import Controlador.AsociadosController;
 import modelo.ambulancia.Asociado;
+import modelo.excepciones.AsociadoInvalidoException;
 public class VentanaAsociados extends JDialog {
 
     // --- CAMBIO ---
@@ -38,7 +42,9 @@ public class VentanaAsociados extends JDialog {
     private CardLayout cardLayout;
     private JPanel panelDerechoContenedor;
     private String nombreAsociado, apellidoAsociado, dniAsociado, telefonoAsociado, domicilioAsociado, ciudadAsociado;
-    private JTextArea areaListado;
+    //private JTextArea areaListado;
+    private DefaultTableModel modeloTabla;
+    private JTable tablaAsociados;
 
     public VentanaAsociados(JFrame parent, String nombre, AsociadosController controlador) {
     	
@@ -49,7 +55,7 @@ public class VentanaAsociados extends JDialog {
         this.nombreAsociado = null;
         this.apellidoAsociado = null;
         this.dniAsociado = null;
-        setSize(700, 400);
+        setSize(800, 400);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout());
@@ -510,34 +516,67 @@ public class VentanaAsociados extends JDialog {
     * post: crea un panel para almacenar el listado de asociados<br>
     */
     private JPanel crearPanelListar() {
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(204, 255, 204));
-        // BorderLayout es ideal: Título al NORTE, Lista (con scroll) al CENTRO.
-        panel.setLayout(new BorderLayout()); 
-        panel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+    	 JPanel panel = new JPanel();
+    	    panel.setBackground(new Color(204, 255, 204));
+    	    panel.setLayout(new BorderLayout());
+    	    panel.setBorder(BorderFactory.createEmptyBorder(40, 25, 25, 25));
 
-        // Título
-        JLabel title = new JLabel("<html><u>LISTADO DE ASOCIADOS</u></html>");
-        title.setFont(new Font("Arial", Font.BOLD, 18));
-        title.setHorizontalAlignment(SwingConstants.CENTER);
-        // Añadimos un borde vacío para darle espacio antes del área de texto
-        title.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0)); 
-        panel.add(title, BorderLayout.NORTH);
+    	    // Título
+    	    JLabel title = new JLabel("<html><u>LISTADO DE ASOCIADOS</u></html>");
+    	    title.setFont(new Font("Arial", Font.BOLD, 18));
+    	    title.setHorizontalAlignment(SwingConstants.CENTER);
+    	    title.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+    	    panel.add(title, BorderLayout.NORTH);
 
-        // Área de Texto (donde irá la lista)
-        areaListado = new JTextArea();
-        areaListado.setEditable(false); // Para que el usuario no pueda escribir
-        areaListado.setFont(new Font("Monospaced", Font.PLAIN, 12)); // Letra monoespaciada
-        
-        // Panel con Scroll (¡la clave!)
-        // Añadimos el areaListado DENTRO del JScrollPane
-        JScrollPane scrollPane = new JScrollPane(areaListado);
-        
-        // Añadimos el scrollPane (que contiene el área de texto) al centro
-        panel.add(scrollPane, BorderLayout.CENTER);
+    	    // Modelo de la tabla (las columnas)
+    	    modeloTabla = new DefaultTableModel(new Object[]{"DNI", "NOMBRE"}, 0);
+    	    
+    	    
+    	    
+    	    // Crear la tabla
+    	    tablaAsociados = new JTable(modeloTabla);
+    	    tablaAsociados.setFont(new Font("Monospace", Font.PLAIN, 14));
+    	    tablaAsociados.setRowHeight(22);
 
-        return panel;
-    }
+    	    // Hacer que no se pueda editar
+    	    tablaAsociados.setDefaultEditor(Object.class, null);
+    	    
+    	    // Estilo de la tabla:
+    	    JTableHeader header = tablaAsociados.getTableHeader();
+    	    header.setFont(new Font("Monospace", Font.BOLD, 14));
+    	    header.setBackground(new Color(180, 220, 250));
+    	    ((DefaultTableCellRenderer) header.getDefaultRenderer())
+    	            .setHorizontalAlignment(SwingConstants.CENTER);
+    	
+    	    
+    	    tablaAsociados.getColumnModel().getColumn(0).setPreferredWidth(120);
+    	    tablaAsociados.getColumnModel().getColumn(1).setPreferredWidth(200);
+    	    tablaAsociados.setShowVerticalLines(false);
+
+    	    tablaAsociados.setGridColor(new Color(180,180,180));
+    	    
+    	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+    	    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+    	    tablaAsociados.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+    	    tablaAsociados.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+    	    
+    	    
+
+
+
+    	    
+
+    	    // Meter dentro del scroll
+    	    JScrollPane scrollPane = new JScrollPane(tablaAsociados);
+    	    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+    	    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    	    scrollPane.setBorder(null); // Sin borde del scroll
+    	    
+    	    panel.add(scrollPane, BorderLayout.CENTER);
+
+    	    return panel;
+    	}
     /**
      * 
      * @param asociados arraylist de asociados a listar
@@ -546,11 +585,15 @@ public class VentanaAsociados extends JDialog {
      */
     public void Mostrar_Asociados(ArrayList<Asociado> asociados) {
     	
-    	String cad = "";
+    	//String cad = "";
+    	this.modeloTabla.setRowCount(0);
     	for(Asociado a : asociados){
-    		cad = cad + a.getPersona().toString() + '\n';
+    		this.modeloTabla.addRow(new Object[]{
+    		        a.getDNI(),
+    		        a.getNombre()
+    		    });
+    		//cad = cad + i + " " + a.getPersona().toString() + '\n';
     	}
-    	areaListado.setText(cad);
     	
     }
     
@@ -566,11 +609,11 @@ public class VentanaAsociados extends JDialog {
         }
 
         // Ponemos el texto en el área
-        areaListado.setText(sb.toString());
+        //areaListado.setText(sb.toString());
         
         // --- IMPORTANTE ---
         // Mueve el cursor (y el scroll) al inicio del texto.
-        areaListado.setCaretPosition(0); 
+        //areaListado.setCaretPosition(0); 
     }
 
 }
