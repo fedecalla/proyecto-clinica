@@ -10,6 +10,25 @@ public class AsociadoDTO {
 	    // Constructor vacío (útil para frameworks o para ir llenándolo a mano)
 	    public AsociadoDTO() {
 	    }
+	    
+	    /**
+	     * Crea el DTO de Persona con sus datos.
+	     *
+	     * <p><b>Precondiciones:</b></p>
+	     * <ul>
+	     *   <li><code>dni</code> no debe ser {@code null} ni vacío.</li>
+	     *   <li><code>nombreyapellido</code> no debe ser {@code null} ni vacío.</li>
+	     *   <li><code>telefono</code> no debe ser {@code null} ni vacío.</li>
+	     *   <li><code>domicilio</code> no debe ser {@code null} ni vacío.</li>
+	     *   <li><code>ciudad</code> no debe ser {@code null} ni vacío.</li>
+	     * </ul>
+	     *
+	     * @param dni Documento Nacional de Identidad de la persona.
+	     * @param nombreyapellido Nombre completo de la persona.
+	     * @param telefono Número de teléfono de contacto.
+	     * @param domicilio Dirección de domicilio.
+	     * @param ciudad Ciudad de residencia.
+	     */
 
 	    // Constructor completo
 	    public AsociadoDTO(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad) {

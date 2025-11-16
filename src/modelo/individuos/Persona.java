@@ -7,6 +7,25 @@ public class Persona {
 	protected String domicilio;
 	protected String ciudad;
 	
+	/**
+	 * Crea una nueva instancia de Persona con los datos básicos.
+	 *
+	 * <p><b>Precondiciones:</b></p>
+	 * <ul>
+	 *   <li><code>dni</code> no debe ser {@code null} ni vacío.</li>
+	 *   <li><code>nombreyapellido</code> no debe ser {@code null} ni vacío.</li>
+	 *   <li><code>telefono</code> no debe ser {@code null} ni vacío.</li>
+	 *   <li><code>domicilio</code> no debe ser {@code null} ni vacío.</li>
+	 *   <li><code>ciudad</code> no debe ser {@code null} ni vacío.</li>
+	 * </ul>
+	 *
+	 * @param dni Documento Nacional de Identidad de la persona.
+	 * @param nombreyapellido Nombre completo de la persona.
+	 * @param telefono Número de teléfono de contacto.
+	 * @param domicilio Dirección de domicilio.
+	 * @param ciudad Ciudad de residencia.
+	 */
+	
 	public Persona(String dni, String nombreyapellido, String telefono, String domicilio, String ciudad) {
 		super();
 		this.dni = dni;
