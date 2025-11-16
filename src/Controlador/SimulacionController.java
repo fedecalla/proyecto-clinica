@@ -52,6 +52,11 @@ public class SimulacionController implements ActionListener,Observer{
 		this.vista = vista;
 	}
 
+	/**
+	 * @param evento
+	 * Metodo del controlador, el cual detecta los eventos que ocurren en la vista la cual controla
+	 * y determina segun el origen, el comportamiento que debe tomar
+	 */
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		if(evento.getActionCommand().equalsIgnoreCase("comenzarsimulacion"))
@@ -122,6 +127,10 @@ public class SimulacionController implements ActionListener,Observer{
 		}
 	}
 	
+	/**
+	 * Metodo del controlador, el cual es llamado cada vez que ocurre un cambio por parte de los objetos que observa.
+	 * recibe al observable, y un String que cierto formato el cual es analizado para saber donde actualizar
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		String mensaje = (String) arg;
@@ -151,8 +160,6 @@ public class SimulacionController implements ActionListener,Observer{
 						ventana_sim.getBtnMant().setEnabled(false);
 					else
 						ventana_sim.getBtnMant().setEnabled(true);
-
-
 			});
 		}
 

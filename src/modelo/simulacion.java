@@ -17,10 +17,6 @@ public class simulacion extends Thread {
 	private int cant_asociados;
 	private int solicitudesxasociado;
 	
-	
-
-	
-
 	public simulacion(Ambulancia amb, Operario op) {
 		this.ambulancia = amb;
 		this.dao = new AsociadoDAO();
@@ -68,13 +64,21 @@ public class simulacion extends Thread {
 	// ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
 	
 	
-
+	/**
+	 * <b>Detener Simulacion </b> <br>
+	 * <p>Metodo encargado de recorrer todos los hilos activos y 'desactivar' la flag que hace que sigan ejecutandose continuamente.</p>
+	 */
 	public void detener() {
 		for (Asociado a : this.asociados) {
             a.detener();
         }
 	}
 
+	/**
+	 * <b>Comienzo de la simulacion</b> <br>
+	 * <p>Metodo encargado de recibir la lista de Asociados desde la base de datos, a partir de esta crea una sublista con la cantidad de asociados
+	 * requeridos para simular, y luego recorrera esta sublista para darle a cada hilo, la cantidad de ejecuciones, y llamar a su metodo start().</p>
+	 */
 	public void comenzar() {
 		try {
 			List<Asociado> todos = this.dao.listarAsociados(this.ambulancia);

@@ -153,11 +153,11 @@ public class VentanaAsociados extends JDialog {
         JPanel panelForm = new JPanel();
         panelForm.setBackground(new Color(204, 255, 204));
         panelForm.setLayout(new BoxLayout(panelForm, BoxLayout.Y_AXIS));
-        panelForm.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        panelForm.setBorder(BorderFactory.createEmptyBorder(40, 25, 25, 25));
 
         JButton btnAgregarForm = new JButton("<html><b><u>AGREGAR</u></b></html>");
         btnAgregarForm.addActionListener(this.controlador);
-        btnAgregarForm.setActionCommand("AgregarAsociado");
+        btnAgregarForm.setActionCommand("AgregarAsociado");	
         //btnAgregarForm.addActionListener(this.controlador);
         btnAgregarForm.setFont(new Font("Arial", Font.BOLD, 16));
         btnAgregarForm.setBackground(new Color(153, 255, 204)); // verde claro
@@ -170,13 +170,13 @@ public class VentanaAsociados extends JDialog {
         lblagregar.setFont(new Font("Arial", Font.BOLD, 18));
         lblagregar.setAlignmentX(0.5f);
         panelForm.add(lblagregar);
-
-        JTextField campo1 = new JTextField("Nombre del Asociado...");
+        
+        JTextField campo1 = new JTextField(" NOMBRE");
         campo1.setForeground(Color.gray);
         campo1.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
-                if (campo1.getText().equals("Nombre del Asociado...")) {
+                if (campo1.getText().equals(" NOMBRE")) {
                     campo1.setText("");
                     campo1.setForeground(Color.BLACK);
                 }
@@ -185,17 +185,17 @@ public class VentanaAsociados extends JDialog {
             @Override
             public void focusLost(java.awt.event.FocusEvent e) {
                 if (campo1.getText().isEmpty()) {
-                    campo1.setText("Nombre del Asociado...");
+                    campo1.setText(" NOMBRE");
                     campo1.setForeground(Color.GRAY);
                 }
             }
         });
-        JTextField campo2 = new JTextField("Apellido del asociado...");
+        JTextField campo2 = new JTextField(" APELLIDO");
         campo2.setForeground(Color.gray);
         campo2.addFocusListener(new java.awt.event.FocusAdapter() {
         	@Override
         	public void focusGained(java.awt.event.FocusEvent e) {
-        		if (campo2.getText().equals("Apellido del asociado...")) {
+        		if (campo2.getText().equals(" APELLIDO")) {
         			campo2.setText("");
         			campo2.setForeground(Color.BLACK);
         		}
@@ -204,17 +204,17 @@ public class VentanaAsociados extends JDialog {
         	@Override
         	public void focusLost(java.awt.event.FocusEvent e) {
         		if (campo2.getText().isEmpty()) {
-        			campo2.setText("Apellido del asociado...");
+        			campo2.setText(" APELLIDO");
         			campo2.setForeground(Color.GRAY);
         		}
         	}
         });
-        JTextField campo3 = new JTextField("DNI...");
+        JTextField campo3 = new JTextField(" DNI");
         campo3.setForeground(Color.gray);
         campo3.addFocusListener(new java.awt.event.FocusAdapter() {
         	@Override
         	public void focusGained(java.awt.event.FocusEvent e) {
-        		if (campo3.getText().equals("DNI...")) {
+        		if (campo3.getText().equals(" DNI")) {
         			campo3.setText("");
         			campo3.setForeground(Color.BLACK);
         		}
@@ -223,17 +223,17 @@ public class VentanaAsociados extends JDialog {
         	@Override
         	public void focusLost(java.awt.event.FocusEvent e) {
         		if (campo3.getText().isEmpty()) {
-        			campo3.setText("DNI...");
+        			campo3.setText(" DNI");
         			campo3.setForeground(Color.GRAY);
         		}
         	}
         });
-        JTextField campo4 = new JTextField("TELEFONO...");
+        JTextField campo4 = new JTextField(" TELEFONO");
         campo4.setForeground(Color.gray);
         campo4.addFocusListener(new java.awt.event.FocusAdapter() {
         	@Override
         	public void focusGained(java.awt.event.FocusEvent e) {
-        		if (campo4.getText().equals("TELEFONO...")) {
+        		if (campo4.getText().equals(" TELEFONO")) {
         			campo4.setText("");
         			campo4.setForeground(Color.BLACK);
         		}
@@ -242,17 +242,17 @@ public class VentanaAsociados extends JDialog {
         	@Override
         	public void focusLost(java.awt.event.FocusEvent e) {
         		if (campo4.getText().isEmpty()) {
-        			campo4.setText("TELEFONO...");
+        			campo4.setText(" TELEFONO");
         			campo4.setForeground(Color.GRAY);
         		}
         	}
         });
-        JTextField campo5 = new JTextField("DOMICILIO...");
+        JTextField campo5 = new JTextField(" DOMICILIO");
         campo5.setForeground(Color.gray);
         campo5.addFocusListener(new java.awt.event.FocusAdapter() {
         	@Override
         	public void focusGained(java.awt.event.FocusEvent e) {
-        		if (campo5.getText().equals("DOMICILIO...")) {
+        		if (campo5.getText().equals(" DOMICILIO")) {
         			campo5.setText("");
         			campo5.setForeground(Color.BLACK);
         		}
@@ -261,17 +261,17 @@ public class VentanaAsociados extends JDialog {
         	@Override
         	public void focusLost(java.awt.event.FocusEvent e) {
         		if (campo5.getText().isEmpty()) {
-        			campo5.setText("DOMICILIO...");
+        			campo5.setText(" DOMICILIO");
         			campo5.setForeground(Color.GRAY);
         		}
         	}
         });
-        JTextField campo6 = new JTextField("CIUDAD...");
+        JTextField campo6 = new JTextField(" CIUDAD");
         campo6.setForeground(Color.gray);
         campo6.addFocusListener(new java.awt.event.FocusAdapter() {
         	@Override
         	public void focusGained(java.awt.event.FocusEvent e) {
-        		if (campo6.getText().equals("CIUDAD...")) {
+        		if (campo6.getText().equals(" CIUDAD")) {
         			campo6.setText("");
         			campo6.setForeground(Color.BLACK);
         		}
@@ -280,7 +280,7 @@ public class VentanaAsociados extends JDialog {
         	@Override
         	public void focusLost(java.awt.event.FocusEvent e) {
         		if (campo6.getText().isEmpty()) {
-        			campo6.setText("CIUDAD...");
+        			campo6.setText(" CIUDAD");
         			campo6.setForeground(Color.GRAY);
         		}
         	}
@@ -290,11 +290,11 @@ public class VentanaAsociados extends JDialog {
         for (JTextField c : campos) {
             c.setMaximumSize(new Dimension(300, 30));
             c.setAlignmentX(Component.CENTER_ALIGNMENT);
-            panelForm.add(Box.createVerticalStrut(15));
+            panelForm.add(Box.createVerticalStrut(10));
             panelForm.add(c);
         }
 
-        panelForm.add(Box.createVerticalStrut(30));
+        panelForm.add(Box.createVerticalStrut(10));
         panelForm.add(btnAgregarForm);
         panelForm.add(Box.createVerticalGlue());
 
@@ -306,7 +306,6 @@ public class VentanaAsociados extends JDialog {
             this.domicilioAsociado = campo5.getText();
             this.ciudadAsociado = campo6.getText();
         });
-
         return panelForm;
     }
 
@@ -335,14 +334,13 @@ public class VentanaAsociados extends JDialog {
         panel.add(title, gbc);
 
 
-
         // Campo de texto para DNI
-        JTextField txtDni = new JTextField("DNI...");
+        JTextField txtDni = new JTextField("DNI");
         txtDni.setForeground(Color.gray);
         txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
-                if (txtDni.getText().equals("DNI...")) {
+                if (txtDni.getText().equals("DNI")) {
                     txtDni.setText("");
                     txtDni.setForeground(Color.BLACK);
                 }
@@ -351,7 +349,7 @@ public class VentanaAsociados extends JDialog {
             @Override
             public void focusLost(java.awt.event.FocusEvent e) {
                 if (txtDni.getText().isEmpty()) {
-                    txtDni.setText("DNI...");
+                    txtDni.setText("DNI");
                     txtDni.setForeground(Color.GRAY);
                 }
             }

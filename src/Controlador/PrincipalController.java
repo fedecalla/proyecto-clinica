@@ -28,11 +28,12 @@ public class PrincipalController implements ActionListener{
 	public void setVista(VentanaPrincipal vista) {
 		this.vista = vista;
 	}
+	
 	/**
 	 * @param ActionEvent evento<br>
 	 * 
 	 * pre: evento existente <br>
-	 * post: Realiza algun cambio en el modelo seguen el evento<br>
+	 * post: Realiza algun cambio en el modelo segun el evento<br>
 	 *
 	 */
 	@Override
