@@ -59,20 +59,20 @@ public class VentanaPrincipal extends JFrame {
 
 		JButton btnAsociados = new JButton("ASOCIADOS");
 		JButton btnSimulacion = new JButton("SIMULACION");
+		JButton btnInicializacion = new JButton("INICIALIZACION");
 
-		for (JButton b : new JButton[] { btnAsociados, btnSimulacion }) {
+		for (JButton b : new JButton[] { btnAsociados, btnSimulacion, btnInicializacion}) {
 			b.setAlignmentX(Component.CENTER_ALIGNMENT);
 			b.setBackground(new Color(120, 220, 160));
 			b.setFont(new Font("Arial", Font.BOLD, 14));
 			b.setFocusPainted(false);
 		}
-
 		btnAsociados.setActionCommand("VentanaAsociados");
 		btnAsociados.addActionListener(this.controlador);
-
 		btnSimulacion.setActionCommand("VentanaSimulacion");
 		btnSimulacion.addActionListener(this.controlador);
-
+		btnInicializacion.setActionCommand("INICIALIZAR");
+		btnInicializacion.addActionListener(this.controlador);
 		central.add(Box.createVerticalGlue());
 		central.add(btnAsociados);
 		central.add(Box.createVerticalStrut(40));
